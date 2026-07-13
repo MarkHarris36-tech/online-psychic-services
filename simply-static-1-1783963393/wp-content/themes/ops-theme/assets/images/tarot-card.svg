@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" width="300" height="400">
+  <defs>
+    <linearGradient id="cardBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#efe6dc"></stop>
+      <stop offset="100%" stop-color="#d38aab"></stop>
+    </linearGradient>
+    <linearGradient id="cardBg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1340"></stop>
+      <stop offset="100%" stop-color="#3a2d6b"></stop>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="400" rx="3" fill="url(#cardBg2)"></rect>
+  <rect x="10" y="10" width="280" height="380" rx="2" fill="none" stroke="#c9a56a" stroke-width="1" opacity=".6"></rect>
+  <path d="M150 120l5 18 18 5-18 5-5 18-5-18-18-5 18-5z" fill="#c9a56a"></path>
+  <circle cx="150" cy="240" r="40" fill="none" stroke="#c9a56a" stroke-width="1" opacity=".6"></circle>
+  <circle cx="150" cy="240" r="24" fill="#c9a56a" opacity=".9"></circle>
+  <text x="150" y="340" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="16" fill="#c9a56a">The Star</text>
+</svg>

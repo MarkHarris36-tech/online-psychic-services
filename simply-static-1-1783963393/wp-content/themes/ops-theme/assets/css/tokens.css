@@ -1,0 +1,192 @@
+/**
+ * WEB DS — Colors & Type
+ * Sourced from foundation/tokens/ SCSS (primitives + semantics)
+ * plus Typography Figma (Redesign = Season Mix headings + Season Sans body)
+ */
+
+/* fonts.css imported separately by host */
+
+:root {
+  /* ====== COLOR PRIMITIVES ====== */
+  /* Aqua */
+  --aqua-01: #bbebfa; --aqua-02: #89dbf6; --aqua-03: #56ccf2;
+  --aqua-04: #3c8fa9; --aqua-05: #225261;
+
+  /* Lilac — the signature dark-blue navy palette (backgrounds/surfaces) */
+  --lilac-01: #b1b1ce; --lilac-02: #8a8ab5; --lilac-03: #63639d;
+  --lilac-04: #505090; --lilac-05: #393d99; --lilac-06: #33199b;
+  --lilac-07: #3c3c84; --lilac-08: #2e317a; --lilac-09: #282861;
+  --lilac-10: #24244f; --lilac-11: #141333; --lilac-12: #0c0c1a;
+
+  /* Gray */
+  --gray-01: #fafafa; --gray-02: #e6e6e6; --gray-03: #cdcdcd;
+  --gray-04: #9b9b9b; --gray-05: #828282; --gray-06: #686868;
+  --gray-07: #4e4e4e; --gray-08: #343434; --gray-09: #1a1a1a; --gray-10: #06060f;
+
+  /* Purple — the brand highlight */
+  --purple-01: #e8e8fc; --purple-02: #d2d1f9; --purple-03: #bbbaf6;
+  --purple-04: #a5a3f3; --purple-05: #8e8cf0; --purple-06: #7270c0;
+  --purple-07: #555490; --purple-08: #393860; --purple-09: #1c1c30;
+  --purple-10: #555bf6;
+
+  /* Semantic hues */
+  --green-01:#d3eadd;--green-02:#a6d5ba;--green-03:#7ac098;--green-04:#4dab75;
+  --green-05:#219653;--green-06:#1a7842;--green-07:#145a32;--green-08:#0d3c21;--green-09:#071e11;
+  --orange-01:#fcebdb;--orange-02:#fad6b7;--orange-03:#f7c292;--orange-04:#f5ad6e;
+  --orange-05:#f2994a;--orange-06:#c27a3b;--orange-07:#915c2c;--orange-08:#613d1e;--orange-09:#301f0f;
+  --pink-01:#f1e1f7;--pink-02:#e4c4f0;--pink-03:#d6a6e8;--pink-04:#c989e1;
+  --pink-05:#bb6bd9;--pink-06:#9656ae;--pink-07:#704082;--pink-08:#4b2b57;--pink-09:#25152b;
+  --red-01:#facfd0;--red-02:#f49ea1;--red-03:#ef6e73;--red-04:#e93d44;
+  --red-05:#e40d15;--red-06:#b60a11;--red-07:#89080d;--red-08:#5b0508;--red-09:#2e0304;
+  --yellow-01:#fae9b7;--yellow-02:#f6d982;--yellow-03:#f2c94c;--yellow-04:#a98d35;--yellow-05:#61501e;
+
+  /* Alpha tokens */
+  --white-alpha-00:rgba(255,255,255,0);--white-alpha-05:rgba(255,255,255,.05);
+  --white-alpha-10:rgba(255,255,255,.1);--white-alpha-15:rgba(255,255,255,.15);
+  --white-alpha-20:rgba(255,255,255,.2);--white-alpha-25:rgba(255,255,255,.25);--white-alpha-50:rgba(255,255,255,.5);
+  --black-alpha-10:rgba(0,0,0,.1);--black-alpha-20:rgba(0,0,0,.2);
+  --black-alpha-32:rgba(0,0,0,.32);--black-alpha-40:rgba(0,0,0,.4);--black-alpha-50:rgba(0,0,0,.5);--black-alpha-80:rgba(0,0,0,.8);
+  --violet-alpha-10:rgba(142,140,240,.1);--violet-alpha-30:rgba(142,140,240,.3);
+  --lilac-alpha-25:rgba(60,56,215,.25);--purple-alpha-40:rgba(94,102,253,.4);
+  --focus-ring:rgba(142,140,240,.5);
+
+  /* ====== GRADIENTS ====== */
+  --gradient-tranquil: linear-gradient(83.5deg, #5e6ffd -15.87%, #aa8aca 96.3%);
+  --gradient-amethyst: linear-gradient(180deg, var(--lilac-11) 0%, #202261 70.63%, #3a237a 100%);
+  --gradient-indigo:   linear-gradient(161deg, #282575 38.57%, var(--lilac-06) 71.03%, #3e11bc 87.28%);
+  --gradient-orchid:   linear-gradient(91deg, #6a4dbc 0.47%, var(--orange-05) 137.94%);
+  --gradient-emerald:  linear-gradient(83.5deg, #1c9478 -15.87%, #215387 96.3%);
+  --gradient-cobalt:   linear-gradient(83.5deg, #2a4685 0%, #2b58a2 50%, #5060b1 100%);
+  --gradient-overlay-dark: linear-gradient(180deg, rgba(20,19,51,0) 0%, var(--lilac-11) 100%);
+  --gradient-overlay-blue: linear-gradient(180deg, rgba(40,40,97,0) 0%, var(--lilac-09) 100%);
+  /* Logo mark gradient — from the WEB DS wordmark SVG */
+  --gradient-web-ds-mark: radial-gradient(circle at 50% 65%, #5CCEFF 14%, #6378FD 52%, #553EFF 84%, #462DFF 97%);
+
+  /* ====== SEMANTIC: BACKGROUNDS / SURFACES (dark theme is default) ====== */
+  --bg-page-primary: var(--lilac-11);
+  --bg-page-secondary: var(--lilac-09);
+  --bg-surface-primary: var(--lilac-10);
+  --bg-surface-secondary: var(--lilac-09);
+  --bg-surface-tertiary: var(--lilac-08);
+  --bg-surface-quaternary: var(--lilac-07);
+  --bg-surface-quinary: var(--lilac-05);
+  --bg-page-inverted: var(--gray-01);
+
+  /* Text */
+  --text-default: var(--gray-01);
+  --text-subtle: var(--purple-01);
+  --text-subtlest: var(--gray-03);
+  --text-highlight: var(--purple-05);
+  --text-disabled: var(--gray-06);
+  --text-error: var(--red-04);
+  --text-inverted-default: var(--gray-10);
+  --text-inverted-subtle: var(--gray-07);
+  --text-inverted-subtlest: var(--gray-06);
+
+  /* Border */
+  --border-default: var(--lilac-07);
+  --border-subtle: var(--lilac-01);
+  --border-subtlest: var(--purple-03);
+  --border-highlight: var(--purple-05);
+  --border-error: var(--red-04);
+  --border-success: var(--green-04);
+  --border-warning: var(--yellow-03);
+
+  /* ====== SPACING ====== */
+  --space-0:0px;   --space-025:1px; --space-050:2px;  --space-100:4px;
+  --space-150:6px; --space-200:8px; --space-250:10px; --space-300:12px;
+  --space-350:14px;--space-400:16px;--space-500:20px; --space-600:24px;
+  --space-700:28px;--space-750:30px;--space-800:32px; --space-1000:40px;
+  --space-1200:48px;--space-1250:50px;--space-1300:52px;--space-1500:60px;
+  --space-1600:64px;--space-1750:70px;--space-2000:80px;--space-2400:96px;
+
+  /* ====== RADII ====== */
+  --radius-0:0; --radius-050:2px; --radius-100:4px; --radius-150:6px;
+  --radius-200:8px; --radius-300:12px; --radius-350:14px; --radius-400:16px;
+  --radius-500:20px; --radius-600:24px; --radius-750:30px; --radius-full:9999px;
+
+  /* ====== SHADOWS ====== */
+  --shadow-0: none;
+  --shadow-100: 0 1px 6px 0 rgba(218,218,218,.2);
+  --shadow-200: 0 2px 6px 0 rgba(218,218,218,.4);
+  --shadow-300: 2px 4px 12px 0 rgba(218,218,218,.3);
+  --shadow-400: 2px 4px 20px 0 rgba(218,218,218,.6);
+  --shadow-500: 0 6px 30px 0 rgba(218,218,218,.8);
+  --shadow-dark-100: 0 1px 6px 0 rgba(28,28,62,.2);
+  --shadow-dark-200: 0 2px 6px 0 rgba(28,28,62,.4);
+  --shadow-dark-300: 2px 4px 12px 0 rgba(28,28,62,.3);
+  --shadow-dark-400: 2px 4px 20px 0 rgba(28,28,62,.4);
+  --shadow-dark-500: 0 6px 30px 0 rgba(28,28,62,.4);
+
+  /* Border widths */
+  --border-width-025:1px; --border-width-050:2px; --border-width-075:3px;
+
+  /* ====== TYPOGRAPHY ====== */
+  /* Production (post-redesign). Heading = Season Mix, Body = Season Sans.
+     Fallback = Open Sans (the legacy family). */
+  --font-family-heading: 'Season Mix', 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-family-body:    'Season Sans', 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-family-sans:    'Season Sans', 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Primitives */
+  --font-size-3xs:10px;--font-size-2xs:12px;--font-size-xs:14px;
+  --font-size-sm:16px;--font-size-md:18px;--font-size-lg:20px;
+  --font-size-xl:22px;--font-size-2xl:24px;--font-size-3xl:28px;
+  --font-size-4xl:32px;--font-size-5xl:40px;
+
+  --font-weight-regular:400;
+  --font-weight-medium:500;    /* redesign replaces 600 -> 500 */
+  --font-weight-semibold:600;
+  --font-weight-bold:700;
+
+  --line-130:1.30; --line-135:1.35; --line-150:1.50; --line-170:1.70;
+}
+
+/* ============================================================ */
+/* Semantic element styles                                        */
+/* ============================================================ */
+
+html, body {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-150);
+  color: var(--text-default);
+  background: var(--bg-page-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Heading scale — desktop sizing per Mobile & Desktop Fonts figma */
+.h-3xl, h1 { font-family: var(--font-family-heading); font-weight: 500; font-size: 40px; line-height: 1.35; letter-spacing: -0.01em; }
+.h-2xl, h2 { font-family: var(--font-family-heading); font-weight: 500; font-size: 32px; line-height: 1.35; letter-spacing: -0.01em; }
+.h-xl,  h3 { font-family: var(--font-family-heading); font-weight: 500; font-size: 28px; line-height: 1.35; }
+.h-lg,  h4 { font-family: var(--font-family-heading); font-weight: 500; font-size: 24px; line-height: 1.35; }
+.h-md,  h5 { font-family: var(--font-family-heading); font-weight: 500; font-size: 20px; line-height: 1.5; }
+.h-sm,  h6 { font-family: var(--font-family-heading); font-weight: 500; font-size: 18px; line-height: 1.5; }
+.h-xs      { font-family: var(--font-family-heading); font-weight: 500; font-size: 16px; line-height: 1.5; }
+.h-2xs     { font-family: var(--font-family-heading); font-weight: 500; font-size: 14px; line-height: 1.3; }
+
+/* Body scale */
+.text-body-md  { font-family: var(--font-family-body); font-weight: 400; font-size: 18px; line-height: 1.5; }
+.text-body-sm, p { font-family: var(--font-family-body); font-weight: 400; font-size: 16px; line-height: 1.5; }
+.text-body-xs  { font-family: var(--font-family-body); font-weight: 400; font-size: 14px; line-height: 1.5; }
+.text-body-2xs { font-family: var(--font-family-body); font-weight: 400; font-size: 12px; line-height: 1.3; }
+.text-body-3xs { font-family: var(--font-family-body); font-weight: 400; font-size: 10px; line-height: 1.3; }
+
+/* Semibold / Bold body variants */
+.text-body-md-semibold  { font-weight: 500; font-size: 18px; line-height: 1.5; }
+.text-body-sm-semibold  { font-weight: 500; font-size: 16px; line-height: 1.5; }
+.text-body-xs-semibold  { font-weight: 500; font-size: 14px; line-height: 1.5; }
+.text-body-2xs-semibold { font-weight: 500; font-size: 12px; line-height: 1.3; }
+.text-body-xs-bold      { font-weight: 700; font-size: 14px; line-height: 1.35; }
+.text-body-2xs-bold     { font-weight: 700; font-size: 12px; line-height: 1.3; }
+
+/* Utility */
+.text-highlight { color: var(--text-highlight); }
+.text-subtle    { color: var(--text-subtle); }
+.text-subtlest  { color: var(--text-subtlest); }
+.text-error     { color: var(--text-error); }
+
+a { color: var(--text-highlight); text-decoration: none; }
+a:hover { color: var(--purple-04); text-decoration: underline; }
+code, pre { font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }

@@ -1,0 +1,121 @@
+<?php
+/**
+ * Front page template
+ * @package ops-theme
+ */
+get_header(); ?>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-inner" style="max-width:800px;margin:0 auto;text-align:center;position:relative;">
+        <h1><?php echo esc_html( get_bloginfo( 'name' ) ); ?></h1>
+        <p><?php echo esc_html( get_bloginfo( 'description' ) ); ?></p>
+        <div class="btn-group" style="display:flex;gap:16px;justify-content:center;">
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>#services" class="btn btn-primary"><?php esc_html_e( 'Get Started', 'ops-theme' ); ?></a>
+            <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="btn btn-secondary"><?php esc_html_e( 'Learn More', 'ops-theme' ); ?></a>
+        </div>
+    </div>
+</section>
+
+<!-- Features/Services Section -->
+<section class="section section-alt" id="services">
+    <div class="section-title">
+        <h2><?php esc_html_e( 'Our Services', 'ops-theme' ); ?></h2>
+        <p><?php esc_html_e( 'Discover the guidance you have been looking for.', 'ops-theme' ); ?></p>
+    </div>
+    <div class="card-grid">
+        <div class="card">
+            <h3><?php esc_html_e( 'Psychic Readings', 'ops-theme' ); ?></h3>
+            <p><?php esc_html_e( 'Connect with gifted psychics for clarity and insight into your life path.', 'ops-theme' ); ?></p>
+        </div>
+        <div class="card">
+            <h3><?php esc_html_e( 'Tarot Guidance', 'ops-theme' ); ?></h3>
+            <p><?php esc_html_e( 'Explore the wisdom of tarot for answers to your most pressing questions.', 'ops-theme' ); ?></p>
+        </div>
+        <div class="card">
+            <h3><?php esc_html_e( 'Spiritual Advice', 'ops-theme' ); ?></h3>
+            <p><?php esc_html_e( 'Receive compassionate spiritual guidance from experienced advisors.', 'ops-theme' ); ?></p>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="section">
+    <div class="section-title">
+        <h2><?php esc_html_e( 'How It Works', 'ops-theme' ); ?></h2>
+    </div>
+    <div class="steps-grid">
+        <div class="step">
+            <div style="width:48px;height:48px;border-radius:50%;background:var(--color-accent,#D4A843);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-weight:700;">1</div>
+            <h3><?php esc_html_e( 'Choose', 'ops-theme' ); ?></h3>
+            <p><?php esc_html_e( 'Browse our verified advisors and find the right match for you.', 'ops-theme' ); ?></p>
+        </div>
+        <div class="step">
+            <div style="width:48px;height:48px;border-radius:50%;background:var(--color-accent,#D4A843);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-weight:700;">2</div>
+            <h3><?php esc_html_e( 'Connect', 'ops-theme' ); ?></h3>
+            <p><?php esc_html_e( 'Start your session via chat, phone, or video at your convenience.', 'ops-theme' ); ?></p>
+        </div>
+        <div class="step">
+            <div style="width:48px;height:48px;border-radius:50%;background:var(--color-accent,#D4A843);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-weight:700;">3</div>
+            <h3><?php esc_html_e( 'Discover', 'ops-theme' ); ?></h3>
+            <p><?php esc_html_e( 'Receive insights and guidance to help you move forward with confidence.', 'ops-theme' ); ?></p>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="section section-alt">
+    <div class="section-title">
+        <h2><?php esc_html_e( 'What Clients Say', 'ops-theme' ); ?></h2>
+    </div>
+    <div class="card-grid">
+        <div class="testimonial">
+            <p><?php esc_html_e( 'An incredible experience. The reading gave me the clarity I needed during a difficult time.', 'ops-theme' ); ?></p>
+            <div class="author"><?php esc_html_e( '-- Sarah M.', 'ops-theme' ); ?></div>
+        </div>
+        <div class="testimonial">
+            <p><?php esc_html_e( 'I was skeptical at first, but the accuracy was remarkable. Highly recommend to anyone seeking guidance.', 'ops-theme' ); ?></p>
+            <div class="author"><?php esc_html_e( '-- James T.', 'ops-theme' ); ?></div>
+        </div>
+        <div class="testimonial">
+            <p><?php esc_html_e( 'Compassionate and insightful. The advisor truly helped me understand my path forward.', 'ops-theme' ); ?></p>
+            <div class="author"><?php esc_html_e( '-- Maria L.', 'ops-theme' ); ?></div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <h2><?php esc_html_e( 'Ready for Guidance?', 'ops-theme' ); ?></h2>
+    <p><?php esc_html_e( 'Connect with a trusted advisor today and take the first step toward clarity.', 'ops-theme' ); ?></p>
+    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="btn btn-primary"><?php esc_html_e( 'Start Now', 'ops-theme' ); ?></a>
+</section>
+
+<!-- Recent Posts Section -->
+<section class="section">
+    <div class="section-title">
+        <h2><?php esc_html_e( 'Latest from the Blog', 'ops-theme' ); ?></h2>
+    </div>
+    <div class="card-grid">
+        <?php
+        $recent = new WP_Query( array( 'posts_per_page' => 3, 'post_status' => 'publish' ) );
+        if ( $recent->have_posts() ) :
+            while ( $recent->have_posts() ) : $recent->the_post(); ?>
+            <article class="card article-card">
+                <?php if ( has_post_thumbnail() ) : ?>
+                    <a href="<?php the_permalink(); ?>">
+                        <?php the_post_thumbnail( 'medium_large', array( 'style' => 'width:100%;height:200px;object-fit:cover;' ) ); ?>
+                    </a>
+                <?php endif; ?>
+                <div class="card-body">
+                    <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                    <p><?php echo esc_html( get_the_excerpt() ); ?></p>
+                </div>
+            </article>
+            <?php endwhile;
+            wp_reset_postdata();
+        endif; ?>
+    </div>
+</section>
+
+<?php get_footer(); ?>

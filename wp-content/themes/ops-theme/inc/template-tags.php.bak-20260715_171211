@@ -1,0 +1,64 @@
+<?php
+/**
+ * Template tags and helpers
+ * IMPORTANT: fallback_menu is defined ONLY here, never in functions.php
+ * @package ops-theme
+ */
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+/**
+ * Fallback menu when no menu is assigned
+ * NOTE: This function MUST only be defined here in template-tags.php
+ */
+function ops_fallback_menu() {
+    echo '<a href="' . esc_url( home_url( '/home/' ) ) . '" class="nav-link">Home</a>';
+    echo '<a href="' . esc_url( home_url( '/all-services/' ) ) . '" class="nav-link">All Services</a>';
+    echo '<a href="' . esc_url( home_url( '/tarot/' ) ) . '" class="nav-link">Tarot Readings</a>';
+    echo '<a href="' . esc_url( home_url( '/astrology/' ) ) . '" class="nav-link">Astrology</a>';
+    echo '<a href="' . esc_url( home_url( '/mediumship/' ) ) . '" class="nav-link">Mediumship</a>';
+    echo '<a href="' . esc_url( home_url( '/love-readings/' ) ) . '" class="nav-link">Love Readings</a>';
+    echo '<a href="' . esc_url( home_url( '/pricing/' ) ) . '" class="nav-link">Pricing</a>';
+}
+
+/**
+ * Post meta helper
+ */
+function ops_posted_on() {
+    $time = '<time class="entry-date" datetime="' . esc_attr( get_the_date( 'c' ) ) . '">' . esc_html( get_the_date() ) . '</time>';
+    echo '<span class="posted-on">' . $time . '</span>';
+    echo '<span class="byline"> &middot; ' . esc_html( get_the_author() ) . '</span>';
+}
+
+/**
+ * Post thumbnail helper
+ */
+function ops_post_thumbnail( $size = 'medium_large' ) {
+    if ( ! has_post_thumbnail() ) return;
+    echo '<div class="post-thumbnail">';
+    the_post_thumbnail( $size, array( 'style' => 'width:100%;height:auto;border-radius:var(--radius-md);' ) );
+    echo '</div>';
+}
+
+/**
+ * Breadcrumb helper
+ */
+function ops_breadcrumb() {
+    if ( is_front_page() ) return;
+    echo '<nav class="breadcrumb" style="font-size:0.85rem;color:var(--color-text-light);margin-bottom:1.5rem;">';
+    echo '<a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html__( 'Home', 'ops-theme' ) . '</a>';
+    if ( is_single() ) {
+        $cats = get_the_category();
+        if ( $cats ) {
+            echo ' &rsaquo; <a href="' . esc_url( get_category_link( $cats[0]->term_id ) ) . '">' . esc_html( $cats[0]->name ) . '</a>';
+        }
+        echo ' &rsaquo; <span>' . esc_html( get_the_title() ) . '</span>';
+    } elseif ( is_page() ) {
+        echo ' &rsaquo; <span>' . esc_html( get_the_title() ) . '</span>';
+    } elseif ( is_archive() ) {
+        echo ' &rsaquo; <span>' . esc_html( get_the_archive_title() ) . '</span>';
+    } elseif ( is_search() ) {
+        echo ' &rsaquo; <span>' . esc_html__( 'Search Results', 'ops-theme' ) . '</span>';
+    }
+    echo '</nav>';
+}

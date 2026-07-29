@@ -1,0 +1,835 @@
+<?php
+/**
+ * Front page template — Online Psychic Services
+ * Variant A: Rose Quartz Minimal
+ *
+ * Self-contained landing page that bypasses header.php / footer.php
+ * and renders the full mockup verbatim. wp_head/wp_footer hooks are
+ * injected so plugins, customizer CSS, and admin bar still work.
+ *
+ * @package ops-theme
+ */
+$theme_uri = get_stylesheet_directory_uri();
+$site_name = get_bloginfo( 'name' );
+$site_desc = get_bloginfo( 'description' );
+$home_url  = home_url( '/' );
+?><!doctype html>
+<html <?php language_attributes(); ?>>
+<head>
+<meta charset="<?php bloginfo( 'charset' ); ?>" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title><?php echo esc_html( $site_name ); ?> &mdash; <?php echo esc_html( $site_desc ); ?></title>
+<link rel="stylesheet" href="<?php echo esc_url( $theme_uri ); ?>/assets/fonts/fonts.css" />
+<link rel="stylesheet" href="<?php echo esc_url( $theme_uri ); ?>/assets/css/tokens.css" />
+<style>
+  :root {
+    /* Variant A palette: soft light + rose quartz magic */
+    --a-bg: #fbf7f4;
+    --a-bg-alt: #f4ecf3;
+    --a-ink: #1a1033;
+    --a-ink-soft: #4a3f5c;
+    --a-ink-mute: #8b7f9a;
+    --a-rose: #e5a6c2;
+    --a-rose-deep: #c876a0;
+    --a-lilac: #a89bdc;
+    --a-violet: #5e4dbf;
+    --a-card: #ffffff;
+    --a-line: #ebe3e8;
+    --a-glow: radial-gradient(60% 60% at 50% 50%, rgba(229,166,194,.55), rgba(168,155,220,.25) 60%, transparent 80%);
+    --grad-aurora: linear-gradient(135deg, #f4e1ec 0%, #e9d8f1 40%, #d7c5ee 100%);
+    --grad-cta: linear-gradient(135deg, #c876a0 0%, #8e6bd2 100%);
+    --shadow-soft: 0 2px 24px rgba(94,77,191,.08);
+    --shadow-card: 0 8px 40px rgba(94,77,191,.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--a-bg);
+    color: var(--a-ink);
+    font-family: var(--font-family-body, 'Season Sans', -apple-system, 'Segoe UI', Roboto, sans-serif);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "ss01","ss02";
+  }
+  h1, h2, h3, h4, h5 { font-family: var(--font-family-heading, 'Season Mix', Georgia, serif); font-weight: 500; letter-spacing: -0.015em; color: var(--a-ink); }
+  h1 { font-size: 88px; line-height: 1.02; letter-spacing: -0.03em; }
+  h2 { font-size: 56px; line-height: 1.08; letter-spacing: -0.025em; }
+  h3 { font-size: 28px; line-height: 1.2; }
+  h4 { font-size: 20px; line-height: 1.3; }
+  p { color: var(--a-ink-soft); }
+  a { color: inherit; text-decoration: none; }
+  img, svg { display: block; max-width: 100%; }
+
+  .page { max-width: 1440px; margin: 0 auto; overflow: hidden; }
+
+  /* ======== NAV ======== */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 72px;
+    background: rgba(251,247,244,.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(235,227,232,.6);
+  }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo-text { display: flex; flex-direction: column; line-height: 1; gap: 2px; }
+  .logo-text-top { font-family: var(--font-family-heading, 'Season Mix', Georgia, serif); font-size: 19px; font-weight: 500; letter-spacing: -0.015em; color: var(--a-ink); }
+  .logo-text-top em { font-style: italic; background: var(--grad-cta); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .logo-text-bot { font-family: var(--font-family-body, 'Season Sans', sans-serif); font-size: 9px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--a-ink-mute); }
+  .logo-mark {
+    width: 32px; height: 32px; border-radius: 50%;
+    background:
+      radial-gradient(circle at 35% 30%, #fff 0%, transparent 35%),
+      conic-gradient(from 220deg, #e5a6c2, #a89bdc, #5e4dbf, #c876a0, #e5a6c2);
+    box-shadow: 0 2px 10px rgba(200,118,160,.35), inset 0 0 0 1px rgba(255,255,255,.4);
+    position: relative;
+  }
+  .logo-mark::after {
+    content: ""; position: absolute; inset: 3px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.9), transparent 55%);
+  }
+  .nav-links { display: flex; gap: 36px; font-size: 15px; color: var(--a-ink-soft); }
+  .nav-links a:hover { color: var(--a-violet); }
+  .nav-cta { display: flex; align-items: center; gap: 14px; }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    height: 46px; padding: 0 22px; border-radius: 999px;
+    font-family: var(--font-family-body, 'Season Sans', sans-serif); font-weight: 500; font-size: 15px;
+    cursor: pointer; transition: all .2s ease;
+    border: none; color: #fff;
+    text-decoration: none;
+  }
+  .btn-primary { background: var(--grad-cta); box-shadow: 0 4px 18px rgba(200,118,160,.35); }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(200,118,160,.45); }
+  .btn-ghost { background: transparent; color: var(--a-ink); border: 1px solid var(--a-line); }
+  .btn-ghost:hover { border-color: var(--a-violet); color: var(--a-violet); }
+  .btn-lg { height: 56px; padding: 0 30px; font-size: 16px; }
+
+  /* ======== HERO ======== */
+  .hero {
+    position: relative;
+    padding: 110px 72px 140px;
+    overflow: hidden;
+    background:
+      radial-gradient(80% 60% at 80% 20%, rgba(229,166,194,.45), transparent 60%),
+      radial-gradient(70% 60% at 10% 80%, rgba(168,155,220,.35), transparent 60%),
+      var(--a-bg);
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .hero-video {
+    position: absolute; inset: 0; z-index: 0; opacity: .9; pointer-events: none;
+    background:
+      conic-gradient(from 120deg at 30% 30%, transparent 0deg, rgba(229,166,194,.35) 60deg, transparent 120deg),
+      conic-gradient(from 300deg at 80% 70%, transparent 0deg, rgba(168,155,220,.4) 60deg, transparent 140deg);
+    filter: blur(60px);
+    animation: aurora 18s ease-in-out infinite alternate;
+  }
+  @keyframes aurora {
+    0% { transform: scale(1) rotate(0deg); }
+    100% { transform: scale(1.15) rotate(8deg); }
+  }
+  .hero-inner { position: relative; z-index: 1; }
+
+  .hero-visual { position: relative; aspect-ratio: 1 / 1; display: grid; place-items: center; z-index: 1; }
+  .hero-blob {
+    position: relative;
+    width: 82%;
+    aspect-ratio: 1 / 1;
+    border-radius: 62% 38% 54% 46% / 48% 56% 44% 52%;
+    background: linear-gradient(155deg, #f7e4ee 0%, #e9d4f0 45%, #d5c2ec 100%);
+    overflow: hidden;
+    box-shadow:
+      0 30px 70px -20px rgba(200,118,160,.4),
+      0 0 0 1px rgba(255,255,255,.5) inset,
+      0 8px 24px rgba(94,77,191,.15);
+    animation: blobMorph 14s ease-in-out infinite;
+  }
+  .hero-blob img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero-blob::after {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(60% 50% at 50% 40%, transparent 0%, rgba(94,77,191,.15) 100%);
+    pointer-events: none;
+  }
+  @keyframes blobMorph {
+    0%, 100% { border-radius: 62% 38% 54% 46% / 48% 56% 44% 52%; }
+    50%      { border-radius: 48% 52% 42% 58% / 56% 44% 56% 44%; }
+  }
+
+  .ring { position: absolute; border-radius: 50%; border: 1px dashed rgba(168,155,220,.4); pointer-events: none; }
+  .ring-1 { inset: 4%;  animation: spin 60s linear infinite; }
+  .ring-2 { inset: -4%; border-color: rgba(200,118,160,.25); animation: spin 90s linear infinite reverse; }
+  .ring-3 { inset: -12%; border-color: rgba(168,155,220,.2); border-style: solid; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .float-chip {
+    position: absolute;
+    background: rgba(255,255,255,.92);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,.7);
+    border-radius: 16px;
+    box-shadow: 0 12px 32px rgba(94,77,191,.18);
+    padding: 12px 14px;
+    font-size: 13px;
+    z-index: 2;
+  }
+  .chip-advisor { top: 8%; left: -8%; display: flex; align-items: center; gap: 10px; padding: 10px 16px 10px 10px; animation: floaty 5s ease-in-out infinite; }
+  .chip-advisor img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; }
+  .chip-name { font-family: var(--font-family-heading, 'Season Mix', Georgia, serif); font-size: 15px; display: flex; align-items: center; gap: 6px; color: var(--a-ink); }
+  .chip-live { width: 7px; height: 7px; border-radius: 50%; background: #3ca374; box-shadow: 0 0 0 3px rgba(60,163,116,.2); }
+  .chip-sub { font-size: 11px; color: var(--a-ink-mute); margin-top: 2px; }
+  .chip-review { bottom: 10%; right: -10%; max-width: 220px; animation: floaty 6s ease-in-out infinite -2s; }
+  .chip-stars { color: #c876a0; letter-spacing: 2px; font-size: 12px; margin-bottom: 6px; }
+  .chip-quote { font-family: var(--font-family-heading, 'Season Mix', Georgia, serif); font-size: 14px; line-height: 1.3; color: var(--a-ink); font-style: italic; }
+  .chip-by { font-size: 11px; color: var(--a-ink-mute); margin-top: 6px; }
+  .chip-tag {
+    top: 62%; left: -4%;
+    background: var(--grad-cta);
+    color: #fff;
+    border: none;
+    box-shadow: 0 10px 28px rgba(200,118,160,.45);
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 16px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .02em;
+    animation: floaty 7s ease-in-out infinite -4s;
+  }
+  .chip-dot { width: 6px; height: 6px; border-radius: 50%; background: #fff; }
+  @keyframes floaty {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+  }
+  .spark { position: absolute; width: 18px; height: 18px; color: #c876a0; opacity: .85; filter: drop-shadow(0 0 8px rgba(200,118,160,.6)); }
+  .spark-1 { top: 4%;  right: 18%; animation: twinkle 3s ease-in-out infinite; }
+  .spark-2 { top: 30%; right: -6%; width: 12px; height: 12px; color: #a89bdc; animation: twinkle 4s ease-in-out infinite -1s; }
+  .spark-3 { bottom: 4%; left: 12%; width: 14px; height: 14px; color: #e5a6c2; animation: twinkle 3.5s ease-in-out infinite -1.5s; }
+  @keyframes twinkle {
+    0%, 100% { opacity: .35; transform: scale(.8); }
+    50%      { opacity: 1;   transform: scale(1.1); }
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 8px 16px; border-radius: 999px;
+    background: rgba(255,255,255,.7);
+    border: 1px solid rgba(200,118,160,.2);
+    font-size: 13px; color: var(--a-ink-soft); letter-spacing: .02em;
+    backdrop-filter: blur(8px);
+  }
+  .eyebrow-dot { width: 8px; height: 8px; border-radius: 50%; background: #55c38e; box-shadow: 0 0 0 4px rgba(85,195,142,.2); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 4px rgba(85,195,142,.2);} 50% { box-shadow: 0 0 0 8px rgba(85,195,142,0);} }
+
+  .hero h1 { margin: 28px 0 24px; max-width: 1000px; font-size: 76px; }
+  .hero h1 em { font-style: normal; background: var(--grad-cta); -webkit-background-clip: text; background-clip: text; color: transparent; font-family: var(--font-family-heading, 'Season Mix', Georgia, serif); }
+  .hero-sub { font-size: 20px; color: var(--a-ink-soft); max-width: 620px; margin-bottom: 44px; }
+  .hero-ctas { display: flex; gap: 16px; align-items: center; margin-bottom: 56px; flex-wrap: wrap; }
+  .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 56px; padding-top: 36px; border-top: 1px solid rgba(0,0,0,.06); max-width: 780px; }
+  .stat-num { font-family: var(--font-family-heading, 'Season Mix', Georgia, serif); font-size: 40px; font-weight: 500; color: var(--a-ink); line-height: 1; }
+  .stat-label { font-size: 14px; color: var(--a-ink-mute); margin-top: 8px; }
+
+  /* ======== FEATURED IN ======== */
+  .featured {
+    padding: 48px 72px;
+    border-top: 1px solid var(--a-line);
+    border-bottom: 1px solid var(--a-line);
+    background: rgba(255,255,255,.5);
+  }
+  .featured-label { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--a-ink-mute); text-align: center; margin-bottom: 24px; }
+  .featured-logos { display: flex; justify-content: space-between; align-items: center; gap: 40px; opacity: .55; flex-wrap: wrap; }
+  .featured-logos > span { font-family: var(--font-family-heading, 'Season Mix', Georgia, serif); font-size: 22px; color: var(--a-ink); letter-spacing: -.01em; }
+  .featured-logos > span:nth-child(2) { font-family: Georgia, serif; font-style: italic; }
+  .featured-logos > span:nth-child(3) { font-weight: 700; text-transform: uppercase; letter-spacing: .15em; font-size: 14px; font-family: var(--font-family-body, 'Season Sans', sans-serif); }
+  .featured-logos > span:nth-child(4) { font-family: 'Times New Roman', serif; font-weight: 700; }
+  .featured-logos > span:nth-child(5) { font-family: var(--font-family-body, 'Season Sans', sans-serif); font-weight: 300; letter-spacing: .05em; font-size: 18px; }
+
+  /* ======== SECTIONS ======== */
+  section { padding: 120px 72px; }
+  .section-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 64px; gap: 48px; flex-wrap: wrap; }
+  .section-eyebrow { font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: var(--a-rose-deep); margin-bottom: 18px; }
+  .section-lede { font-size: 18px; color: var(--a-ink-soft); max-width: 440px; }
+
+  /* services */
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .service-card {
+    position: relative;
+    background: var(--a-card);
+    border-radius: 24px;
+    padding: 40px 36px;
+    border: 1px solid var(--a-line);
+    transition: all .3s ease;
+    overflow: hidden;
+  }
+  .service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); border-color: rgba(200,118,160,.3); }
+  .service-icon-wrap { width: 96px; height: 96px; border-radius: 50%; display: grid; place-items: center; background: var(--grad-aurora); margin-bottom: 28px; position: relative; }
+  .service-icon-wrap::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.7), transparent 50%); }
+  .service-icon-wrap svg { position: relative; z-index: 1; }
+  .service-card h3 { margin-bottom: 12px; }
+  .service-card p { font-size: 15px; margin-bottom: 24px; }
+  .service-meta { display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: 1px solid var(--a-line); font-size: 13px; color: var(--a-ink-mute); }
+  .service-price { color: var(--a-violet); font-weight: 500; }
+  .service-arrow { width: 36px; height: 36px; border-radius: 50%; background: var(--a-bg-alt); display: grid; place-items: center; transition: all .2s; }
+  .service-card:hover .service-arrow { background: var(--grad-cta); color: #fff; transform: rotate(-45deg); }
+
+  /* how */
+  .how { background: linear-gradient(180deg, var(--a-bg) 0%, var(--a-bg-alt) 100%); position: relative; overflow: hidden; }
+  .how::before { content: ""; position: absolute; top: 20%; left: -10%; width: 500px; height: 500px; background: var(--a-glow); opacity: .6; pointer-events: none; }
+  .how-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; position: relative; }
+  .how-line { position: absolute; top: 48px; left: 16%; right: 16%; height: 1px; background: linear-gradient(90deg, transparent, var(--a-rose), var(--a-lilac), transparent); }
+  .step { position: relative; }
+  .step-num { width: 96px; height: 96px; border-radius: 50%; background: var(--a-card); border: 1px solid var(--a-line); display: grid; place-items: center; font-family: var(--font-family-heading, 'Season Mix', Georgia, serif); font-size: 36px; font-weight: 500; color: var(--a-violet); margin-bottom: 28px; box-shadow: var(--shadow-soft); position: relative; }
+  .step-num::before { content: ""; position: absolute; inset: -6px; border-radius: 50%; background: var(--grad-aurora); z-index: -1; opacity: .5; }
+  .step h3 { margin-bottom: 10px; }
+  .step p { font-size: 15px; }
+
+  /* advisors */
+  .advisors { background: var(--a-bg); }
+  .advisors-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .advisor-card { background: var(--a-card); border-radius: 20px; overflow: hidden; border: 1px solid var(--a-line); transition: all .3s ease; }
+  .advisor-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); }
+  .advisor-photo { aspect-ratio: 1 / 1; background: var(--grad-aurora); position: relative; display: grid; place-items: center; font-family: var(--font-family-heading, 'Season Mix', Georgia, serif); font-size: 56px; color: #fff; }
+  .advisor-status { position: absolute; top: 14px; right: 14px; padding: 6px 12px; border-radius: 999px; background: rgba(255,255,255,.92); font-size: 12px; font-weight: 500; color: #3ca374; display: flex; align-items: center; gap: 6px; }
+  .advisor-status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #3ca374; }
+  .advisor-info { padding: 20px 22px; }
+  .advisor-name { font-family: var(--font-family-heading, 'Season Mix', Georgia, serif); font-size: 18px; margin-bottom: 4px; }
+  .advisor-tags { font-size: 13px; color: var(--a-ink-mute); margin-bottom: 14px; }
+  .advisor-rating { display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+  .stars { color: #f2994a; letter-spacing: 1px; }
+  .advisor-rate { color: var(--a-violet); font-weight: 500; }
+
+  /* testimonials */
+  .testimonials { background: linear-gradient(180deg, var(--a-bg-alt) 0%, var(--a-bg) 100%); position: relative; overflow: hidden; }
+  .testimonials::after { content: ""; position: absolute; bottom: -100px; right: -100px; width: 600px; height: 600px; background: var(--a-glow); opacity: .5; }
+  .t-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; position: relative; }
+  .t-card { background: var(--a-card); border-radius: 20px; padding: 36px 32px; border: 1px solid var(--a-line); }
+  .t-stars { color: #f2994a; font-size: 18px; letter-spacing: 2px; margin-bottom: 20px; }
+  .t-quote { font-family: var(--font-family-heading, 'Season Mix', Georgia, serif); font-size: 20px; line-height: 1.4; color: var(--a-ink); margin-bottom: 28px; letter-spacing: -0.01em; }
+  .t-author { display: flex; align-items: center; gap: 14px; }
+  .t-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--grad-aurora); display: grid; place-items: center; font-family: var(--font-family-heading, 'Season Mix', Georgia, serif); color: #fff; }
+  .t-author-name { font-weight: 500; font-size: 15px; }
+  .t-author-meta { font-size: 13px; color: var(--a-ink-mute); }
+
+  /* trust */
+  .trust { background: var(--a-bg); padding: 100px 72px; border-top: 1px solid var(--a-line); border-bottom: 1px solid var(--a-line); }
+  .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+  .trust-item { text-align: center; }
+  .trust-icon { width: 72px; height: 72px; margin: 0 auto 20px; border-radius: 50%; background: var(--a-bg-alt); display: grid; place-items: center; color: var(--a-violet); border: 1px solid var(--a-line); }
+  .trust-item h4 { font-size: 17px; margin-bottom: 8px; }
+  .trust-item p { font-size: 14px; }
+
+  /* cta */
+  .cta-band {
+    padding: 140px 72px;
+    background:
+      radial-gradient(60% 70% at 50% 50%, rgba(229,166,194,.45), transparent 70%),
+      radial-gradient(40% 60% at 10% 20%, rgba(168,155,220,.35), transparent 70%),
+      radial-gradient(40% 60% at 90% 80%, rgba(94,77,191,.25), transparent 70%),
+      var(--a-bg-alt);
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .cta-band h2 { font-size: 72px; max-width: 900px; margin: 0 auto 24px; letter-spacing: -0.03em; }
+  .cta-band h2 em { font-style: italic; font-family: var(--font-family-heading, 'Season Mix', Georgia, serif); background: var(--grad-cta); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .cta-band p { font-size: 18px; max-width: 560px; margin: 0 auto 40px; }
+
+  /* blog */
+  .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .blog-card { background: var(--a-card); border-radius: 20px; overflow: hidden; border: 1px solid var(--a-line); transition: all .3s ease; }
+  .blog-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); }
+  .blog-cover { aspect-ratio: 16 / 10; background: var(--grad-aurora); position: relative; overflow: hidden; }
+  .blog-cover img { width: 100%; height: 100%; object-fit: cover; }
+  .blog-body { padding: 28px 28px 32px; }
+  .blog-tag { font-size: 12px; letter-spacing: .15em; text-transform: uppercase; color: var(--a-rose-deep); margin-bottom: 12px; }
+  .blog-card h3 { font-size: 22px; line-height: 1.25; margin-bottom: 14px; }
+  .blog-card p { font-size: 14px; }
+
+  /* footer */
+  .site-footer { background: #1a1033; color: #e2d6ec; padding: 80px 72px 40px; }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px; padding-bottom: 56px; border-bottom: 1px solid rgba(255,255,255,.1); }
+  .footer-brand p { color: rgba(226,214,236,.7); font-size: 15px; max-width: 320px; margin-top: 18px; }
+  .footer-col h5 { color: #fff; font-size: 15px; margin-bottom: 20px; font-family: var(--font-family-body, 'Season Sans', sans-serif); font-weight: 500; letter-spacing: .05em; text-transform: uppercase; }
+  .footer-col a { display: block; color: rgba(226,214,236,.65); font-size: 14px; margin-bottom: 10px; }
+  .footer-col a:hover { color: #e5a6c2; }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 32px; font-size: 13px; color: rgba(226,214,236,.5); flex-wrap: wrap; gap: 12px; }
+
+  /* sticky cta */
+  .sticky-cta {
+    position: fixed; bottom: 24px; right: 24px; z-index: 40;
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 18px 14px 14px;
+    background: #1a1033; color: #fff;
+    border-radius: 999px;
+    box-shadow: 0 12px 40px rgba(26,16,51,.35);
+    border: 1px solid rgba(229,166,194,.3);
+  }
+  .sticky-cta-avatars { display: flex; }
+  .sticky-cta-avatars .av { width: 36px; height: 36px; border-radius: 50%; background: var(--grad-aurora); border: 2px solid #1a1033; margin-left: -10px; display: grid; place-items: center; font-size: 12px; color: #fff; font-family: var(--font-family-heading, 'Season Mix', Georgia, serif); }
+  .sticky-cta-avatars .av:first-child { margin-left: 0; }
+  .sticky-cta-text { font-size: 13px; line-height: 1.3; }
+  .sticky-cta-text strong { display: block; font-weight: 500; }
+  .sticky-cta-text span { color: rgba(226,214,236,.6); font-size: 12px; }
+  .sticky-cta button { height: 38px; padding: 0 18px; border-radius: 999px; background: var(--grad-cta); color: #fff; border: 0; font-weight: 500; font-size: 13px; font-family: inherit; cursor: pointer; }
+
+  /* ======== RESPONSIVE ======== */
+  @media (max-width: 1279px) {
+    h1 { font-size: 64px; }
+    h2 { font-size: 44px; }
+    .hero h1 { font-size: 56px; }
+    .hero { grid-template-columns: 1fr; padding: 80px 48px 100px; }
+    .hero-visual { max-width: 520px; margin: 0 auto; width: 100%; }
+    section { padding: 96px 48px; }
+    .nav { padding: 18px 48px; }
+    .featured, .trust { padding-left: 48px; padding-right: 48px; }
+    .cta-band { padding: 100px 48px; }
+    .site-footer { padding: 64px 48px 32px; }
+    .services-grid, .t-grid, .blog-grid { grid-template-columns: repeat(2, 1fr); }
+    .advisors-grid { grid-template-columns: repeat(3, 1fr); }
+    .trust-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 768px) {
+    h1 { font-size: 44px; }
+    h2 { font-size: 34px; }
+    .hero h1 { font-size: 40px; }
+    .hero { padding: 56px 20px 72px; }
+    .nav { padding: 14px 20px; }
+    section { padding: 64px 20px; }
+    .featured, .trust { padding: 40px 20px; }
+    .cta-band { padding: 72px 20px; }
+    .cta-band h2 { font-size: 40px; }
+    .site-footer { padding: 48px 20px 24px; }
+    .services-grid, .advisors-grid, .t-grid, .trust-grid, .blog-grid, .how-steps, .footer-top { grid-template-columns: 1fr; }
+    .how-line { display: none; }
+    .section-head { flex-direction: column; align-items: flex-start; }
+    .hero-stats { grid-template-columns: 1fr 1fr; gap: 20px 24px; }
+    .stat-num { font-size: 30px; }
+    .featured-logos { gap: 18px; justify-content: center; }
+    .featured-logos > span { font-size: 16px; }
+    .float-chip { transform: scale(.85); }
+    .chip-advisor { left: -2%; }
+    .chip-review { right: -2%; max-width: 180px; }
+    .sticky-cta { left: 12px; right: 12px; bottom: 12px; justify-content: space-between; padding: 10px 12px 10px 10px; }
+    .sticky-cta-text span { display: none; }
+  }
+</style>
+<?php wp_head(); ?>
+</head>
+<body <?php body_class( 'ops-landing-a' ); ?>>
+<div class="page">
+
+  <!-- NAV -->
+  <nav class="nav" data-screen-label="01 Nav">
+    <a href="<?php echo esc_url( $home_url ); ?>" class="logo">
+      <div class="logo-mark"></div>
+      <div class="logo-text">
+        <span class="logo-text-top">Online <em>Psychic</em></span>
+        <span class="logo-text-bot">&middot; Services &middot;</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="<?php echo esc_url( $home_url ); ?>#services">Services</a>
+      <a href="<?php echo esc_url( $home_url ); ?>#advisors">Advisors</a>
+      <a href="<?php echo esc_url( $home_url ); ?>#how">How It Works</a>
+      <a href="<?php echo esc_url( get_post_type_archive_link( 'post' ) ?: $home_url . 'blog/' ); ?>">Blog</a>
+      <a href="<?php echo esc_url( $home_url . 'about/' ); ?>">About</a>
+    </div>
+    <div class="nav-cta">
+      <a href="<?php echo esc_url( $home_url . 'pricing/' ); ?>" style="font-size:15px;color:var(--a-ink-soft);">Pricing</a>
+      <a href="<?php echo esc_url( $home_url . 'contact/' ); ?>" class="btn btn-primary">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" data-screen-label="02 Hero">
+    <div class="hero-video"></div>
+    <div class="hero-inner">
+      <span class="eyebrow"><span class="eyebrow-dot"></span> 147 advisors online now &middot; avg. wait 2 min</span>
+      <h1>Full-spectrum psychic guidance, <em>whenever you need clarity.</em></h1>
+      <p class="hero-sub">One trusted platform. Many gifts. Connect with vetted psychics, tarot readers, and mediums in under two minutes &mdash; by chat, phone, or video.</p>
+      <div class="hero-ctas">
+        <a href="<?php echo esc_url( $home_url . 'contact/' ); ?>" class="btn btn-primary btn-lg">Start Free 3-min Reading &rarr;</a>
+        <a href="<?php echo esc_url( $home_url ); ?>#advisors" class="btn btn-ghost btn-lg">Browse Advisors</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-num">2M+</div><div class="stat-label">Readings delivered</div></div>
+        <div><div class="stat-num">800+</div><div class="stat-label">Vetted advisors</div></div>
+        <div><div class="stat-num">4.9&#9733;</div><div class="stat-label">54,000 reviews</div></div>
+        <div><div class="stat-num">18 yrs</div><div class="stat-label">Avg. experience</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="ring ring-1"></div>
+      <div class="ring ring-2"></div>
+      <div class="ring ring-3"></div>
+      <div class="hero-blob">
+        <img src="<?php echo esc_url( $theme_uri ); ?>/assets/images/hero-aurora.svg" alt="" />
+      </div>
+      <div class="float-chip chip-advisor">
+        <img src="<?php echo esc_url( $theme_uri ); ?>/assets/images/photo-chip-luna.jpg" alt=""/>
+        <div>
+          <div class="chip-name">Luna <span class="chip-live"></span></div>
+          <div class="chip-sub">Reading now &middot; 4.98&#9733;</div>
+        </div>
+      </div>
+      <div class="float-chip chip-review">
+        <div class="chip-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="chip-quote">&ldquo;Gave me the clarity I was searching for.&rdquo;</div>
+        <div class="chip-by">&mdash; Amira K., verified</div>
+      </div>
+      <div class="float-chip chip-tag">
+        <span class="chip-dot"></span> Tarot &middot; Love &middot; Career
+      </div>
+      <svg class="spark spark-1" viewBox="0 0 20 20"><path d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z" fill="currentColor"/></svg>
+      <svg class="spark spark-2" viewBox="0 0 20 20"><path d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z" fill="currentColor"/></svg>
+      <svg class="spark spark-3" viewBox="0 0 20 20"><path d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z" fill="currentColor"/></svg>
+    </div>
+  </section>
+
+  <!-- FEATURED IN -->
+  <section class="featured" data-screen-label="03 Featured" style="padding:48px 72px;">
+    <div class="featured-label">As featured in</div>
+    <div class="featured-logos">
+      <span>Cosmopolitan</span>
+      <span>Bustle</span>
+      <span>ELLE</span>
+      <span>The Times</span>
+      <span>Refinery29</span>
+      <span>mindbodygreen</span>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" data-screen-label="04 Services">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">Our Services</div>
+        <h2>Guidance, tailored<br/>to your question.</h2>
+      </div>
+      <p class="section-lede">Whether you&rsquo;re navigating love, career, or grief &mdash; there&rsquo;s a gifted advisor waiting to help you find your way forward.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon-wrap">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="14" stroke="#5e4dbf" stroke-width="1.5"/><circle cx="22" cy="22" r="6" fill="#5e4dbf"/><path d="M22 4v6M22 34v6M4 22h6M34 22h6" stroke="#5e4dbf" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Psychic Readings</h3>
+        <p>Connect with intuitive psychics who sense energies, patterns, and paths your rational mind can&rsquo;t always see.</p>
+        <div class="service-meta">
+          <span class="service-price">from $1.99/min</span>
+          <div class="service-arrow">&rarr;</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon-wrap">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none"><rect x="10" y="8" width="16" height="24" rx="2" stroke="#5e4dbf" stroke-width="1.5" transform="rotate(-8 18 20)"/><rect x="18" y="10" width="16" height="24" rx="2" stroke="#5e4dbf" stroke-width="1.5" fill="#fff" transform="rotate(8 26 22)"/><path d="M26 18l2 4 4 .5-3 3 .7 4-3.7-2-3.7 2 .7-4-3-3 4-.5z" fill="#c876a0" transform="rotate(8 26 22)"/></svg>
+        </div>
+        <h3>Tarot Guidance</h3>
+        <p>The cards speak truths we&rsquo;re not always ready to hear. Our readers translate the symbols into clear next steps.</p>
+        <div class="service-meta">
+          <span class="service-price">from $2.49/min</span>
+          <div class="service-arrow">&rarr;</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon-wrap">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none"><path d="M14 30c0-6 3.6-10 8-10s8 4 8 10" stroke="#5e4dbf" stroke-width="1.5" stroke-linecap="round"/><circle cx="22" cy="16" r="4" stroke="#5e4dbf" stroke-width="1.5"/><path d="M8 36c4-2 9-3 14-3s10 1 14 3" stroke="#c876a0" stroke-width="1.5" stroke-linecap="round" opacity=".6"/><path d="M10 38c4-1 8-2 12-2s8 1 12 2" stroke="#c876a0" stroke-width="1.5" stroke-linecap="round" opacity=".4"/></svg>
+        </div>
+        <h3>Mediumship</h3>
+        <p>Gentle, evidence-based connection with loved ones who have passed on. For closure, reassurance, and messages received.</p>
+        <div class="service-meta">
+          <span class="service-price">from $3.49/min</span>
+          <div class="service-arrow">&rarr;</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" class="how" data-screen-label="05 How It Works">
+    <div class="section-head" style="justify-content:center;text-align:center;flex-direction:column;align-items:center;margin-bottom:80px;">
+      <div class="section-eyebrow">How it works</div>
+      <h2>Clarity in three<br/>quiet steps.</h2>
+    </div>
+    <div class="how-steps">
+      <div class="how-line"></div>
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Choose your guide</h3>
+        <p>Browse 800+ verified advisors. Filter by gift, price, language, or rating &mdash; whatever helps you find your match.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Start a session</h3>
+        <p>Connect instantly via chat, phone, or video. Your first three minutes are free to make sure it&rsquo;s the right fit.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Carry the clarity</h3>
+        <p>Save transcripts, revisit insights, and return anytime. Your advisor can continue the conversation when you&rsquo;re ready.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADVISORS -->
+  <section id="advisors" class="advisors" data-screen-label="06 Advisors">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">Featured advisors</div>
+        <h2>Gifts that feel like<br/>meeting an old friend.</h2>
+      </div>
+      <a href="<?php echo esc_url( $home_url . 'contact/' ); ?>" class="btn btn-ghost">See all 800+ advisors &rarr;</a>
+    </div>
+    <div class="advisors-grid">
+      <div class="advisor-card">
+        <div class="advisor-photo" style="background:#eee;color:transparent;padding:0;">
+          <img src="<?php echo esc_url( $theme_uri ); ?>/assets/images/photo-advisor-luna.jpg" alt="Luna Moreau" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"/>
+          <div class="advisor-status">Online</div>
+        </div>
+        <div class="advisor-info">
+          <div class="advisor-name">Luna Moreau</div>
+          <div class="advisor-tags">Tarot &middot; Love &middot; Career</div>
+          <div class="advisor-rating"><span><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 4.98 &middot; 2.1k</span><span class="advisor-rate">$2.99/min</span></div>
+        </div>
+      </div>
+      <div class="advisor-card">
+        <div class="advisor-photo" style="background:#eee;color:transparent;padding:0;">
+          <img src="<?php echo esc_url( $theme_uri ); ?>/assets/images/photo-advisor-arjun.jpg" alt="Arjun Shankar" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"/>
+          <div class="advisor-status">Online</div>
+        </div>
+        <div class="advisor-info">
+          <div class="advisor-name">Arjun Shankar</div>
+          <div class="advisor-tags">Mediumship &middot; Astrology</div>
+          <div class="advisor-rating"><span><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 4.96 &middot; 1.8k</span><span class="advisor-rate">$3.49/min</span></div>
+        </div>
+      </div>
+      <div class="advisor-card">
+        <div class="advisor-photo" style="background:#eee;color:transparent;padding:0;">
+          <img src="<?php echo esc_url( $theme_uri ); ?>/assets/images/photo-advisor-rosa.jpg" alt="Rosa Calla" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"/>
+          <div class="advisor-status">Online</div>
+        </div>
+        <div class="advisor-info">
+          <div class="advisor-name">Rosa Calla</div>
+          <div class="advisor-tags">Clairvoyance &middot; Dreams</div>
+          <div class="advisor-rating"><span><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 4.99 &middot; 3.2k</span><span class="advisor-rate">$2.49/min</span></div>
+        </div>
+      </div>
+      <div class="advisor-card">
+        <div class="advisor-photo" style="background:#eee;color:transparent;padding:0;">
+          <img src="<?php echo esc_url( $theme_uri ); ?>/assets/images/photo-advisor-elena.jpg" alt="Elena Voss" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"/>
+          <div class="advisor-status" style="color:#8b7f9a">Back in 12m</div>
+        </div>
+        <div class="advisor-info">
+          <div class="advisor-name">Elena Voss</div>
+          <div class="advisor-tags">Reiki &middot; Spiritual coaching</div>
+          <div class="advisor-rating"><span><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 4.97 &middot; 1.4k</span><span class="advisor-rate">$1.99/min</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" data-screen-label="07 Testimonials">
+    <div class="section-head" style="justify-content:center;text-align:center;flex-direction:column;align-items:center;margin-bottom:64px;">
+      <div class="section-eyebrow">What clients say</div>
+      <h2>54,000 reviews.<br/>4.9 stars. One reason.</h2>
+    </div>
+    <div class="t-grid">
+      <div class="t-card">
+        <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="t-quote">&ldquo;An incredible experience. The reading gave me the clarity I needed during a genuinely difficult time &mdash; and I came away feeling seen.&rdquo;</div>
+        <div class="t-author">
+          <div class="t-avatar">SM</div>
+          <div><div class="t-author-name">Sarah M.</div><div class="t-author-meta">Verified &middot; Tarot reading</div></div>
+        </div>
+      </div>
+      <div class="t-card">
+        <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="t-quote">&ldquo;I came in skeptical. I left shaken, in the best way. The accuracy was remarkable &mdash; details she couldn&rsquo;t have guessed.&rdquo;</div>
+        <div class="t-author">
+          <div class="t-avatar">JT</div>
+          <div><div class="t-author-name">James T.</div><div class="t-author-meta">Verified &middot; Mediumship</div></div>
+        </div>
+      </div>
+      <div class="t-card">
+        <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="t-quote">&ldquo;Compassionate and insightful. My advisor helped me understand my path without ever pushing her own conclusions.&rdquo;</div>
+        <div class="t-author">
+          <div class="t-avatar">ML</div>
+          <div><div class="t-author-name">Maria L.</div><div class="t-author-meta">Verified &middot; Life path reading</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section class="trust" data-screen-label="08 Trust">
+    <div class="trust-grid">
+      <div class="trust-item">
+        <div class="trust-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 2L4 7v10c0 7 5 12 12 13 7-1 12-6 12-13V7l-12-5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M11 16l3.5 3.5L21 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h4>Vetted Advisors</h4>
+        <p>Background-checked, accuracy-tested, and continually reviewed. Less than 8% of applicants make it onto the platform.</p>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M8 14V9a8 8 0 0116 0v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><rect x="5" y="14" width="22" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="21" r="2" fill="currentColor"/></svg></div>
+        <h4>Private &amp; Secure</h4>
+        <p>End-to-end encrypted sessions. Your conversations stay between you and your advisor &mdash; never sold, never shared.</p>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" stroke="currentColor" stroke-width="1.5"/><path d="M16 9v8l5 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h4>Satisfaction Guarantee</h4>
+        <p>Not feeling it in the first 3 minutes? End the session &mdash; no charge. A guarantee, not a gimmick.</p>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M4 22c2-6 6-10 12-10s10 4 12 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="16" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M8 26h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h4>24/7 Availability</h4>
+        <p>Guidance doesn&rsquo;t keep office hours. Neither do we. Someone you connect with is always online &mdash; any timezone, any hour.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-band" data-screen-label="09 CTA">
+    <div class="section-eyebrow">Ready when you are</div>
+    <h2>The next three minutes<br/>could change <em>everything.</em></h2>
+    <p>Your first reading is on us. No credit card required to start.</p>
+    <a href="<?php echo esc_url( $home_url . 'contact/' ); ?>" class="btn btn-primary btn-lg">Begin Your Free Reading &rarr;</a>
+  </section>
+
+  <!-- BLOG -->
+  <section data-screen-label="10 Blog">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">From the journal</div>
+        <h2>Essays on intuition,<br/>energy, and inquiry.</h2>
+      </div>
+      <a href="<?php echo esc_url( get_post_type_archive_link( 'post' ) ?: $home_url . 'blog/' ); ?>" class="btn btn-ghost">All articles &rarr;</a>
+    </div>
+    <div class="blog-grid">
+      <?php
+      $recent_posts = get_posts( [ 'numberposts' => 3, 'post_status' => 'publish' ] );
+      $blog_fallbacks = [
+        [
+          'tag'  => 'Ethics &middot; 6 min read',
+          'title'=> 'What Does a Vetted Psychic Advisor Actually Mean?',
+          'desc' => 'Every platform claims their readers are &ldquo;vetted.&rdquo; The term has been used so broadly it nearly lost its meaning. Here&rsquo;s how we actually define it.',
+          'img'  => 'photo-blog-1.jpg',
+          'cls'  => 'blog-cover-1',
+        ],
+        [
+          'tag'  => 'Guide &middot; 8 min read',
+          'title'=> 'Tarot, Astrology, or Mediumship &mdash; Which Service Do You Need?',
+          'desc' => 'Three of the most requested modalities, all answering different questions. A plain-language guide to choosing the right one for what you&rsquo;re carrying.',
+          'img'  => 'photo-blog-2.jpg',
+          'cls'  => 'blog-cover-2',
+        ],
+        [
+          'tag'  => 'History &middot; 5 min read',
+          'title'=> 'How Affordable Psychic Readings Became Possible Online',
+          'desc' => 'Not long ago, a quality reading meant knowing someone &mdash; or a storefront with uncertain credentials and a steep price tag. What changed.',
+          'img'  => 'photo-blog-3.jpg',
+          'cls'  => 'blog-cover-3',
+        ],
+      ];
+      if ( ! empty( $recent_posts ) ) :
+        $i = 0;
+        foreach ( $recent_posts as $rp ) :
+          $fb        = $blog_fallbacks[ $i % 3 ];
+          $thumb     = get_the_post_thumbnail_url( $rp->ID, 'large' );
+          $cover_img = $thumb ? esc_url( $thumb ) : esc_url( $theme_uri ) . '/assets/images/' . $fb['img'];
+          $cats      = get_the_category( $rp->ID );
+          $cat_name  = ! empty( $cats ) ? esc_html( $cats[0]->name ) : 'Article';
+          $excerpt   = wp_trim_words( wp_strip_all_tags( $rp->post_excerpt ?: $rp->post_content ), 26, '&hellip;' );
+          $i++;
+          ?>
+          <article class="blog-card">
+            <a href="<?php echo esc_url( get_permalink( $rp->ID ) ); ?>">
+              <div class="blog-cover <?php echo esc_attr( $fb['cls'] ); ?>" style="background:#1a1033;">
+                <img src="<?php echo $cover_img; ?>" alt=""/>
+              </div>
+              <div class="blog-body">
+                <div class="blog-tag"><?php echo $cat_name; ?></div>
+                <h3><?php echo esc_html( get_the_title( $rp->ID ) ); ?></h3>
+                <p><?php echo esc_html( $excerpt ); ?></p>
+              </div>
+            </a>
+          </article>
+          <?php
+        endforeach;
+      else :
+        foreach ( $blog_fallbacks as $fb ) : ?>
+          <article class="blog-card">
+            <div class="blog-cover <?php echo esc_attr( $fb['cls'] ); ?>" style="background:#1a1033;">
+              <img src="<?php echo esc_url( $theme_uri ); ?>/assets/images/<?php echo esc_attr( $fb['img'] ); ?>" alt=""/>
+            </div>
+            <div class="blog-body">
+              <div class="blog-tag"><?php echo $fb['tag']; ?></div>
+              <h3><?php echo $fb['title']; ?></h3>
+              <p><?php echo $fb['desc']; ?></p>
+            </div>
+          </article>
+        <?php endforeach;
+      endif;
+      ?>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" data-screen-label="11 Footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">
+          <div class="logo-mark"></div>
+          <div class="logo-text">
+            <span class="logo-text-top" style="color:#fff">Online <em style="background:linear-gradient(135deg,#fcd8e6,#c5b8ea);-webkit-background-clip:text;background-clip:text;color:transparent;">Psychic</em></span>
+            <span class="logo-text-bot" style="color:rgba(226,214,236,.6)">&middot; Services &middot;</span>
+          </div>
+        </div>
+        <p>Full-spectrum online psychic services &mdash; one platform, many gifts. Trusted by over 2 million seekers worldwide.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Platform</h5>
+        <a href="<?php echo esc_url( $home_url ); ?>">Home</a>
+        <a href="<?php echo esc_url( $home_url ); ?>#how">How It Works</a>
+        <a href="<?php echo esc_url( $home_url ); ?>#advisors">Advisors</a>
+        <a href="<?php echo esc_url( $home_url . 'pricing/' ); ?>">Pricing</a>
+        <a href="<?php echo esc_url( get_post_type_archive_link( 'post' ) ?: $home_url . 'blog/' ); ?>">Blog</a>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <a href="<?php echo esc_url( $home_url ); ?>#services">Psychic Readings</a>
+        <a href="<?php echo esc_url( $home_url ); ?>#services">Love Readings</a>
+        <a href="<?php echo esc_url( $home_url ); ?>#services">Tarot Readings</a>
+        <a href="<?php echo esc_url( $home_url ); ?>#services">Medium Readings</a>
+        <a href="<?php echo esc_url( $home_url ); ?>#services">Astrology</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a href="<?php echo esc_url( $home_url . 'about/' ); ?>">About Us</a>
+        <a href="<?php echo esc_url( $home_url . 'faq/' ); ?>">FAQ</a>
+        <a href="<?php echo esc_url( $home_url . 'contact/' ); ?>">Contact</a>
+        <a href="<?php echo esc_url( $home_url . 'privacy-policy/' ); ?>">Privacy Policy</a>
+        <a href="<?php echo esc_url( $home_url . 'terms-of-service/' ); ?>">Terms of Service</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <?php echo esc_html( date_i18n( 'Y' ) ); ?> <?php echo esc_html( $site_name ); ?>. All rights reserved.</span>
+      <span>For entertainment purposes only. Not a substitute for professional advice.</span>
+    </div>
+  </footer>
+
+</div>
+
+<!-- Sticky CTA -->
+<div class="sticky-cta">
+  <div class="sticky-cta-avatars"><div class="av">L</div><div class="av">A</div><div class="av">R</div></div>
+  <div class="sticky-cta-text"><strong>147 advisors online</strong><span>Avg. wait 2 minutes</span></div>
+  <a href="<?php echo esc_url( $home_url . 'contact/' ); ?>"><button>Start &rarr;</button></a>
+</div>
+
+<?php wp_footer(); ?>
+</body>
+</html>

@@ -799,6 +799,16 @@ body:not(.home):not(.front-page) .btn-secondary {
 /*# sourceURL=core-block-supports-inline-css */
 </style>
 
+<style>
+.lang-switch{display:inline-flex;align-items:center;gap:6px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin-right:14px}
+.lang-switch__current{font-weight:700}
+.lang-switch a{opacity:.6;text-decoration:none;color:inherit}
+.lang-switch a:hover{opacity:1;text-decoration:underline}
+</style>
+<!-- i18n hreflang vi -->
+<link rel="alternate" hreflang="en" href="https://online-psychic-services.com/" />
+<link rel="alternate" hreflang="vi" href="https://vi.online-psychic-services.com/" />
+<link rel="alternate" hreflang="x-default" href="https://online-psychic-services.com/" />
 </head>
 <body class="home wp-singular page-template-default page page-id-5 wp-embed-responsive wp-theme-ops-theme ops-landing-a">
 <div class="page">
@@ -819,7 +829,8 @@ body:not(.home):not(.front-page) .btn-secondary {
       <a href="https://online-psychic-services.com/blog/">Blog</a>
       <a href="https://online-psychic-services.com/about/">About</a>
     </div>
-    <div class="nav-cta">
+    <span class="lang-switch" aria-label="Choose language"><span class="lang-switch__current" lang="en">EN</span><a href="https://vi.online-psychic-services.com/" hreflang="vi" lang="vi">VI</a></span>
+<div class="nav-cta">
       <a href="https://online-psychic-services.com/pricing/" style="font-size:15px;color:var(--a-ink-soft);">Pricing</a>
       <a href="https://online-psychic-services.com/contact/" class="btn btn-primary">Get Started</a>
     </div>

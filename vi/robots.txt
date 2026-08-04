@@ -4,6 +4,5 @@ Disallow: /wp-admin/
 Disallow: /wp-includes/
 Disallow: /wp-json/
 Disallow: /xmlrpc.php
-Disallow: /go/
 
-Sitemap: https://online-psychic-services.com/sitemap.xml
+Sitemap: https://vi.online-psychic-services.com/sitemap.xml

@@ -1,0 +1,162 @@
+/* AI Tarot Reader (Selene) — ops-theme. Токени з style.css (--color-*, --font-*, --radius-*). */
+.ait {
+  --ait-bg: #262626;
+  --ait-bg-2: #333331;
+  --ait-gold: var(--color-accent, #D4A843);
+  --ait-gold-dk: #BF9535;
+  --ait-ink: #fff;
+  --ait-soft: rgba(255, 255, 255, .78);
+  --ait-line: rgba(255, 255, 255, .16);
+  --ait-focus: #ffe08a;
+  position: relative;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px 16px 24px;
+  color: var(--ait-ink);
+  background: linear-gradient(160deg, var(--ait-bg) 0%, var(--ait-bg-2) 55%, #2C2C2C 100%);
+  border-radius: var(--radius-lg, 12px);
+  box-shadow: var(--shadow-lg, 0 8px 30px rgba(0, 0, 0, .14));
+  font-family: var(--font-body, 'Open Sans', sans-serif);
+  line-height: 1.6;
+  box-sizing: border-box;
+}
+.ait *, .ait *::before, .ait *::after { box-sizing: border-box; }
+.ait p { margin: 0 0 .75em; }
+.ait-sr { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.ait [hidden] { display: none !important; }
+
+.ait :focus-visible { outline: 3px solid var(--ait-focus); outline-offset: 2px; }
+
+/* Заголовок читця */
+.ait-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding-bottom: 14px; margin-bottom: 16px; border-bottom: 1px solid var(--ait-line); }
+.ait-avatar { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--ait-gold); color: #2C2C2C; font-size: 24px; line-height: 1; flex: none; }
+.ait-who { display: flex; flex-direction: column; line-height: 1.2; }
+.ait-name { font-family: var(--font-heading, 'Merriweather', serif); font-size: 1.1rem; color: #fff; }
+.ait-role { font-size: .85rem; color: var(--ait-soft); }
+.ait-badge { margin-left: auto; padding: 4px 10px; border: 1px solid var(--ait-gold); border-radius: 999px; font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ait-gold); }
+
+/* Кроки й бульбашки */
+.ait-step-title { font-family: var(--font-heading, 'Merriweather', serif); font-weight: 700; font-size: 1.15rem; color: #fff; margin: 0 0 .6em; }
+.ait-step-title:focus { outline: none; }
+.ait-bubble { max-width: 100%; padding: 14px 16px; margin: 0 0 14px; border-radius: 14px; word-wrap: break-word; overflow-wrap: anywhere; }
+.ait-bubble:focus { outline: none; }
+.ait-bubble--selene { background: rgba(255, 255, 255, .08); border: 1px solid var(--ait-line); border-top-left-radius: 4px; color: #fff; }
+.ait-bubble--user { background: var(--ait-gold); color: #2C2C2C; margin-left: auto; width: fit-content; max-width: 90%; border-top-right-radius: 4px; }
+.ait-bubble-body p:last-child { margin-bottom: 0; }
+.ait-bubble-body strong { color: var(--ait-gold); }
+.ait-bubble--user .ait-bubble-body strong { color: inherit; }
+.ait-typing { color: var(--ait-soft); font-style: italic; }
+.ait-qecho { padding: 10px 14px; background: rgba(255, 255, 255, .06); border-left: 3px solid var(--ait-gold); border-radius: 4px; color: var(--ait-soft); font-style: italic; }
+
+/* Форми */
+.ait-form { margin: 0 0 12px; }
+.ait-label { display: block; margin-bottom: 6px; font-weight: 600; color: #fff; }
+.ait-input { display: block; width: 100%; padding: 12px 14px; font: inherit; font-size: 1rem; color: #2C2C2C; background: #fff; border: 2px solid transparent; border-radius: var(--radius-md, 8px); resize: vertical; }
+.ait-input:focus-visible { border-color: var(--ait-gold); }
+.ait-hint { margin: 6px 0 10px; font-size: .82rem; color: var(--ait-soft); }
+.ait-error { min-height: 0; margin: 0 0 8px; font-size: .9rem; color: #ffb3b3; }
+.ait-error:empty { display: none; }
+.ait-follow-row { display: flex; gap: 8px; }
+.ait-follow-row .ait-input { flex: 1; min-width: 0; }
+
+/* Кнопки */
+.ait-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 10px 22px; font: inherit; font-weight: 700; font-size: .9rem; letter-spacing: .06em; text-transform: uppercase; border: 2px solid transparent; border-radius: var(--radius-sm, 4px); cursor: pointer; transition: var(--transition, .2s ease); }
+.ait-btn--primary { background: var(--ait-gold); color: #2C2C2C; }
+.ait-btn--primary:hover:not(:disabled) { background: var(--ait-gold-dk); transform: translateY(-1px); }
+.ait-btn--ghost { background: transparent; color: #fff; border-color: var(--ait-line); }
+.ait-btn--ghost:hover:not(:disabled) { border-color: var(--ait-gold); color: var(--ait-gold); }
+.ait-btn--dark { background: #fff; color: #2C2C2C; }
+.ait-btn--dark:hover { background: var(--ait-gold); }
+.ait-btn:disabled { opacity: .55; cursor: not-allowed; }
+.ait-tools { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+
+/* Розклади */
+.ait-spreads { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 0 0 14px; }
+.ait-spread { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 14px 16px; text-align: left; font: inherit; color: #fff; background: rgba(255, 255, 255, .07); border: 2px solid var(--ait-line); border-radius: var(--radius-md, 8px); cursor: pointer; transition: var(--transition, .2s ease); min-height: 44px; }
+.ait-spread:hover { border-color: var(--ait-gold); background: rgba(212, 168, 67, .12); }
+.ait-spread-name { font-family: var(--font-heading, 'Merriweather', serif); font-weight: 700; font-size: 1.05rem; }
+.ait-spread-hint { font-size: .85rem; color: var(--ait-soft); }
+
+/* Стіл із картами */
+.ait-shuffle { position: relative; height: 150px; margin: 8px auto 16px; max-width: 220px; }
+.ait-shuffle-card { position: absolute; left: 50%; top: 0; width: 84px; height: 140px; margin-left: -42px; border-radius: 8px; background: repeating-linear-gradient(45deg, #3a2d6b 0 6px, #2d1f5a 6px 12px); border: 2px solid var(--ait-gold); box-shadow: 0 4px 10px rgba(0, 0, 0, .4); animation: ait-shuf 1.6s ease-in-out infinite; }
+.ait-shuffle-card:nth-child(2) { animation-delay: .15s; }
+.ait-shuffle-card:nth-child(3) { animation-delay: .3s; }
+.ait-shuffle-card:nth-child(4) { animation-delay: .45s; }
+.ait-shuffle-card:nth-child(5) { animation-delay: .6s; }
+@keyframes ait-shuf {
+  0%, 100% { transform: translateX(0) rotate(0); }
+  25% { transform: translateX(-70px) rotate(-12deg); }
+  50% { transform: translateX(0) rotate(2deg); }
+  75% { transform: translateX(70px) rotate(12deg); }
+}
+.ait-table { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 14px 10px; justify-items: center; }
+.ait-step--table[data-spread="one"] .ait-table { grid-template-columns: minmax(130px, 170px); justify-content: center; }
+.ait-step--table[data-spread="three"] .ait-table { grid-template-columns: repeat(3, minmax(0, 150px)); justify-content: center; }
+.ait-step--table[data-spread="celtic"] .ait-table { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.ait-slot { width: 100%; max-width: 150px; text-align: center; margin: 0; }
+
+.ait-card { display: block; width: 100%; padding: 0; margin: 0; background: none; border: 0; border-radius: 8px; cursor: pointer; perspective: 800px; aspect-ratio: 2 / 3.4; }
+.ait-card:disabled { cursor: default; }
+.ait-card-inner { position: relative; display: block; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .7s cubic-bezier(.2, .7, .2, 1); }
+.ait-card.is-flipped .ait-card-inner { transform: rotateY(180deg); }
+.ait-face { position: absolute; inset: 0; display: block; overflow: hidden; border-radius: 8px; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.ait-face--back { display: grid; place-items: center; background: repeating-linear-gradient(45deg, #3a2d6b 0 7px, #2d1f5a 7px 14px); border: 2px solid var(--ait-gold); box-shadow: 0 4px 12px rgba(0, 0, 0, .45); }
+.ait-card:not(:disabled):hover .ait-face--back { box-shadow: 0 6px 18px rgba(212, 168, 67, .45); }
+.ait-back-mark { font-size: 2rem; color: var(--ait-gold); }
+.ait-face--front { transform: rotateY(180deg); background: #f7f1e3; border: 2px solid var(--ait-gold); box-shadow: 0 4px 12px rgba(0, 0, 0, .45); }
+.ait-art { position: absolute; inset: 0; display: block; }
+.ait-art.is-reversed { transform: rotate(180deg); }
+.ait-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: none; }
+.ait-art.has-img .ait-img { display: block; }
+.ait-art.has-img .ait-fallback { display: none; }
+.ait-fallback { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 8px; text-align: center; background: radial-gradient(circle at 50% 35%, #fff 0, #efe3c2 100%); color: #2C2C2C; }
+.ait-fallback-mark { font-family: var(--font-heading, 'Merriweather', serif); font-size: 1.8rem; font-weight: 900; color: var(--ait-gold-dk); }
+.ait-fallback-name { font-family: var(--font-heading, 'Merriweather', serif); font-size: .78rem; font-weight: 700; line-height: 1.25; }
+
+.ait-cap { display: flex; flex-direction: column; align-items: center; gap: 1px; margin-top: 8px; font-size: .8rem; line-height: 1.3; }
+.ait-pos { font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ait-soft); }
+.ait-cardlink { color: var(--ait-gold); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+.ait-cardlink:hover { color: #fff; }
+.ait-orient { font-size: .72rem; color: var(--ait-soft); }
+
+/* Розмова */
+.ait-log { margin: 18px 0 14px; }
+.ait-step--chat { margin-top: 6px; border-top: 1px solid var(--ait-line); padding-top: 4px; }
+.ait-fine { margin: 14px 0 0; font-size: .78rem; color: var(--ait-soft); }
+.ait-more { margin: 14px 0 0; font-size: .9rem; }
+.ait-more a { color: var(--ait-gold); font-weight: 700; }
+
+/* Компактний варіант */
+.ait--compact { padding: 14px 14px 16px; }
+.ait--compact .ait-spreads { grid-template-columns: 1fr; }
+
+@media (min-width: 640px) {
+  .ait { padding: 28px 28px 30px; }
+  .ait-spreads { grid-template-columns: repeat(3, 1fr); }
+  .ait--compact .ait-spreads { grid-template-columns: repeat(3, 1fr); }
+  .ait-step--table[data-spread="celtic"] .ait-table { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .ait-bubble { padding: 16px 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ait-card-inner { transition: none; }
+  .ait-shuffle-card { animation: none; }
+  .ait-btn { transition: none; }
+}
+
+/* Сторінка шаблону */
+.ait-page { background: var(--color-bg, #fff); }
+.ait-page-hero { background: linear-gradient(160deg, #262626 0%, #333331 55%, #2C2C2C 100%); padding: 56px 20px 36px; text-align: center; }
+.ait-page-hero h1 { color: #fff; font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 .4em; }
+.ait-page-hero p { max-width: 680px; margin: 0 auto; color: rgba(255, 255, 255, .78); font-size: 1.05rem; }
+.ait-page-hero .accent-line { width: 60px; height: 4px; background: var(--color-accent, #D4A843); margin: 0 auto 20px; }
+.ait-page-tool { padding: 0 16px; margin-top: -4px; background: linear-gradient(to bottom, #2C2C2C 0, #2C2C2C 40px, transparent 40px); }
+.ait-page-copy { max-width: 780px; margin: 0 auto; padding: 48px 20px 24px; }
+.ait-page-copy h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); margin: 1.6em 0 .5em; }
+.ait-page-copy h2:first-child { margin-top: 0; }
+.ait-page-copy h3 { font-size: 1.1rem; margin: 1.4em 0 .3em; }
+.ait-page-copy ol, .ait-page-copy ul { padding-left: 1.3em; }
+.ait-page-note { padding: 14px 18px; margin: 1.5em 0; background: var(--color-bg-alt, #F7F7F5); border-left: 4px solid var(--color-accent, #D4A843); border-radius: 4px; }
+.ait-page-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 1.5em; }
+.ait-home-embed { padding: 40px 16px; }

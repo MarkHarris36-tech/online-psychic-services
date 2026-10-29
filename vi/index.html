@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<link href="https://online-psychic-services.com/wp-content/themes/ops-theme/assets/fonts/fonts.css" rel="stylesheet"/>
+<link href="https://online-psychic-services.com/wp-content/themes/ops-theme/assets/css/tokens.css" rel="stylesheet"/>
+<style>
+  :root {
+    /* Variant A palette: soft light + rose quartz magic */
+    --a-bg: #fbf7f4;
+    --a-bg-alt: #f4ecf3;
+    --a-ink: #1a1033;
+    --a-ink-soft: #4a3f5c;
+    --a-ink-mute: #8b7f9a;
+    --a-rose: #e5a6c2;
+    --a-rose-deep: #c876a0;
+    --a-lilac: #a89bdc;
+    --a-violet: #5e4dbf;
+    --a-card: #ffffff;
+    --a-line: #ebe3e8;
+    --a-glow: radial-gradient(60% 60% at 50% 50%, rgba(229,166,194,.55), rgba(168,155,220,.25) 60%, transparent 80%);
+    --grad-aurora: linear-gradient(135deg, #f4e1ec 0%, #e9d8f1 40%, #d7c5ee 100%);
+    --grad-cta: linear-gradient(135deg, #c876a0 0%, #8e6bd2 100%);
+    --shadow-soft: 0 2px 24px rgba(94,77,191,.08);
+    --shadow-card: 0 8px 40px rgba(94,77,191,.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--a-bg);
+    color: var(--a-ink);
+    font-family: var(--font-family-body, 'Season Sans', -apple-system, 'Segoe UI', Roboto, sans-serif);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "ss01","ss02";
+  }
+  h1, h2, h3, h4, h5 { font-family: var(--font-family-heading, 'Season Mix', Georgia, serif); font-weight: 500; letter-spacing: -0.015em; color: var(--a-ink); }
+  h1 { font-size: 88px; line-height: 1.02; letter-spacing: -0.03em; }
+  h2 { font-size: 56px; line-height: 1.08; letter-spacing: -0.025em; }
+  h3 { font-size: 28px; line-height: 1.2; }
+  h4 { font-size: 20px; line-height: 1.3; }
+  p { color: var(--a-ink-soft); }
+  a { color: inherit; text-decoration: none; }
+  img, svg { display: block; max-width: 100%; }
+
+  .page { max-width: 1440px; margin: 0 auto; overflow: hidden; }
+
+  /* ======== NAV ======== */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 72px;
+    background: rgba(251,247,244,.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(235,227,232,.6);
+  }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo-text { display: flex; flex-direction: column; line-height: 1; gap: 2px; }
+  .logo-text-top { font-family: var(--font-family-heading, 'Season Mix', Georgia, serif); font-size: 19px; font-weight: 500; letter-spacing: -0.015em; color: var(--a-ink); }
+  .logo-text-top em { font-style: italic; background: var(--grad-cta); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .logo-text-bot { font-family: var(--font-family-body, 'Season Sans', sans-serif); font-size: 9px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--a-ink-mute); }
+  .logo-mark {
+    width: 32px; height: 32px; border-radius: 50%;
+    background:
+      radial-gradient(circle at 35% 30%, #fff 0%, transparent 35%),
+      conic-gradient(from 220deg, #e5a6c2, #a89bdc, #5e4dbf, #c876a0, #e5a6c2);
+    box-shadow: 0 2px 10px rgba(200,118,160,.35), inset 0 0 0 1px rgba(255,255,255,.4);
+    position: relative;
+  }
+  .logo-mark::after {
+    content: ""; position: absolute; inset: 3px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.9), transparent 55%);
+  }
+  .nav-links { display: flex; gap: 36px; font-size: 15px; color: var(--a-ink-soft); }
+  .nav-links a:hover { color: var(--a-violet); }
+  .nav-cta { display: flex; align-items: center; gap: 14px; }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    height: 46px; padding: 0 22px; border-radius: 999px;
+    font-family: var(--font-family-body, 'Season Sans', sans-serif); font-weight: 500; font-size: 15px;
+    cursor: pointer; transition: all .2s ease;
+    border: none; color: #fff;
+    text-decoration: none;
+  }
+  .btn-primary { background: var(--grad-cta); box-shadow: 0 4px 18px rgba(200,118,160,.35); }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(200,118,160,.45); }
+  .btn-ghost { background: transparent; color: var(--a-ink); border: 1px solid var(--a-line); }
+  .btn-ghost:hover { border-color: var(--a-violet); color: var(--a-violet); }
+  .btn-lg { height: 56px; padding: 0 30px; font-size: 16px; }
+
+  /* ======== HERO ======== */
+  .hero {
+    position: relative;
+    padding: 110px 72px 140px;
+    overflow: hidden;
+    background:
+      radial-gradient(80% 60% at 80% 20%, rgba(229,166,194,.45), transparent 60%),
+      radial-gradient(70% 60% at 10% 80%, rgba(168,155,220,.35), transparent 60%),
+      var(--a-bg);
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .hero-video {
+    position: absolute; inset: 0; z-index: 0; opacity: .9; pointer-events: none;
+    background:
+      conic-gradient(from 120deg at 30% 30%, transparent 0deg, rgba(229,166,194,.35) 60deg, transparent 120deg),
+      conic-gradient(from 300deg at 80% 70%, transparent 0deg, rgba(168,155,220,.4) 60deg, transparent 140deg);
+    filter: blur(60px);
+    animation: aurora 18s ease-in-out infinite alternate;
+  }
+  @keyframes aurora {
+    0% { transform: scale(1) rotate(0deg); }
+    100% { transform: scale(1.15) rotate(8deg); }
+  }
+  .hero-inner { position: relative; z-index: 1; }
+
+  .hero-visual { position: relative; aspect-ratio: 1 / 1; display: grid; place-items: center; z-index: 1; }
+  .hero-blob {
+    position: relative;
+    width: 82%;
+    aspect-ratio: 1 / 1;
+    border-radius: 62% 38% 54% 46% / 48% 56% 44% 52%;
+    background: linear-gradient(155deg, #f7e4ee 0%, #e9d4f0 45%, #d5c2ec 100%);
+    overflow: hidden;
+    box-shadow:
+      0 30px 70px -20px rgba(200,118,160,.4),
+      0 0 0 1px rgba(255,255,255,.5) inset,
+      0 8px 24px rgba(94,77,191,.15);
+    animation: blobMorph 14s ease-in-out infinite;
+  }
+  .hero-blob img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero-blob::after {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(60% 50% at 50% 40%, transparent 0%, rgba(94,77,191,.15) 100%);
+    pointer-events: none;
+  }
+  @keyframes blobMorph {
+    0%, 100% { border-radius: 62% 38% 54% 46% / 48% 56% 44% 52%; }
+    50%      { border-radius: 48% 52% 42% 58% / 56% 44% 56% 44%; }
+  }
+
+  .ring { position: absolute; border-radius: 50%; border: 1px dashed rgba(168,155,220,.4); pointer-events: none; }
+  .ring-1 { inset: 4%;  animation: spin 60s linear infinite; }
+  .ring-2 { inset: -4%; border-color: rgba(200,118,160,.25); animation: spin 90s linear infinite reverse; }
+  .ring-3 { inset: -12%; border-color: rgba(168,155,220,.2); border-style: solid; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .float-chip {
+    position: absolute;
+    background: rgba(255,255,255,.92);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,.7);
+    border-radius: 16px;
+    box-shadow: 0 12px 32px rgba(94,77,191,.18);
+    padding: 12px 14px;
+    font-size: 13px;
+    z-index: 2;
+  }
+  .chip-advisor { top: 8%; left: -8%; display: flex; align-items: center; gap: 10px; padding: 10px 16px 10px 10px; animation: floaty 5s ease-in-out infinite; }
+  .chip-advisor img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; }
+  .chip-name { font-family: var(--font-family-heading, 'Season Mix', Georgia, serif); font-size: 15px; display: flex; align-items: center; gap: 6px; color: var(--a-ink); }
+  .chip-live { width: 7px; height: 7px; border-radius: 50%; background: #3ca374; box-shadow: 0 0 0 3px rgba(60,163,116,.2); }
+  .chip-sub { font-size: 11px; color: var(--a-ink-mute); margin-top: 2px; }
+  .chip-review { bottom: 10%; right: -10%; max-width: 220px; animation: floaty 6s ease-in-out infinite -2s; }
+  .chip-stars { color: #c876a0; letter-spacing: 2px; font-size: 12px; margin-bottom: 6px; }
+  .chip-quote { font-family: var(--font-family-heading, 'Season Mix', Georgia, serif); font-size: 14px; line-height: 1.3; color: var(--a-ink); font-style: italic; }
+  .chip-by { font-size: 11px; color: var(--a-ink-mute); margin-top: 6px; }
+  .chip-tag {
+    top: 62%; left: -4%;
+    background: var(--grad-cta);
+    color: #fff;
+    border: none;
+    box-shadow: 0 10px 28px rgba(200,118,160,.45);
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 16px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .02em;
+    animation: floaty 7s ease-in-out infinite -4s;
+  }
+  .chip-dot { width: 6px; height: 6px; border-radius: 50%; background: #fff; }
+  @keyframes floaty {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+  }
+  .spark { position: absolute; width: 18px; height: 18px; color: #c876a0; opacity: .85; filter: drop-shadow(0 0 8px rgba(200,118,160,.6)); }
+  .spark-1 { top: 4%;  right: 18%; animation: twinkle 3s ease-in-out infinite; }
+  .spark-2 { top: 30%; right: -6%; width: 12px; height: 12px; color: #a89bdc; animation: twinkle 4s ease-in-out infinite -1s; }
+  .spark-3 { bottom: 4%; left: 12%; width: 14px; height: 14px; color: #e5a6c2; animation: twinkle 3.5s ease-in-out infinite -1.5s; }
+  @keyframes twinkle {
+    0%, 100% { opacity: .35; transform: scale(.8); }
+    50%      { opacity: 1;   transform: scale(1.1); }
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 8px 16px; border-radius: 999px;
+    background: rgba(255,255,255,.7);
+    border: 1px solid rgba(200,118,160,.2);
+    font-size: 13px; color: var(--a-ink-soft); letter-spacing: .02em;
+    backdrop-filter: blur(8px);
+  }
+  .eyebrow-dot { width: 8px; height: 8px; border-radius: 50%; background: #55c38e; box-shadow: 0 0 0 4px rgba(85,195,142,.2); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 4px rgba(85,195,142,.2);} 50% { box-shadow: 0 0 0 8px rgba(85,195,142,0);} }
+
+  .hero h1 { margin: 28px 0 24px; max-width: 1000px; font-size: 76px; }
+  .hero h1 em { font-style: normal; background: var(--grad-cta); -webkit-background-clip: text; background-clip: text; color: transparent; font-family: var(--font-family-heading, 'Season Mix', Georgia, serif); }
+  .hero-sub { font-size: 20px; color: var(--a-ink-soft); max-width: 620px; margin-bottom: 44px; }
+  .hero-ctas { display: flex; gap: 16px; align-items: center; margin-bottom: 56px; flex-wrap: wrap; }
+  .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 56px; padding-top: 36px; border-top: 1px solid rgba(0,0,0,.06); max-width: 780px; }
+  .stat-num { font-family: var(--font-family-heading, 'Season Mix', Georgia, serif); font-size: 40px; font-weight: 500; color: var(--a-ink); line-height: 1; }
+  .stat-label { font-size: 14px; color: var(--a-ink-mute); margin-top: 8px; }
+
+  /* ======== FEATURED IN ======== */
+  .featured {
+    padding: 48px 72px;
+    border-top: 1px solid var(--a-line);
+    border-bottom: 1px solid var(--a-line);
+    background: rgba(255,255,255,.5);
+  }
+  .featured-label { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--a-ink-mute); text-align: center; margin-bottom: 24px; }
+  .featured-logos { display: flex; justify-content: space-between; align-items: center; gap: 40px; opacity: .55; flex-wrap: wrap; }
+  .featured-logos > span { font-family: var(--font-family-heading, 'Season Mix', Georgia, serif); font-size: 22px; color: var(--a-ink); letter-spacing: -.01em; }
+  .featured-logos > span:nth-child(2) { font-family: Georgia, serif; font-style: italic; }
+  .featured-logos > span:nth-child(3) { font-weight: 700; text-transform: uppercase; letter-spacing: .15em; font-size: 14px; font-family: var(--font-family-body, 'Season Sans', sans-serif); }
+  .featured-logos > span:nth-child(4) { font-family: 'Times New Roman', serif; font-weight: 700; }
+  .featured-logos > span:nth-child(5) { font-family: var(--font-family-body, 'Season Sans', sans-serif); font-weight: 300; letter-spacing: .05em; font-size: 18px; }
+
+  /* ======== SECTIONS ======== */
+  section { padding: 120px 72px; }
+  .section-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 64px; gap: 48px; flex-wrap: wrap; }
+  .section-eyebrow { font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: var(--a-rose-deep); margin-bottom: 18px; }
+  .section-lede { font-size: 18px; color: var(--a-ink-soft); max-width: 440px; }
+
+  /* services */
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .service-card {
+    position: relative;
+    background: var(--a-card);
+    border-radius: 24px;
+    padding: 40px 36px;
+    border: 1px solid var(--a-line);
+    transition: all .3s ease;
+    overflow: hidden;
+  }
+  .service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); border-color: rgba(200,118,160,.3); }
+  .service-icon-wrap { width: 96px; height: 96px; border-radius: 50%; display: grid; place-items: center; background: var(--grad-aurora); margin-bottom: 28px; position: relative; }
+  .service-icon-wrap::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.7), transparent 50%); }
+  .service-icon-wrap svg { position: relative; z-index: 1; }
+  .service-card h3 { margin-bottom: 12px; }
+  .service-card p { font-size: 15px; margin-bottom: 24px; }
+  .service-meta { display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: 1px solid var(--a-line); font-size: 13px; color: var(--a-ink-mute); }
+  .service-price { color: var(--a-violet); font-weight: 500; }
+  .service-arrow { width: 36px; height: 36px; border-radius: 50%; background: var(--a-bg-alt); display: grid; place-items: center; transition: all .2s; }
+  .service-card:hover .service-arrow { background: var(--grad-cta); color: #fff; transform: rotate(-45deg); }
+
+  /* how */
+  .how { background: linear-gradient(180deg, var(--a-bg) 0%, var(--a-bg-alt) 100%); position: relative; overflow: hidden; }
+  .how::before { content: ""; position: absolute; top: 20%; left: -10%; width: 500px; height: 500px; background: var(--a-glow); opacity: .6; pointer-events: none; }
+  .how-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; position: relative; }
+  .how-line { position: absolute; top: 48px; left: 16%; right: 16%; height: 1px; background: linear-gradient(90deg, transparent, var(--a-rose), var(--a-lilac), transparent); }
+  .step { position: relative; }
+  .step-num { width: 96px; height: 96px; border-radius: 50%; background: var(--a-card); border: 1px solid var(--a-line); display: grid; place-items: center; font-family: var(--font-family-heading, 'Season Mix', Georgia, serif); font-size: 36px; font-weight: 500; color: var(--a-violet); margin-bottom: 28px; box-shadow: var(--shadow-soft); position: relative; }
+  .step-num::before { content: ""; position: absolute; inset: -6px; border-radius: 50%; background: var(--grad-aurora); z-index: -1; opacity: .5; }
+  .step h3 { margin-bottom: 10px; }
+  .step p { font-size: 15px; }
+
+  /* advisors */
+  .advisors { background: var(--a-bg); }
+  .advisors-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .advisor-card { background: var(--a-card); border-radius: 20px; overflow: hidden; border: 1px solid var(--a-line); transition: all .3s ease; }
+  .advisor-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); }
+  .advisor-photo { aspect-ratio: 1 / 1; background: var(--grad-aurora); position: relative; display: grid; place-items: center; font-family: var(--font-family-heading, 'Season Mix', Georgia, serif); font-size: 56px; color: #fff; }
+  .advisor-status { position: absolute; top: 14px; right: 14px; padding: 6px 12px; border-radius: 999px; background: rgba(255,255,255,.92); font-size: 12px; font-weight: 500; color: #3ca374; display: flex; align-items: center; gap: 6px; }
+  .advisor-status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #3ca374; }
+  .advisor-info { padding: 20px 22px; }
+  .advisor-name { font-family: var(--font-family-heading, 'Season Mix', Georgia, serif); font-size: 18px; margin-bottom: 4px; }
+  .advisor-tags { font-size: 13px; color: var(--a-ink-mute); margin-bottom: 14px; }
+  .advisor-rating { display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+  .stars { color: #f2994a; letter-spacing: 1px; }
+  .advisor-rate { color: var(--a-violet); font-weight: 500; }
+
+  /* testimonials */
+  .testimonials { background: linear-gradient(180deg, var(--a-bg-alt) 0%, var(--a-bg) 100%); position: relative; overflow: hidden; }
+  .testimonials::after { content: ""; position: absolute; bottom: -100px; right: -100px; width: 600px; height: 600px; background: var(--a-glow); opacity: .5; }
+  .t-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; position: relative; }
+  .t-card { background: var(--a-card); border-radius: 20px; padding: 36px 32px; border: 1px solid var(--a-line); }
+  .t-stars { color: #f2994a; font-size: 18px; letter-spacing: 2px; margin-bottom: 20px; }
+  .t-quote { font-family: var(--font-family-heading, 'Season Mix', Georgia, serif); font-size: 20px; line-height: 1.4; color: var(--a-ink); margin-bottom: 28px; letter-spacing: -0.01em; }
+  .t-author { display: flex; align-items: center; gap: 14px; }
+  .t-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--grad-aurora); display: grid; place-items: center; font-family: var(--font-family-heading, 'Season Mix', Georgia, serif); color: #fff; }
+  .t-author-name { font-weight: 500; font-size: 15px; }
+  .t-author-meta { font-size: 13px; color: var(--a-ink-mute); }
+
+  /* trust */
+  .trust { background: var(--a-bg); padding: 100px 72px; border-top: 1px solid var(--a-line); border-bottom: 1px solid var(--a-line); }
+  .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+  .trust-item { text-align: center; }
+  .trust-icon { width: 72px; height: 72px; margin: 0 auto 20px; border-radius: 50%; background: var(--a-bg-alt); display: grid; place-items: center; color: var(--a-violet); border: 1px solid var(--a-line); }
+  .trust-item h4 { font-size: 17px; margin-bottom: 8px; }
+  .trust-item p { font-size: 14px; }
+
+  /* cta */
+  .cta-band {
+    padding: 140px 72px;
+    background:
+      radial-gradient(60% 70% at 50% 50%, rgba(229,166,194,.45), transparent 70%),
+      radial-gradient(40% 60% at 10% 20%, rgba(168,155,220,.35), transparent 70%),
+      radial-gradient(40% 60% at 90% 80%, rgba(94,77,191,.25), transparent 70%),
+      var(--a-bg-alt);
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .cta-band h2 { font-size: 72px; max-width: 900px; margin: 0 auto 24px; letter-spacing: -0.03em; }
+  .cta-band h2 em { font-style: italic; font-family: var(--font-family-heading, 'Season Mix', Georgia, serif); background: var(--grad-cta); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .cta-band p { font-size: 18px; max-width: 560px; margin: 0 auto 40px; }
+
+  /* blog */
+  .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .blog-card { background: var(--a-card); border-radius: 20px; overflow: hidden; border: 1px solid var(--a-line); transition: all .3s ease; }
+  .blog-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); }
+  .blog-cover { aspect-ratio: 16 / 10; background: var(--grad-aurora); position: relative; overflow: hidden; }
+  .blog-cover img { width: 100%; height: 100%; object-fit: cover; }
+  .blog-body { padding: 28px 28px 32px; }
+  .blog-tag { font-size: 12px; letter-spacing: .15em; text-transform: uppercase; color: var(--a-rose-deep); margin-bottom: 12px; }
+  .blog-card h3 { font-size: 22px; line-height: 1.25; margin-bottom: 14px; }
+  .blog-card p { font-size: 14px; }
+
+  /* footer */
+  .site-footer { background: #1a1033; color: #e2d6ec; padding: 80px 72px 40px; }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px; padding-bottom: 56px; border-bottom: 1px solid rgba(255,255,255,.1); }
+  .footer-brand p { color: rgba(226,214,236,.7); font-size: 15px; max-width: 320px; margin-top: 18px; }
+  .footer-col h5 { color: #fff; font-size: 15px; margin-bottom: 20px; font-family: var(--font-family-body, 'Season Sans', sans-serif); font-weight: 500; letter-spacing: .05em; text-transform: uppercase; }
+  .footer-col a { display: block; color: rgba(226,214,236,.65); font-size: 14px; margin-bottom: 10px; }
+  .footer-col a:hover { color: #e5a6c2; }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 32px; font-size: 13px; color: rgba(226,214,236,.5); flex-wrap: wrap; gap: 12px; }
+
+  /* sticky cta */
+  .sticky-cta {
+    position: fixed; bottom: 24px; right: 24px; z-index: 40;
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 18px 14px 14px;
+    background: #1a1033; color: #fff;
+    border-radius: 999px;
+    box-shadow: 0 12px 40px rgba(26,16,51,.35);
+    border: 1px solid rgba(229,166,194,.3);
+  }
+  .sticky-cta-avatars { display: flex; }
+  .sticky-cta-avatars .av { width: 36px; height: 36px; border-radius: 50%; background: var(--grad-aurora); border: 2px solid #1a1033; margin-left: -10px; display: grid; place-items: center; font-size: 12px; color: #fff; font-family: var(--font-family-heading, 'Season Mix', Georgia, serif); }
+  .sticky-cta-avatars .av:first-child { margin-left: 0; }
+  .sticky-cta-text { font-size: 13px; line-height: 1.3; }
+  .sticky-cta-text strong { display: block; font-weight: 500; }
+  .sticky-cta-text span { color: rgba(226,214,236,.6); font-size: 12px; }
+  .sticky-cta button { height: 38px; padding: 0 18px; border-radius: 999px; background: var(--grad-cta); color: #fff; border: 0; font-weight: 500; font-size: 13px; font-family: inherit; cursor: pointer; }
+
+  /* ======== RESPONSIVE ======== */
+  @media (max-width: 1279px) {
+    h1 { font-size: 64px; }
+    h2 { font-size: 44px; }
+    .hero h1 { font-size: 56px; }
+    .hero { grid-template-columns: 1fr; padding: 80px 48px 100px; }
+    .hero-visual { max-width: 520px; margin: 0 auto; width: 100%; }
+    section { padding: 96px 48px; }
+    .nav { padding: 18px 48px; }
+    .featured, .trust { padding-left: 48px; padding-right: 48px; }
+    .cta-band { padding: 100px 48px; }
+    .site-footer { padding: 64px 48px 32px; }
+    .services-grid, .t-grid, .blog-grid { grid-template-columns: repeat(2, 1fr); }
+    .advisors-grid { grid-template-columns: repeat(3, 1fr); }
+    .trust-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 768px) {
+    h1 { font-size: 44px; }
+    h2 { font-size: 34px; }
+    .hero h1 { font-size: 40px; }
+    .hero { padding: 56px 20px 72px; }
+    .nav { padding: 14px 20px; }
+    section { padding: 64px 20px; }
+    .featured, .trust { padding: 40px 20px; }
+    .cta-band { padding: 72px 20px; }
+    .cta-band h2 { font-size: 40px; }
+    .site-footer { padding: 48px 20px 24px; }
+    .services-grid, .advisors-grid, .t-grid, .trust-grid, .blog-grid, .how-steps, .footer-top { grid-template-columns: 1fr; }
+    .how-line { display: none; }
+    .section-head { flex-direction: column; align-items: flex-start; }
+    .hero-stats { grid-template-columns: 1fr 1fr; gap: 20px 24px; }
+    .stat-num { font-size: 30px; }
+    .featured-logos { gap: 18px; justify-content: center; }
+    .featured-logos > span { font-size: 16px; }
+    .float-chip { transform: scale(.85); }
+    .chip-advisor { left: -2%; }
+    .chip-review { right: -2%; max-width: 180px; }
+    .sticky-cta { left: 12px; right: 12px; bottom: 12px; justify-content: space-between; padding: 10px 12px 10px 10px; }
+    .sticky-cta-text span { display: none; }
+  }
+</style>
+<title>Online Psychic Services | Xem Bói Uy Tín, Chat, Tư Vấn</title>
+<meta content="max-image-preview:large" name="robots"/>
+<!-- ops-theme SEO -->
+<meta content="Online Psychic Services, được sắp xếp để bạn chọn đúng dịch vụ. Không phải câu hỏi nào cũng cần một kiểu phiên giống nhau, và không phải nhà ngoại cảm nào cũng chuyên về…" name="description"/>
+<link href="https://vi.online-psychic-services.com/" rel="canonical"/>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
+<meta content="website" property="og:type"/>
+<meta content="Online Psychic Services" property="og:site_name"/>
+<meta content="Online Psychic Services | Xem Bói Uy Tín, Chat, Tư Vấn" property="og:title"/>
+<meta content="Online Psychic Services, được sắp xếp để bạn chọn đúng dịch vụ. Không phải câu hỏi nào cũng cần một kiểu phiên giống nhau, và không phải nhà ngoại cảm nào cũng chuyên về…" property="og:description"/>
+<meta property="og:url" content="https://online-psychic-services.com/vi/" />
+<meta content="vi_VN" property="og:locale"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Online Psychic Services | Xem Bói Uy Tín, Chat, Tư Vấn" name="twitter:title"/>
+<meta content="Online Psychic Services, được sắp xếp để bạn chọn đúng dịch vụ. Không phải câu hỏi nào cũng cần một kiểu phiên giống nhau, và không phải nhà ngoại cảm nào cũng chuyên về…" name="twitter:description"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://vi.online-psychic-services.com/#organization", "name": "Online Psychic Services", "url": "https://vi.online-psychic-services.com/", "inLanguage": "vi-VN"}, {"@type": "WebSite", "@id": "https://vi.online-psychic-services.com/#website", "url": "https://vi.online-psychic-services.com/", "name": "Online Psychic Services", "publisher": {"@id": "https://vi.online-psychic-services.com/#organization"}, "inLanguage": "vi-VN"}, {"@type": "WebPage", "@id": "https://vi.online-psychic-services.com/#webpage", "url": "https://vi.online-psychic-services.com/", "name": "Online Psychic Services", "description": "Online Psychic Services, được sắp xếp để bạn chọn đúng dịch vụ. Không phải câu hỏi nào cũng cần một kiểu phiên giống nhau, và không phải nhà ngoại cảm nào cũng chuyên về…", "isPartOf": {"@id": "https://vi.online-psychic-services.com/#website"}, "inLanguage": "vi-VN"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "https://vi.online-psychic-services.com/"}, {"@type": "ListItem", "position": 2, "name": "Online Psychic Services", "item": "https://vi.online-psychic-services.com/"}]}]}</script>
+<!-- /ops-theme SEO -->
+<link href="//fonts.googleapis.com" rel="dns-prefetch"/><style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id="wp-block-library-inline-css">
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{word-wrap:normal!important;border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style*=border-color]){border-style:solid}html :where([style*=border-top-color]){border-top-style:solid}html :where([style*=border-right-color]){border-right-style:solid}html :where([style*=border-bottom-color]){border-bottom-style:solid}html :where([style*=border-left-color]){border-left-style:solid}html :where([style*=border-width]){border-style:solid}html :where([style*=border-top-width]){border-top-style:solid}html :where([style*=border-right-width]){border-right-style:solid}html :where([style*=border-bottom-width]){border-bottom-style:solid}html :where([style*=border-left-width]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+
+/*# sourceURL=/wp-includes/css/dist/block-library/common.min.css */
+</style>
+<style id="wp-block-button-inline-css">
+.wp-block-button__link{align-content:center;box-sizing:border-box;cursor:pointer;display:inline-block;height:100%;text-align:center;word-break:break-word}.wp-block-button__link.aligncenter{text-align:center}.wp-block-button__link.alignright{text-align:right}:where(.wp-block-button__link){border-radius:9999px;box-shadow:none;padding:calc(.667em + 2px) calc(1.333em + 2px);text-decoration:none}.wp-block-button[style*=text-decoration] .wp-block-button__link{text-decoration:inherit}.wp-block-buttons>.wp-block-button.has-custom-width{max-width:none}.wp-block-buttons>.wp-block-button.has-custom-width .wp-block-button__link{width:100%}.wp-block-buttons>.wp-block-button.has-custom-font-size .wp-block-button__link{font-size:inherit}.wp-block-buttons>.wp-block-button.wp-block-button__width-25{width:calc(25% - var(--wp--style--block-gap, .5em)*.75)}.wp-block-buttons>.wp-block-button.wp-block-button__width-50{width:calc(50% - var(--wp--style--block-gap, .5em)*.5)}.wp-block-buttons>.wp-block-button.wp-block-button__width-75{width:calc(75% - var(--wp--style--block-gap, .5em)*.25)}.wp-block-buttons>.wp-block-button.wp-block-button__width-100{flex-basis:100%;width:100%}.wp-block-buttons.is-vertical>.wp-block-button.wp-block-button__width-25{width:25%}.wp-block-buttons.is-vertical>.wp-block-button.wp-block-button__width-50{width:50%}.wp-block-buttons.is-vertical>.wp-block-button.wp-block-button__width-75{width:75%}.wp-block-button.is-style-squared,.wp-block-button__link.wp-block-button.is-style-squared{border-radius:0}.wp-block-button.no-border-radius,.wp-block-button__link.no-border-radius{border-radius:0!important}:root :where(.wp-block-button .wp-block-button__link.is-style-outline),:root :where(.wp-block-button.is-style-outline>.wp-block-button__link){border:2px solid;padding:.667em 1.333em}:root :where(.wp-block-button .wp-block-button__link.is-style-outline:not(.has-text-color)),:root :where(.wp-block-button.is-style-outline>.wp-block-button__link:not(.has-text-color)){color:currentColor}:root :where(.wp-block-button .wp-block-button__link.is-style-outline:not(.has-background)),:root :where(.wp-block-button.is-style-outline>.wp-block-button__link:not(.has-background)){background-color:initial;background-image:none}
+/*# sourceURL=https://online-psychic-services.com/wp-includes/blocks/button/style.min.css */
+</style>
+<style id="wp-block-heading-inline-css">
+h1:where(.wp-block-heading).has-background,h2:where(.wp-block-heading).has-background,h3:where(.wp-block-heading).has-background,h4:where(.wp-block-heading).has-background,h5:where(.wp-block-heading).has-background,h6:where(.wp-block-heading).has-background{padding:1.25em 2.375em}h1.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h1.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h2.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h2.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h3.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h3.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h4.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h4.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h5.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h5.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h6.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h6.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]){rotate:180deg}
+/*# sourceURL=https://online-psychic-services.com/wp-includes/blocks/heading/style.min.css */
+</style>
+<style id="wp-block-list-inline-css">
+ol,ul{box-sizing:border-box}:root :where(.wp-block-list.has-background){padding:1.25em 2.375em}
+/*# sourceURL=https://online-psychic-services.com/wp-includes/blocks/list/style.min.css */
+</style>
+<style id="wp-block-paragraph-inline-css">
+.is-small-text{font-size:.875em}.is-regular-text{font-size:1em}.is-large-text{font-size:2.25em}.is-larger-text{font-size:3em}.has-drop-cap:not(:focus):first-letter{float:left;font-size:8.4em;font-style:normal;font-weight:100;line-height:.68;margin:.05em .1em 0 0;text-transform:uppercase}body.rtl .has-drop-cap:not(:focus):first-letter{float:none;margin-left:.1em}p.has-drop-cap.has-background{overflow:hidden}:root :where(p.has-background){padding:1.25em 2.375em}:where(p.has-text-color:not(.has-link-color)) a{color:inherit}p.has-text-align-left[style*="writing-mode:vertical-lr"],p.has-text-align-right[style*="writing-mode:vertical-rl"]{rotate:180deg}
+/*# sourceURL=https://online-psychic-services.com/wp-includes/blocks/paragraph/style.min.css */
+</style>
+<style id="wp-block-buttons-inline-css">
+.wp-block-buttons{box-sizing:border-box}.wp-block-buttons.is-vertical{flex-direction:column}.wp-block-buttons.is-vertical>.wp-block-button:last-child{margin-bottom:0}.wp-block-buttons>.wp-block-button{display:inline-block;margin:0}.wp-block-buttons.is-content-justification-left{justify-content:flex-start}.wp-block-buttons.is-content-justification-left.is-vertical{align-items:flex-start}.wp-block-buttons.is-content-justification-center{justify-content:center}.wp-block-buttons.is-content-justification-center.is-vertical{align-items:center}.wp-block-buttons.is-content-justification-right{justify-content:flex-end}.wp-block-buttons.is-content-justification-right.is-vertical{align-items:flex-end}.wp-block-buttons.is-content-justification-space-between{justify-content:space-between}.wp-block-buttons.aligncenter{text-align:center}.wp-block-buttons:not(.is-content-justification-space-between,.is-content-justification-right,.is-content-justification-left,.is-content-justification-center) .wp-block-button.aligncenter{margin-left:auto;margin-right:auto;width:100%}.wp-block-buttons[style*=text-decoration] .wp-block-button,.wp-block-buttons[style*=text-decoration] .wp-block-button__link{text-decoration:inherit}.wp-block-buttons.has-custom-font-size .wp-block-button__link{font-size:inherit}.wp-block-buttons .wp-block-button__link{width:100%}.wp-block-button.aligncenter{text-align:center}
+/*# sourceURL=https://online-psychic-services.com/wp-includes/blocks/buttons/style.min.css */
+</style>
+<style id="wp-block-columns-inline-css">
+.wp-block-columns{box-sizing:border-box;display:flex;flex-wrap:wrap!important}@media (min-width:782px){.wp-block-columns{flex-wrap:nowrap!important}}.wp-block-columns{align-items:normal!important}.wp-block-columns.are-vertically-aligned-top{align-items:flex-start}.wp-block-columns.are-vertically-aligned-center{align-items:center}.wp-block-columns.are-vertically-aligned-bottom{align-items:flex-end}@media (max-width:781px){.wp-block-columns:not(.is-not-stacked-on-mobile)>.wp-block-column{flex-basis:100%!important}}@media (min-width:782px){.wp-block-columns:not(.is-not-stacked-on-mobile)>.wp-block-column{flex-basis:0;flex-grow:1}.wp-block-columns:not(.is-not-stacked-on-mobile)>.wp-block-column[style*=flex-basis]{flex-grow:0}}.wp-block-columns.is-not-stacked-on-mobile{flex-wrap:nowrap!important}.wp-block-columns.is-not-stacked-on-mobile>.wp-block-column{flex-basis:0;flex-grow:1}.wp-block-columns.is-not-stacked-on-mobile>.wp-block-column[style*=flex-basis]{flex-grow:0}:where(.wp-block-columns){margin-bottom:1.75em}:where(.wp-block-columns.has-background){padding:1.25em 2.375em}.wp-block-column{flex-grow:1;min-width:0;overflow-wrap:break-word;word-break:break-word}.wp-block-column.is-vertically-aligned-top{align-self:flex-start}.wp-block-column.is-vertically-aligned-center{align-self:center}.wp-block-column.is-vertically-aligned-bottom{align-self:flex-end}.wp-block-column.is-vertically-aligned-stretch{align-self:stretch}.wp-block-column.is-vertically-aligned-bottom,.wp-block-column.is-vertically-aligned-center,.wp-block-column.is-vertically-aligned-top{width:100%}
+/*# sourceURL=https://online-psychic-services.com/wp-includes/blocks/columns/style.min.css */
+</style>
+<style id="wp-block-group-inline-css">
+.wp-block-group{box-sizing:border-box}:where(.wp-block-group.wp-block-group-is-layout-constrained){position:relative}
+/*# sourceURL=https://online-psychic-services.com/wp-includes/blocks/group/style.min.css */
+</style>
+<style id="classic-theme-styles-inline-css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+/*# sourceURL=/wp-includes/css/classic-themes.min.css */
+</style>
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}:where(body) { margin: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;0,900;1,400&amp;family=Open+Sans:wght@300;400;600;700&amp;display=swap" id="ops-theme-fonts-css" media="all" rel="stylesheet"/>
+<link href="https://online-psychic-services.com/wp-content/themes/ops-theme/style.css?ver=1.1.0" id="ops-theme-style-css" media="all" rel="stylesheet"/>
+<meta content="WordPress 7.0.2" name="generator"/>
+<link href="https://online-psychic-services.com/favicon.ico" rel="icon" sizes="any"/>
+<link href="https://online-psychic-services.com/wp-content/uploads/2026/04/site_17_favicon-150x150.png" rel="icon" sizes="32x32"/>
+<link href="https://online-psychic-services.com/wp-content/uploads/2026/04/site_17_favicon-300x300.png" rel="icon" sizes="192x192"/>
+<link href="https://online-psychic-services.com/wp-content/uploads/2026/04/site_17_favicon-300x300.png" rel="apple-touch-icon"/>
+<meta content="https://online-psychic-services.com/wp-content/uploads/2026/04/site_17_favicon-300x300.png" name="msapplication-TileImage"/>
+<style id="wp-custom-css">
+/* === Online Psychic Services — Design Tokens & Components (Customizer CSS) === */
+@font-face { font-family:'Season Sans'; src:url('/wp-content/themes/ops-theme/assets/fonts/SeasonSans-Regular.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Season Sans'; src:url('/wp-content/themes/ops-theme/assets/fonts/SeasonSans-Medium.woff2') format('woff2'); font-weight:500; font-style:normal; font-display:swap; }
+@font-face { font-family:'Season Sans'; src:url('/wp-content/themes/ops-theme/assets/fonts/SeasonSans-Bold.woff2') format('woff2'); font-weight:700; font-style:normal; font-display:swap; }
+@font-face { font-family:'Season Mix'; src:url('/wp-content/themes/ops-theme/assets/fonts/SeasonMix-Regular.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Season Mix'; src:url('/wp-content/themes/ops-theme/assets/fonts/SeasonMix-Medium.woff2') format('woff2'); font-weight:500; font-style:normal; font-display:swap; }
+/**
+ * Online Psychic Services — Design Tokens
+ * Rose Quartz / Celestial Editorial
+ * Based on WEB DS foundation
+ */
+
+:root {
+  /* ========== BRAND PALETTE ========== */
+  /* Rose quartz family */
+  --ops-rose-50:  #fcf3f7;
+  --ops-rose-100: #f8e0eb;
+  --ops-rose-200: #f0c2d8;
+  --ops-rose-300: #e5a6c2; /* brand rose */
+  --ops-rose-400: #d38aab;
+  --ops-rose-500: #c876a0; /* rose deep — CTA */
+  --ops-rose-600: #b16089;
+  --ops-rose-700: #8b4a6c;
+
+  /* Violet / lilac (mystical) */
+  --ops-violet-50:  #f4f1fb;
+  --ops-violet-100: #e4def4;
+  --ops-violet-200: #c9bfeb;
+  --ops-violet-300: #a89bdc;
+  --ops-violet-400: #7c6ac8;
+  --ops-violet-500: #5e4dbf;
+  --ops-violet-600: #3a2d6b;
+  --ops-violet-700: #1a1340; /* ink violet */
+
+  /* Warm gold accent */
+  --ops-gold-300: #e0c08c;
+  --ops-gold-500: #c9a56a;
+  --ops-gold-700: #8f7446;
+
+  /* Neutrals */
+  --ops-cream: #fbf7f4;          /* page bg (variant A) */
+  --ops-ivory: #f6f1ea;          /* page bg (variant B) */
+  --ops-ivory-alt: #efe6dc;      /* secondary surface */
+  --ops-ink: #1a1033;            /* primary text (A) */
+  --ops-ink-b: #120c24;          /* primary text (B) */
+  --ops-ink-soft: #4a3f5c;       /* body text */
+  --ops-ink-mute: #8b7f9a;       /* subtle text */
+  --ops-line: #ebe3e8;           /* variant A border */
+  --ops-line-b: rgba(18,12,36,.08); /* variant B border */
+  --ops-card: #ffffff;
+
+  /* Semantic (from WEB DS) */
+  --ops-success: #4dab75;
+  --ops-warning: #f2c94c;
+  --ops-error:   #e93d44;
+
+  /* ========== GRADIENTS ========== */
+  --ops-grad-aurora: linear-gradient(135deg, #f4e1ec 0%, #e9d8f1 40%, #d7c5ee 100%);
+  --ops-grad-cta:    linear-gradient(135deg, #c876a0 0%, #8e6bd2 100%);
+  --ops-grad-rose:   linear-gradient(135deg, #e5a6c2 0%, #c876a0 100%);
+  --ops-grad-sky:    linear-gradient(180deg, #1a1340 0%, #2d1f5a 55%, #c876a0 100%);
+  --ops-grad-glow:   radial-gradient(60% 60% at 50% 50%,
+                      rgba(229,166,194,.55),
+                      rgba(168,155,220,.25) 60%,
+                      transparent 80%);
+
+  /* ========== TYPOGRAPHY ========== */
+  --ops-font-heading: 'Season Mix', 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  --ops-font-body:    'Season Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --ops-fs-display: clamp(56px, 8vw, 128px);
+  --ops-fs-h1:      clamp(40px, 5vw, 88px);
+  --ops-fs-h2:      clamp(32px, 4vw, 64px);
+  --ops-fs-h3:      clamp(22px, 2.2vw, 32px);
+  --ops-fs-h4:      20px;
+  --ops-fs-lead:    18px;
+  --ops-fs-body:    16px;
+  --ops-fs-small:   14px;
+  --ops-fs-xs:      12px;
+
+  --ops-fw-regular:  400;
+  --ops-fw-medium:   500;
+  --ops-fw-bold:     700;
+
+  --ops-lh-tight:    1.02;
+  --ops-lh-heading:  1.2;
+  --ops-lh-body:     1.55;
+
+  --ops-ls-display:  -0.03em;
+  --ops-ls-heading:  -0.02em;
+  --ops-ls-upper:    0.2em;
+
+  /* ========== SPACING (4px base) ========== */
+  --ops-s-1:  4px;
+  --ops-s-2:  8px;
+  --ops-s-3:  12px;
+  --ops-s-4:  16px;
+  --ops-s-5:  20px;
+  --ops-s-6:  24px;
+  --ops-s-8:  32px;
+  --ops-s-10: 40px;
+  --ops-s-12: 48px;
+  --ops-s-14: 56px;
+  --ops-s-16: 64px;
+  --ops-s-20: 80px;
+  --ops-s-24: 96px;
+  --ops-s-28: 112px;
+  --ops-s-32: 128px;
+  --ops-s-36: 144px;
+
+  /* Section padding presets */
+  --ops-section-y:  120px;
+  --ops-section-x:  56px;
+  --ops-container:  1440px;
+
+  /* ========== RADII ========== */
+  --ops-radius-xs:   4px;
+  --ops-radius-sm:   8px;
+  --ops-radius-md:   12px;
+  --ops-radius-lg:   16px;
+  --ops-radius-xl:   20px;
+  --ops-radius-2xl:  24px;
+  --ops-radius-pill: 999px;
+
+  /* ========== SHADOWS ========== */
+  --ops-shadow-soft:    0 2px 24px rgba(94,77,191,.08);
+  --ops-shadow-card:    0 8px 40px rgba(94,77,191,.10);
+  --ops-shadow-elev:    0 20px 60px rgba(26,19,64,.15);
+  --ops-shadow-cta:     0 4px 20px rgba(200,118,160,.30);
+  --ops-shadow-cta-hv:  0 10px 28px rgba(200,118,160,.45);
+  --ops-shadow-sticky:  0 18px 50px rgba(18,12,36,.35);
+
+  /* ========== BORDERS ========== */
+  --ops-border-thin:   1px;
+  --ops-border-med:    2px;
+  --ops-focus-ring:    0 0 0 2px rgba(200,118,160,.5);
+
+  /* ========== MOTION ========== */
+  --ops-ease:      cubic-bezier(.2,.7,.2,1);
+  --ops-dur-fast:  150ms;
+  --ops-dur-med:   250ms;
+  --ops-dur-slow:  400ms;
+
+  /* ========== Z-INDEX ========== */
+  --ops-z-sticky: 40;
+  --ops-z-nav:    50;
+  --ops-z-modal:  80;
+  --ops-z-toast:  90;
+}
+
+/* Body typography defaults */
+html, body {
+  font-family: var(--ops-font-body);
+  font-size: var(--ops-fs-body);
+  line-height: var(--ops-lh-body);
+  color: var(--ops-ink);
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4, h5 {
+  font-family: var(--ops-font-heading);
+  font-weight: var(--ops-fw-medium);
+  letter-spacing: var(--ops-ls-heading);
+  color: var(--ops-ink);
+}
+h1 { font-size: var(--ops-fs-h1); line-height: var(--ops-lh-tight); letter-spacing: var(--ops-ls-display); }
+h2 { font-size: var(--ops-fs-h2); line-height: 1.08; }
+h3 { font-size: var(--ops-fs-h3); line-height: var(--ops-lh-heading); }
+h4 { font-size: var(--ops-fs-h4); line-height: 1.3; }
+
+/* Focus ring */
+:focus-visible { outline: none; box-shadow: var(--ops-focus-ring); }
+
+
+/**
+ * Online Psychic Services — Component Starter CSS
+ * Drop-in classes for buttons, cards, badges, nav.
+ * Depends on ops-tokens.css
+ */
+
+/* ===== BUTTONS ===== */
+.ops-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 46px; padding: 0 22px; border-radius: var(--ops-radius-pill);
+  font-family: var(--ops-font-body); font-weight: var(--ops-fw-medium); font-size: 15px;
+  cursor: pointer; transition: all var(--ops-dur-med) var(--ops-ease);
+  border: none; color: #fff; white-space: nowrap;
+}
+.ops-btn--primary { background: var(--ops-grad-cta); box-shadow: var(--ops-shadow-cta); }
+.ops-btn--primary:hover { transform: translateY(-1px); box-shadow: var(--ops-shadow-cta-hv); }
+.ops-btn--dark { background: var(--ops-ink-b); color: #fff; }
+.ops-btn--dark:hover { background: var(--ops-violet-600); }
+.ops-btn--gold { background: var(--ops-gold-500); color: var(--ops-ink-b); }
+.ops-btn--gold:hover { background: var(--ops-gold-300); }
+.ops-btn--ghost { background: transparent; color: var(--ops-ink); border: 1px solid var(--ops-line); }
+.ops-btn--ghost:hover { border-color: var(--ops-violet-500); color: var(--ops-violet-500); }
+.ops-btn--lg { height: 58px; padding: 0 30px; font-size: 16px; }
+.ops-btn--sm { height: 36px; padding: 0 16px; font-size: 13px; }
+
+/* Underline link (variant B) */
+.ops-link {
+  background: none; border: 0; border-bottom: 1px solid currentColor;
+  padding: 6px 0; font-size: 14px; font-weight: 500;
+  color: var(--ops-ink); cursor: pointer; letter-spacing: .05em;
+  font-family: inherit; transition: color var(--ops-dur-fast);
+}
+.ops-link:hover { color: var(--ops-rose-500); border-color: var(--ops-rose-500); }
+
+/* ===== CARDS ===== */
+.ops-card {
+  background: var(--ops-card);
+  border: 1px solid var(--ops-line);
+  border-radius: var(--ops-radius-2xl);
+  padding: 40px 36px;
+  transition: all var(--ops-dur-med) var(--ops-ease);
+}
+.ops-card:hover { transform: translateY(-4px); box-shadow: var(--ops-shadow-card); border-color: rgba(200,118,160,.3); }
+.ops-card--editorial { border-radius: var(--ops-radius-xs); padding: 32px; border-color: var(--ops-line-b); }
+
+/* ===== BADGES ===== */
+.ops-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 12px; border-radius: var(--ops-radius-pill);
+  font-size: 12px; color: var(--ops-ink-soft);
+  background: rgba(255,255,255,.7);
+  border: 1px solid rgba(200,118,160,.2);
+}
+.ops-badge--live::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--ops-success); box-shadow: 0 0 0 4px rgba(77,171,117,.2); }
+
+/* ===== EYEBROW / SECTION LABEL ===== */
+.ops-eyebrow {
+  font-size: 13px;
+  letter-spacing: var(--ops-ls-upper);
+  text-transform: uppercase;
+  color: var(--ops-rose-500);
+  margin-bottom: 12px;
+}
+
+/* ===== NAV ===== */
+.ops-nav {
+  position: sticky; top: 0; z-index: var(--ops-z-nav);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 72px;
+  background: rgba(251,247,244,.82);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(235,227,232,.6);
+}
+
+/* ===== STARFIELD BG (for hero/cta dark sections) ===== */
+.ops-stars { position: relative; }
+.ops-stars::before, .ops-stars::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    radial-gradient(1px 1px at 20px 30px, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 90px 40px, #fff, transparent),
+    radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,.6), transparent),
+    radial-gradient(1.5px 1.5px at 180px 20px, #fff, transparent),
+    radial-gradient(1px 1px at 260px 50px, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 310px 30px, rgba(255,255,255,.7), transparent);
+  background-size: 400px 150px;
+  animation: ops-twinkle 6s ease-in-out infinite alternate;
+}
+.ops-stars::after { background-size: 300px 120px; animation-delay: 2s; opacity: .6; }
+@keyframes ops-twinkle { 0%,100% { opacity: .8; } 50% { opacity: .4; } }
+
+/* ===== PULSE DOT ===== */
+@keyframes ops-pulse { 0%,100% { box-shadow: 0 0 0 4px rgba(77,171,117,.2); } 50% { box-shadow: 0 0 0 10px rgba(77,171,117,0); } }
+.ops-pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--ops-success); animation: ops-pulse 2s infinite; }
+
+
+/* === Body-level overrides for non-front-page templates === */
+body.ops-design-applied,
+body:not(.home):not(.front-page) {
+  background: var(--ops-cream);
+  color: var(--ops-ink);
+  font-family: 'Season Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+body:not(.home):not(.front-page) h1,
+body:not(.home):not(.front-page) h2,
+body:not(.home):not(.front-page) h3,
+body:not(.home):not(.front-page) h4,
+body:not(.home):not(.front-page) h5 {
+  font-family: 'Season Mix', Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: var(--ops-ink);
+}
+body:not(.home):not(.front-page) a { color: var(--ops-violet-500); }
+body:not(.home):not(.front-page) a:hover { color: var(--ops-rose-500); }
+body:not(.home):not(.front-page) .btn,
+body:not(.home):not(.front-page) .btn-primary {
+  background: var(--ops-grad-cta) !important;
+  color: #fff !important;
+  border-radius: var(--ops-radius-pill) !important;
+}
+body:not(.home):not(.front-page) .btn-secondary {
+  border-radius: var(--ops-radius-pill) !important;
+  border-color: var(--ops-line) !important;
+  color: var(--ops-ink) !important;
+}
+
+</style>
+<style id="core-block-supports-inline-css">
+.wp-container-core-columns-is-layout-8f761849{flex-wrap:nowrap;}
+/*# sourceURL=core-block-supports-inline-css */
+</style>
+<style>
+.lang-switch{display:inline-flex;align-items:center;gap:6px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin-right:14px}
+.lang-switch__current{font-weight:700}
+.lang-switch a{opacity:.6;text-decoration:none;color:inherit}
+.lang-switch a:hover{opacity:1;text-decoration:underline}
+</style>
+<!-- i18n hreflang vi -->
+<link href="https://online-psychic-services.com/" hreflang="en" rel="alternate"/>
+<link href="https://vi.online-psychic-services.com/" hreflang="vi" rel="alternate"/>
+<link href="https://online-psychic-services.com/" hreflang="x-default" rel="alternate"/>
+<!-- i18n hreflang (WP-Net-Control) -->
+<link href="https://online-psychic-services.com/" hreflang="en" rel="alternate"/>
+<link href="https://online-psychic-services.com/vi/" hreflang="vi" rel="alternate"/>
+<link href="https://online-psychic-services.com/" hreflang="x-default" rel="alternate"/>
+<meta property="og:image" content="https://online-psychic-services.com/wp-content/uploads/logo.png" />
+</head>
+<body class="home wp-singular page-template-default page page-id-5 wp-embed-responsive wp-theme-ops-theme ops-landing-a">
+<div class="page">
+<!-- NAV -->
+<nav class="nav" data-screen-label="01 Nav">
+<a class="logo" href="https://vi.online-psychic-services.com/">
+<div class="logo-mark"></div>
+<div class="logo-text">
+<span class="logo-text-top">Online <em>Psychic</em></span>
+<span class="logo-text-bot">· Services ·</span>
+</div>
+</a>
+<div class="nav-links">
+<a href="https://vi.online-psychic-services.com/#services">Dịch Vụ</a>
+<a href="https://vi.online-psychic-services.com/#advisors">Nhà Ngoại Cảm</a>
+<a href="https://vi.online-psychic-services.com/#how">Cách Hoạt Động</a>
+<a href="https://online-psychic-services.com/blog/">Blog</a>
+<a href="https://vi.online-psychic-services.com/about/">Giới Thiệu</a>
+</div>
+<span aria-label="Chọn ngôn ngữ" class="lang-switch"><span class="lang-switch__current" lang="vi">VI</span><a href="https://online-psychic-services.com/" hreflang="en" lang="en">EN</a></span>
+<div class="nav-cta">
+<a href="https://vi.online-psychic-services.com/pricing/" style="font-size:15px;color:var(--a-ink-soft);">Bảng Giá</a>
+<a class="btn btn-primary" href="https://vi.online-psychic-services.com/contact/">Bắt Đầu Ngay</a>
+</div>
+</nav>
+<!-- HERO -->
+<section class="hero" data-screen-label="02 Hero">
+<div class="hero-video"></div>
+<div class="hero-inner">
+<span class="eyebrow"><span class="eyebrow-dot"></span> 147 nhà ngoại cảm đang trực tuyến · chờ trung bình 2 phút</span>
+<h1>Dẫn dắt tâm linh trọn vẹn, <em>mỗi khi bạn cần một câu trả lời.</em></h1>
+<p class="hero-sub">Một nền tảng đáng tin cậy. Nhiều năng lực khác nhau. Kết nối với nhà ngoại cảm, người đọc tarot và người kết nối linh hồn đã được kiểm định chỉ trong dưới hai phút — qua chat, điện thoại hoặc video.</p>
+<div class="hero-ctas">
+<a class="btn btn-primary btn-lg" href="https://vi.online-psychic-services.com/contact/">Nhận 3 phút luận giải miễn phí →</a>
+<a class="btn btn-ghost btn-lg" href="/go/" rel="nofollow sponsored">Xem danh sách nhà ngoại cảm</a>
+</div>
+<div class="hero-stats">
+<div><div class="stat-num">2M+</div><div class="stat-label">Phiên luận giải đã thực hiện</div></div>
+<div><div class="stat-num">800+</div><div class="stat-label">Nhà ngoại cảm đã kiểm định</div></div>
+<div><div class="stat-num">4.9★</div><div class="stat-label">54.000 đánh giá</div></div>
+<div><div class="stat-num">18 năm</div><div class="stat-label">Kinh nghiệm trung bình</div></div>
+</div>
+</div>
+<div class="hero-visual">
+<div class="ring ring-1"></div>
+<div class="ring ring-2"></div>
+<div class="ring ring-3"></div>
+<div class="hero-blob">
+<img alt="" src="https://online-psychic-services.com/wp-content/themes/ops-theme/assets/images/hero-aurora.svg"/>
+</div>
+<div class="float-chip chip-advisor">
+<img alt="" src="https://online-psychic-services.com/wp-content/themes/ops-theme/assets/images/photo-chip-luna.jpg"/>
+<div>
+<div class="chip-name">Luna <span class="chip-live"></span></div>
+<div class="chip-sub">Đang trong phiên · 4,98★</div>
+</div>
+</div>
+<div class="float-chip chip-review">
+<div class="chip-stars">★★★★★</div>
+<div class="chip-quote">“Chị ấy đã cho tôi đúng sự sáng tỏ mà tôi đang tìm kiếm.”</div>
+<div class="chip-by">— Amira K., đã xác thực</div>
+</div>
+<div class="float-chip chip-tag">
+<span class="chip-dot"></span> Tarot · Tình yêu · Sự nghiệp
+      </div>
+<svg class="spark spark-1" viewbox="0 0 20 20"><path d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z" fill="currentColor"></path></svg>
+<svg class="spark spark-2" viewbox="0 0 20 20"><path d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z" fill="currentColor"></path></svg>
+<svg class="spark spark-3" viewbox="0 0 20 20"><path d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z" fill="currentColor"></path></svg>
+</div>
+</section>
+<!-- FEATURED IN -->
+<section class="featured" data-screen-label="03 Featured" style="padding:48px 72px;">
+<div class="featured-label">Được nhắc đến trên</div>
+<div class="featured-logos">
+<span>Cosmopolitan</span>
+<span>Bustle</span>
+<span>ELLE</span>
+<span>The Times</span>
+<span>Refinery29</span>
+<span>mindbodygreen</span>
+</div>
+</section>
+<!-- SERVICES -->
+<section data-screen-label="04 Services" id="services">
+<div class="section-head">
+<div>
+<div class="section-eyebrow">Dịch Vụ Của Chúng Tôi</div>
+<h2>Sự dẫn dắt được thiết kế riêng<br/>cho câu hỏi của bạn.</h2>
+</div>
+<p class="section-lede">Dù bạn đang loay hoay với tình yêu, sự nghiệp hay một mất mát — luôn có một nhà ngoại cảm giàu năng lực chờ để giúp bạn tìm ra hướng đi tiếp theo.</p>
+</div>
+<div class="services-grid">
+<div class="service-card">
+<div class="service-icon-wrap">
+<svg fill="none" height="44" viewbox="0 0 44 44" width="44"><circle cx="22" cy="22" r="14" stroke="#5e4dbf" stroke-width="1.5"></circle><circle cx="22" cy="22" fill="#5e4dbf" r="6"></circle><path d="M22 4v6M22 34v6M4 22h6M34 22h6" stroke="#5e4dbf" stroke-linecap="round" stroke-width="1.5"></path></svg>
+</div>
+<h3>Luận Giải Ngoại Cảm</h3>
+<p>Kết nối với những nhà ngoại cảm cảm nhận được năng lượng, quy luật và những hướng đi mà lý trí không phải lúc nào cũng nhìn thấy.</p>
+<div class="service-meta">
+<span class="service-price">từ 1,99 USD/phút</span>
+<div class="service-arrow">→</div>
+</div>
+</div>
+<div class="service-card">
+<div class="service-icon-wrap">
+<svg fill="none" height="44" viewbox="0 0 44 44" width="44"><rect height="24" rx="2" stroke="#5e4dbf" stroke-width="1.5" transform="rotate(-8 18 20)" width="16" x="10" y="8"></rect><rect fill="#fff" height="24" rx="2" stroke="#5e4dbf" stroke-width="1.5" transform="rotate(8 26 22)" width="16" x="18" y="10"></rect><path d="M26 18l2 4 4 .5-3 3 .7 4-3.7-2-3.7 2 .7-4-3-3 4-.5z" fill="#c876a0" transform="rotate(8 26 22)"></path></svg>
+</div>
+<h3>Dẫn Dắt Bằng Tarot</h3>
+<p>Những lá bài nói lên sự thật mà ta không luôn sẵn sàng nghe. Người đọc bài của chúng tôi chuyển các biểu tượng thành những bước đi rõ ràng.</p>
+<div class="service-meta">
+<span class="service-price">từ 2,49 USD/phút</span>
+<div class="service-arrow">→</div>
+</div>
+</div>
+<div class="service-card">
+<div class="service-icon-wrap">
+<svg fill="none" height="44" viewbox="0 0 44 44" width="44"><path d="M14 30c0-6 3.6-10 8-10s8 4 8 10" stroke="#5e4dbf" stroke-linecap="round" stroke-width="1.5"></path><circle cx="22" cy="16" r="4" stroke="#5e4dbf" stroke-width="1.5"></circle><path d="M8 36c4-2 9-3 14-3s10 1 14 3" opacity=".6" stroke="#c876a0" stroke-linecap="round" stroke-width="1.5"></path><path d="M10 38c4-1 8-2 12-2s8 1 12 2" opacity=".4" stroke="#c876a0" stroke-linecap="round" stroke-width="1.5"></path></svg>
+</div>
+<h3>Kết Nối Linh Hồn</h3>
+<p>Kết nối nhẹ nhàng, dựa trên chứng cứ với những người thân đã qua đời. Để khép lại, để an lòng, và để nhận được thông điệp.</p>
+<div class="service-meta">
+<span class="service-price">từ 3,49 USD/phút</span>
+<div class="service-arrow">→</div>
+</div>
+</div>
+</div>
+</section>
+<!-- HOW IT WORKS -->
+<section class="how" data-screen-label="05 How It Works" id="how">
+<div class="section-head" style="justify-content:center;text-align:center;flex-direction:column;align-items:center;margin-bottom:80px;">
+<div class="section-eyebrow">Cách hoạt động</div>
+<h2>Sự sáng tỏ trong ba<br/>bước nhẹ nhàng.</h2>
+</div>
+<div class="how-steps">
+<div class="how-line"></div>
+<div class="step">
+<div class="step-num">1</div>
+<h3>Chọn người dẫn dắt</h3>
+<p>Xem hơn 800 nhà ngoại cảm đã xác thực. Lọc theo năng lực, giá, ngôn ngữ hoặc điểm đánh giá — bất cứ tiêu chí nào giúp bạn tìm được người phù hợp.</p>
+</div>
+<div class="step">
+<div class="step-num">2</div>
+<h3>Bắt đầu phiên</h3>
+<p>Kết nối ngay qua chat, điện thoại hoặc video. Ba phút đầu tiên miễn phí để bạn chắc chắn đây là người phù hợp.</p>
+</div>
+<div class="step">
+<div class="step-num">3</div>
+<h3>Giữ lại sự sáng tỏ</h3>
+<p>Lưu bản ghi, xem lại những điều đã nhận ra, và quay lại bất cứ lúc nào. Nhà ngoại cảm của bạn có thể tiếp tục câu chuyện khi bạn sẵn sàng.</p>
+</div>
+</div>
+</section>
+<!-- ADVISORS -->
+<section class="advisors" data-screen-label="06 Advisors" id="advisors">
+<div class="section-head">
+<div>
+<div class="section-eyebrow">Nhà ngoại cảm nổi bật</div>
+<h2>Những năng lực khiến bạn cảm thấy như<br/>gặp lại một người bạn cũ.</h2>
+</div>
+<a class="btn btn-ghost" href="https://vi.online-psychic-services.com/contact/">Xem tất cả hơn 800 nhà ngoại cảm →</a>
+</div>
+<div class="advisors-grid">
+<div class="advisor-card">
+<div class="advisor-photo" style="background:#eee;color:transparent;padding:0;">
+<img alt="Luna Moreau" src="https://online-psychic-services.com/wp-content/themes/ops-theme/assets/images/photo-advisor-luna.jpg" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"/>
+<div class="advisor-status">Online</div>
+</div>
+<div class="advisor-info">
+<div class="advisor-name">Luna Moreau</div>
+<div class="advisor-tags">Tarot · Tình yêu · Sự nghiệp</div>
+<div class="advisor-rating"><span><span class="stars">★★★★★</span> 4,98 · 2,1k</span><span class="advisor-rate">2,99 USD/phút</span></div>
+</div>
+</div>
+<div class="advisor-card">
+<div class="advisor-photo" style="background:#eee;color:transparent;padding:0;">
+<img alt="Arjun Shankar" src="https://online-psychic-services.com/wp-content/themes/ops-theme/assets/images/photo-advisor-arjun.jpg" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"/>
+<div class="advisor-status">Online</div>
+</div>
+<div class="advisor-info">
+<div class="advisor-name">Arjun Shankar</div>
+<div class="advisor-tags">Kết nối linh hồn · Chiêm tinh</div>
+<div class="advisor-rating"><span><span class="stars">★★★★★</span> 4,96 · 1,8k</span><span class="advisor-rate">3,49 USD/phút</span></div>
+</div>
+</div>
+<div class="advisor-card">
+<div class="advisor-photo" style="background:#eee;color:transparent;padding:0;">
+<img alt="Rosa Calla" src="https://online-psychic-services.com/wp-content/themes/ops-theme/assets/images/photo-advisor-rosa.jpg" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"/>
+<div class="advisor-status">Online</div>
+</div>
+<div class="advisor-info">
+<div class="advisor-name">Rosa Calla</div>
+<div class="advisor-tags">Thấu thị · Giấc mơ</div>
+<div class="advisor-rating"><span><span class="stars">★★★★★</span> 4,99 · 3,2k</span><span class="advisor-rate">2,49 USD/phút</span></div>
+</div>
+</div>
+<div class="advisor-card">
+<div class="advisor-photo" style="background:#eee;color:transparent;padding:0;">
+<img alt="Elena Voss" src="https://online-psychic-services.com/wp-content/themes/ops-theme/assets/images/photo-advisor-elena.jpg" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"/>
+<div class="advisor-status" style="color:#8b7f9a">Quay lại sau 12 phút</div>
+</div>
+<div class="advisor-info">
+<div class="advisor-name">Elena Voss</div>
+<div class="advisor-tags">Reiki · Đồng hành tâm linh</div>
+<div class="advisor-rating"><span><span class="stars">★★★★★</span> 4,97 · 1,4k</span><span class="advisor-rate">1,99 USD/phút</span></div>
+</div>
+</div>
+</div>
+</section>
+<!-- TESTIMONIALS -->
+<section class="testimonials" data-screen-label="07 Testimonials">
+<div class="section-head" style="justify-content:center;text-align:center;flex-direction:column;align-items:center;margin-bottom:64px;">
+<div class="section-eyebrow">Khách hàng nói gì</div>
+<h2>54.000 đánh giá.<br/>4,9 sao. Một lý do duy nhất.</h2>
+</div>
+<div class="t-grid">
+<div class="t-card">
+<div class="t-stars">★★★★★</div>
+<div class="t-quote">“Một trải nghiệm tuyệt vời. Phiên luận giải đã cho tôi sự sáng tỏ mà tôi cần trong một giai đoạn thực sự khó khăn — và tôi ra về với cảm giác được thấu hiểu.”</div>
+<div class="t-author">
+<div class="t-avatar">SM</div>
+<div><div class="t-author-name">Sarah M.</div><div class="t-author-meta">Đã xác thực · Luận giải tarot</div></div>
+</div>
+</div>
+<div class="t-card">
+<div class="t-stars">★★★★★</div>
+<div class="t-quote">“Tôi đến với thái độ nghi ngờ. Tôi ra về với cảm giác rung động, theo nghĩa tốt nhất. Độ chính xác thật đáng nể — những chi tiết cô ấy không thể nào đoán được.”</div>
+<div class="t-author">
+<div class="t-avatar">JT</div>
+<div><div class="t-author-name">James T.</div><div class="t-author-meta">Đã xác thực · Kết nối linh hồn</div></div>
+</div>
+</div>
+<div class="t-card">
+<div class="t-stars">★★★★★</div>
+<div class="t-quote">“Đầy thấu cảm và sâu sắc. Nhà ngoại cảm giúp tôi hiểu con đường của mình mà không hề áp đặt kết luận của chị ấy.”</div>
+<div class="t-author">
+<div class="t-avatar">ML</div>
+<div><div class="t-author-name">Maria L.</div><div class="t-author-meta">Đã xác thực · Luận giải đường đời</div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- TRUST -->
+<section class="trust" data-screen-label="08 Trust">
+<div class="trust-grid">
+<div class="trust-item">
+<div class="trust-icon"><svg fill="none" height="32" viewbox="0 0 32 32" width="32"><path d="M16 2L4 7v10c0 7 5 12 12 13 7-1 12-6 12-13V7l-12-5z" stroke="currentColor" stroke-linejoin="round" stroke-width="1.5"></path><path d="M11 16l3.5 3.5L21 13" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg></div>
+<h4>Nhà Ngoại Cảm Đã Kiểm Định</h4>
+<p>Được xác minh lý lịch, kiểm tra độ chính xác và đánh giá liên tục. Dưới 8% người ứng tuyển được nhận vào nền tảng.</p>
+</div>
+<div class="trust-item">
+<div class="trust-icon"><svg fill="none" height="32" viewbox="0 0 32 32" width="32"><path d="M8 14V9a8 8 0 0116 0v5" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"></path><rect height="14" rx="2" stroke="currentColor" stroke-width="1.5" width="22" x="5" y="14"></rect><circle cx="16" cy="21" fill="currentColor" r="2"></circle></svg></div>
+<h4>Riêng Tư &amp; An Toàn</h4>
+<p>Các phiên được mã hóa đầu cuối. Cuộc trò chuyện của bạn chỉ thuộc về bạn và nhà ngoại cảm — không bao giờ bị bán, không bao giờ bị chia sẻ.</p>
+</div>
+<div class="trust-item">
+<div class="trust-icon"><svg fill="none" height="32" viewbox="0 0 32 32" width="32"><circle cx="16" cy="16" r="13" stroke="currentColor" stroke-width="1.5"></circle><path d="M16 9v8l5 3" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"></path></svg></div>
+<h4>Cam Kết Hài Lòng</h4>
+<p>Không thấy phù hợp trong 3 phút đầu? Hãy kết thúc phiên — không mất phí. Đây là một cam kết, không phải chiêu tiếp thị.</p>
+</div>
+<div class="trust-item">
+<div class="trust-icon"><svg fill="none" height="32" viewbox="0 0 32 32" width="32"><path d="M4 22c2-6 6-10 12-10s10 4 12 10" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"></path><circle cx="16" cy="8" r="3" stroke="currentColor" stroke-width="1.5"></circle><path d="M8 26h16" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"></path></svg></div>
+<h4>Phục Vụ 24/7</h4>
+<p>Sự dẫn dắt không làm việc theo giờ hành chính. Chúng tôi cũng vậy. Luôn có người phù hợp với bạn đang trực tuyến — ở bất kỳ múi giờ nào, bất kỳ giờ nào.</p>
+</div>
+</div>
+</section>
+<!-- CTA -->
+<section class="cta-band" data-screen-label="09 CTA">
+<div class="section-eyebrow">Sẵn sàng khi bạn sẵn sàng</div>
+<h2>Ba phút tới đây<br/>có thể thay đổi <em>mọi thứ.</em></h2>
+<p>Phiên luận giải đầu tiên là quà từ chúng tôi. Không cần thẻ tín dụng để bắt đầu.</p>
+<a class="btn btn-primary btn-lg" href="https://vi.online-psychic-services.com/contact/">Bắt Đầu Phiên Miễn Phí →</a>
+</section>
+<!-- BLOG -->
+<section data-screen-label="10 Blog">
+<div class="section-head">
+<div>
+<div class="section-eyebrow">Từ chuyên mục</div>
+<h2>Những bài viết về trực giác,<br/>năng lượng và sự tìm hiểu.</h2>
+</div>
+<a class="btn btn-ghost" href="https://online-psychic-services.com/blog/">Tất cả bài viết →</a>
+</div>
+<div class="blog-grid">
+<article class="blog-card">
+<a href="https://online-psychic-services.com/1111-angel-number-meaning/">
+<div class="blog-cover blog-cover-1" style="background:#1a1033;">
+<img alt="" src="https://online-psychic-services.com/wp-content/themes/ops-theme/assets/images/photo-blog-1.jpg"/>
+</div>
+<div class="blog-body">
+<div class="blog-tag">Góc Nhìn Ngoại Cảm</div>
+<h3>Ý Nghĩa Con Số Thiên Thần 1111: Hướng Dẫn Đầy Đủ</h3>
+<p>Ý nghĩa của con số thiên thần 1111 xoay quanh những khởi đầu mới, sự đồng điệu và năng lực hiện thực hóa được nâng cao. Khi dãy số này xuất hiện lặp lại, suy nghĩ và ý định của bạn mang một sức nặng khác thường.</p>
+</div>
+</a>
+</article>
+<article class="blog-card">
+<a href="https://online-psychic-services.com/what-does-vetted-psychic-advisor-mean/">
+<div class="blog-cover blog-cover-2" style="background:#1a1033;">
+<img alt="" src="https://online-psychic-services.com/wp-content/uploads/2026/04/blog_what-does-vetted-psychic-advisor-mean.png"/>
+</div>
+<div class="blog-body">
+<div class="blog-tag">Góc Nhìn Ngoại Cảm</div>
+<h3>Một Nhà Ngoại Cảm “Đã Kiểm Định” Thực Sự Nghĩa Là Gì?</h3>
+<p>Nền tảng ngoại cảm nào cũng khẳng định rằng người đọc của họ đã được kiểm định, sàng lọc hoặc xác thực. Nhưng điều đó thực sự có nghĩa gì? Từ “đã kiểm định” được dùng quá rộng đến mức…</p>
+</div>
+</a>
+</article>
+<article class="blog-card">
+<a href="https://online-psychic-services.com/tarot-astrology-mediumship-which-service/">
+<div class="blog-cover blog-cover-3" style="background:#1a1033;">
+<img alt="" src="https://online-psychic-services.com/wp-content/uploads/2026/04/blog_tarot-astrology-mediumship-which-service.png"/>
+</div>
+<div class="blog-body">
+<div class="blog-tag">Góc Nhìn Ngoại Cảm</div>
+<h3>Tarot, Chiêm Tinh Hay Kết Nối Linh Hồn – Bạn Cần Dịch Vụ Nào?</h3>
+<p>Với quá nhiều dịch vụ ngoại cảm đang có, việc chọn đúng dịch vụ cho câu hỏi cụ thể của bạn có thể gây bối rối. Tarot, chiêm tinh và kết nối linh hồn là ba trong số những…</p>
+</div>
+</a>
+</article>
+</div>
+</section>
+<!-- FOOTER -->
+<footer class="site-footer" data-screen-label="11 Footer">
+<div class="footer-top">
+<div class="footer-brand">
+<div class="logo">
+<div class="logo-mark"></div>
+<div class="logo-text">
+<span class="logo-text-top" style="color:#fff">Online <em style="background:linear-gradient(135deg,#fcd8e6,#c5b8ea);-webkit-background-clip:text;background-clip:text;color:transparent;">Psychic</em></span>
+<span class="logo-text-bot" style="color:rgba(226,214,236,.6)">· Services ·</span>
+</div>
+</div>
+<p>Dịch vụ ngoại cảm trực tuyến trọn vẹn — một nền tảng, nhiều năng lực. Được hơn 2 triệu người tìm kiếm trên khắp thế giới tin tưởng.</p>
+</div>
+<div class="footer-col">
+<h5>Nền tảng</h5>
+<a href="https://vi.online-psychic-services.com/">Trang chủ</a>
+<a href="https://vi.online-psychic-services.com/#how">Cách Hoạt Động</a>
+<a href="https://vi.online-psychic-services.com/#advisors">Nhà Ngoại Cảm</a>
+<a href="https://vi.online-psychic-services.com/pricing/">Bảng Giá</a>
+<a href="https://online-psychic-services.com/blog/">Blog</a>
+</div>
+<div class="footer-col">
+<h5>Dịch Vụ</h5>
+<a href="https://vi.online-psychic-services.com/#services">Luận Giải Ngoại Cảm</a>
+<a href="https://vi.online-psychic-services.com/#services">Luận Giải Tình Yêu</a>
+<a href="https://vi.online-psychic-services.com/#services">Luận Giải Tarot</a>
+<a href="https://vi.online-psychic-services.com/#services">Kết Nối Linh Hồn</a>
+<a href="https://vi.online-psychic-services.com/#services">Chiêm Tinh</a>
+</div>
+<div class="footer-col">
+<h5>Về chúng tôi</h5>
+<a href="https://vi.online-psychic-services.com/about/">Giới Thiệu</a>
+<a href="https://vi.online-psychic-services.com/faq/">Câu Hỏi Thường Gặp</a>
+<a href="https://vi.online-psychic-services.com/contact/">Liên Hệ</a>
+<a href="https://vi.online-psychic-services.com/privacy-policy/">Chính Sách Bảo Mật</a><a href="https://vi.online-psychic-services.com/cookie-policy/">Chính Sách Cookie</a><a href="https://vi.online-psychic-services.com/terms-of-service/">Điều Khoản Sử Dụng</a><a href="https://vi.online-psychic-services.com/disclaimer/">Tuyên Bố Miễn Trừ</a> </div>
+</div>
+<div class="footer-bottom">
+<span>© 2026 Online Psychic Services. Bảo lưu mọi quyền.</span>
+<span>Chỉ nhằm mục đích giải trí. Không thay thế cho tư vấn chuyên môn.</span>
+</div>
+<!-- i18n switcher (WP-Net-Control) --><div class="lang-switcher" style="text-align:center;padding:12px 0;font-size:14px;opacity:.85">🌐 <a href="https://online-psychic-services.com/" style="color:inherit;text-decoration:underline">EN</a> · <strong style="color:inherit">VI</strong></div></footer>
+</div>
+<!-- Sticky CTA -->
+<div class="sticky-cta">
+<div class="sticky-cta-avatars"><div class="av">L</div><div class="av">A</div><div class="av">R</div></div>
+<div class="sticky-cta-text"><strong>147 nhà ngoại cảm trực tuyến</strong><span>Chờ trung bình 2 phút</span></div>
+<a href="https://vi.online-psychic-services.com/contact/"><a data-nebula-cta="1" href="/go/" rel="nofollow sponsored">Bắt đầu →</a></a>
+</div>
+<style id="homeblocks-css">
+/* tools/homeblocks/homeblocks.css
+ * Single stylesheet for all 20 homeblocks sites. Inlined once (in a <style>
+ * tag) by inc/homeblocks.php — never enqueued as a static asset, so it
+ * survives a Simply Static export with zero asset-path risk.
+ *
+ * Everything is scoped under .hb-scope so it can never collide with a
+ * theme's own styles: no bare element selectors, no global resets here.
+ *
+ * Color/spacing tokens cascade through each theme's own CSS custom
+ * properties first (--hb-accent, then a theme's own --accent /
+ * --color-accent / --primary, ...) and fall back to a sane default only
+ * when none of those exist.
+ */
+
+.hb-scope {
+  --hbc-accent:  var(--hb-accent,  var(--accent,       var(--color-accent, var(--primary,   #6d4aff))));
+  --hbc-text:    var(--hb-text,    var(--text,          var(--color-text,   var(--ink,        #1c1e26))));
+  --hbc-muted:   var(--hb-muted,   var(--muted,         var(--color-muted,  var(--ink-3,      #6b7280))));
+  --hbc-surface: var(--hb-surface, var(--surface,       var(--color-surface,var(--bg-soft,    #f4f5f8))));
+  --hbc-border:  var(--hb-border,  var(--border,        var(--color-border, var(--line,       #e2e4ea))));
+  --hbc-good:    var(--hb-good,    #2f8f4e);
+  --hbc-avoid:   #9aa0ab;
+
+  display: block;
+  color: var(--hbc-text);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.hb-scope * { box-sizing: border-box; }
+
+/* ── Section rhythm ─────────────────────────────────────────── */
+
+.hb-scope > .wp-block-group {
+  max-width: 1080px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: clamp(2.5rem, 5vw, 4.5rem) 1.25rem;
+}
+
+.hb-scope > .wp-block-group + .wp-block-group {
+  border-top: 1px solid var(--hbc-border);
+}
+
+.hb-scope h2.wp-block-heading { font-size: clamp(1.5rem, 2.5vw, 2rem); margin: 0 0 1rem; }
+.hb-scope h3.wp-block-heading { font-size: clamp(1.1rem, 1.8vw, 1.35rem); margin: 1.5rem 0 0.5rem; }
+.hb-scope p { margin: 0 0 1rem; }
+.hb-scope .hb-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--hbc-accent);
+  margin-bottom: 0.5rem;
+}
+
+/* ── Hero ────────────────────────────────────────────────────── */
+
+.hb-hero h1.wp-block-heading,
+.hb-hero h2.wp-block-heading { font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.15; }
+
+/* ── Cards (also reused visually by .hb-card columns) ───────── */
+
+.hb-cards .wp-block-columns { gap: 1.5rem; }
+.hb-card {
+  background: var(--hbc-surface);
+  border: 1px solid var(--hbc-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+.hb-card h3.wp-block-heading { margin-top: 0; }
+
+/* ── Steps ───────────────────────────────────────────────────── */
+
+.hb-steps h3.wp-block-heading {
+  color: var(--hbc-accent);
+  border-left: 3px solid var(--hbc-accent);
+  padding-left: 0.75rem;
+}
+
+/* ── Topic: good / avoid lists via ::marker, no icon files ──── */
+
+.hb-topic-label { font-weight: 600; margin-bottom: 0.35rem; }
+.hb-good-label { color: var(--hbc-good); }
+.hb-avoid-label { color: var(--hbc-avoid); }
+.hb-topic ul.hb-good,
+.hb-topic ul.hb-avoid { padding-left: 1.4em; margin: 0 0 1rem; }
+.hb-topic ul.hb-good li::marker { content: "\2713  "; color: var(--hbc-good); }
+.hb-topic ul.hb-avoid li::marker { content: "\2013  "; color: var(--hbc-avoid); }
+.hb-topic .hb-tip {
+  font-size: 0.9rem;
+  color: var(--hbc-muted);
+  font-style: italic;
+}
+
+/* ── FAQ ─────────────────────────────────────────────────────── */
+
+.hb-faq h3.wp-block-heading { margin-top: 1.5rem; }
+.hb-faq h3.wp-block-heading:first-of-type { margin-top: 0.5rem; }
+
+/* ── CTA button ──────────────────────────────────────────────── */
+
+.hb-scope .wp-block-button.hb-cta { margin: 0.75rem 0; }
+.hb-scope a.wp-block-button__link.hb-cta {
+  display: inline-block;
+  background: var(--hbc-accent);
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.7em 1.4em;
+  font-weight: 600;
+  text-decoration: none;
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+.hb-scope a.wp-block-button__link.hb-cta:hover,
+.hb-scope a.wp-block-button__link.hb-cta:focus-visible {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+/* ── Disclaimer ──────────────────────────────────────────────── */
+
+.hb-disclaimer { font-size: 0.85rem; color: var(--hbc-muted); }
+.hb-disclaimer p { margin-bottom: 0.5rem; }
+
+/* ── Responsive: single column under 782px, guard against overflow ── */
+
+@media (max-width: 782px) {
+  .hb-scope > .wp-block-group { padding-left: 1rem; padding-right: 1rem; }
+  .hb-cards .wp-block-columns,
+  .hb-scope .wp-block-columns {
+    flex-wrap: wrap;
+  }
+  .hb-cards .wp-block-columns > .wp-block-column,
+  .hb-scope .wp-block-columns > .wp-block-column {
+    flex-basis: 100% !important;
+    width: 100% !important;
+  }
+}
+
+.hb-scope img { max-width: 100%; height: auto; }
+
+/* ── Reduced motion ──────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .hb-scope a.wp-block-button__link.hb-cta {
+    transition: none;
+  }
+  .hb-scope a.wp-block-button__link.hb-cta:hover,
+  .hb-scope a.wp-block-button__link.hb-cta:focus-visible {
+    transform: none;
+  }
+}
+
+</style>
+<div class="hb-scope">
+<div class="wp-block-group hb-hero" id="hb-hero"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained">
+<h2 class="wp-block-heading">Online Psychic Services, Được Sắp Xếp Để Bạn Chọn Đúng Dịch Vụ</h2>
+<p class="wp-block-paragraph">Không phải câu hỏi nào cũng cần một kiểu phiên giống nhau, và không phải nhà ngoại cảm nào cũng chuyên về cùng một thứ. Online Psychic Services tập hợp các dịch vụ ngoại cảm trực tuyến khác nhau vào một nơi — theo điều bạn đang muốn hỏi, chứ không chỉ theo ai đang rảnh — để bạn ghép được hoàn cảnh của mình với một phiên được thiết kế cho đúng hoàn cảnh đó, thay vì phải phỏng đoán. Hãy xem theo điều đang xảy ra với bạn lúc này, và chúng tôi sẽ chỉ cho bạn dịch vụ thực sự phù hợp.</p>
+<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
+<div class="wp-block-button hb-cta"><a class="wp-block-button__link hb-cta" href="/go/" rel="nofollow sponsored">Tìm Dịch Vụ Phù Hợp</a></div>
+</div>
+</div></div>
+<div class="wp-block-group hb-prose" id="hb-intro"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained">
+<p class="wp-block-paragraph">Phần lớn các trang ngoại cảm đưa cho bạn một danh sách tên rồi để bạn tự xoay xở. Chúng tôi xây dựng trang này theo cách khác. Online Psychic Services hoạt động trước hết như một danh mục các loại dịch vụ, rồi mới đến người đọc, bởi hình thức của một phiên quan trọng gần như ngang với việc ai thực hiện nó. Khi bạn đã biết mình thực sự cần loại phiên nào, việc chọn người đọc trở nên đơn giản hơn rất nhiều.</p>
+<p class="wp-block-paragraph">Một câu hỏi nhanh về chuyện tình cảm không cần cùng một cấu trúc như một buổi trò chuyện sâu về bản đồ sao, và một thắc mắc về giấc mơ chỉ xảy ra một lần thì không cần đến mối quan hệ lâu dài với một người đọc. Vậy nên thay vì lướt qua các trang cá nhân và mong có một cái nào đó nổi bật lên, bạn bắt đầu bằng việc gọi tên điều đang thực sự diễn ra. Từ đó, chúng tôi nhóm các dịch vụ ngoại cảm trực tuyến được thiết kế để xử lý đúng điều đó, giải thích mỗi dịch vụ khác nhau ở đâu, và để bạn chọn với hình dung rõ ràng về cảm giác của một phiên trước khi bạn kết nối với bất cứ ai. Nhờ vậy bạn so sánh các dịch vụ dựa trên điều chúng thực sự làm, không phải dựa trên một tấm ảnh đại diện.</p>
+<p class="wp-block-paragraph">Ý tưởng cốt lõi là vậy: ít phỏng đoán ở đầu vào, nhiều thời gian hơn cho cuộc trò chuyện thực sự.</p>
+</div></div>
+<div class="wp-block-group hb-cards" id="hb-scenarios"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained">
+<h2 class="wp-block-heading">Nơi Mọi Người Thường Bắt Đầu</h2>
+<p class="wp-block-paragraph">Mọi người đến đây với đủ loại câu hỏi trong đầu — dưới đây là một vài dạng thường gặp nhất.</p>
+<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-8f761849 wp-block-columns-is-layout-flex">
+<div class="wp-block-column hb-card is-layout-flow wp-block-column-is-layout-flow">
+<h3 class="wp-block-heading">Một Quyết Định Nghề Nghiệp Có Thời Hạn</h3>
+<p class="wp-block-paragraph">Một người đang có lời đề nghị công việc trên bàn và chỉ còn ít thời gian để quyết định. Họ không cần một mối quan hệ dài hạn với người đọc — họ cần một phiên tập trung giúp họ nghĩ cho rõ mình thực sự muốn gì trước khi thời hạn qua đi.</p>
+</div>
+<div class="wp-block-column hb-card is-layout-flow wp-block-column-is-layout-flow">
+<h3 class="wp-block-heading">Một Khuôn Mẫu Tình Cảm Cứ Lặp Lại</h3>
+<p class="wp-block-paragraph">Một người nhận ra cùng một kiểu quan hệ lặp lại qua nhiều mối tình khác nhau và muốn một phiên xoay quanh các khuôn mẫu, chứ không phải một sự việc đơn lẻ — gần với một cuộc trò chuyện dài hơi hơn là một câu hỏi duy nhất.</p>
+</div>
+<div class="wp-block-column hb-card is-layout-flow wp-block-column-is-layout-flow">
+<h3 class="wp-block-heading">Một Câu Hỏi Lớn Chưa Biết Bắt Đầu Từ Đâu</h3>
+<p class="wp-block-paragraph">Một người không chắc điều gì đang thực sự làm mình khó chịu, chỉ biết có gì đó còn dở dang. Người ấy sẽ được phục vụ tốt hơn bởi một phiên rộng, mang tính khám phá, thay vì một phiên hẹp nhắm vào một câu hỏi có/không.</p>
+</div>
+</div>
+</div></div>
+<div class="wp-block-group hb-cards" id="hb-checklist"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained">
+<h2 class="wp-block-heading">Cần Kiểm Tra Gì Trước Khi Đặt Một Phiên</h2>
+<p class="wp-block-paragraph">Có vài điều đáng kiểm tra, bất kể bạn chọn dịch vụ ngoại cảm trực tuyến nào.</p>
+<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-8f761849 wp-block-columns-is-layout-flex">
+<div class="wp-block-column hb-card is-layout-flow wp-block-column-is-layout-flow">
+<h3 class="wp-block-heading">Cách Họ Mô Tả Phương Pháp Của Chính Mình</h3>
+<p class="wp-block-paragraph">Một người đọc đáng để bạn dành thời gian có thể giải thích, bằng ngôn từ giản dị, phiên của họ thực sự gồm những gì và phù hợp với việc gì — không chỉ là một danh sách năng lực, mà là mô tả về cách một phiên với họ thường diễn ra.</p>
+<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
+<div class="wp-block-button hb-cta"><a class="wp-block-button__link hb-cta" href="/go/" rel="nofollow sponsored">Xem những người đọc giải thích rõ quy trình</a></div>
+</div>
+</div>
+<div class="wp-block-column hb-card is-layout-flow wp-block-column-is-layout-flow">
+<h3 class="wp-block-heading">Cách Họ Xử Lý Những Câu Bạn Hỏi Lại</h3>
+<p class="wp-block-paragraph">Hãy để ý xem người đọc có hoan nghênh câu hỏi tiếp theo của bạn hay bỏ qua chúng. Một phiên tốt phải giống một cuộc trò chuyện mà bạn là một phần trong đó, không phải một bài độc thoại đọc trước mặt bạn.</p>
+<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
+<div class="wp-block-button hb-cta"><a class="wp-block-button__link hb-cta" href="/go/" rel="nofollow sponsored">Tìm người đọc chịu trò chuyện cùng bạn</a></div>
+</div>
+</div>
+<div class="wp-block-column hb-card is-layout-flow wp-block-column-is-layout-flow">
+<h3 class="wp-block-heading">Cách Họ Nói Về Những Điều Một Phiên Luận Giải Không Thể Làm</h3>
+<p class="wp-block-paragraph">Những người đọc thẳng thắn về giới hạn của một phiên — rằng nó không thay thế được bác sĩ, luật sư hay chuyên gia tài chính, và không thể hứa một kết quả cụ thể — thường đáng tin hơn những người hứa hẹn sự chắc chắn.</p>
+<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
+<div class="wp-block-button hb-cta"><a class="wp-block-button__link hb-cta" href="/go/" rel="nofollow sponsored">Bắt đầu với một người đọc điềm tĩnh</a></div>
+</div>
+</div>
+</div>
+<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
+<div class="wp-block-button hb-cta"><a class="wp-block-button__link hb-cta" href="/go/" rel="nofollow sponsored">Xem tất cả các loại dịch vụ</a></div>
+</div>
+</div></div>
+<div class="wp-block-group hb-steps" id="hb-how-it-works"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained">
+<h2 class="wp-block-heading">Cách Đặt Một Dịch Vụ Ngoại Cảm Trực Tuyến</h2>
+<p class="wp-block-paragraph">Chọn đúng dịch vụ ngoại cảm trực tuyến không mất nhiều thời gian khi bạn đã biết mình đang tìm gì. Dưới đây là hình dung về quy trình thường diễn ra, từ lúc bạn đến đây cho tới lúc bạn thực sự đang trò chuyện với ai đó.</p>
+<h3 class="wp-block-heading">1. Gọi Tên Điều Đang Thực Sự Diễn Ra</h3>
+<p class="wp-block-paragraph">Hãy bắt đầu từ hoàn cảnh, không phải từ dịch vụ. Bạn đang loay hoay quanh một quyết định, đang cố hiểu một khuôn mẫu, hay đang muốn một cái nhìn tổng thể về nơi mọi thứ đang hướng tới? Bạn không cần đúng thuật ngữ — chỉ cần một cảm nhận sơ bộ về điều đang níu lấy sự chú ý của bạn. Thế là đủ để bước tiếp theo có ý nghĩa, và nó giúp bạn không chọn ngẫu nhiên một loại dịch vụ rồi mong nó vừa vặn.</p>
+<h3 class="wp-block-heading">2. Xem Loại Dịch Vụ Nào Được Thiết Kế Cho Điều Đó</h3>
+<p class="wp-block-paragraph">Khi đã biết mình đang đối diện với điều gì, danh sách hẹp lại rất nhanh. Một câu hỏi sắc gọn thường dẫn tới một phiên luận giải tập trung. Một khuôn mẫu bạn cứ gặp lại dẫn tới điều gì đó mang tính khám phá hơn. Một câu hỏi về thời điểm hoặc các chu kỳ lớn dẫn tới công việc dựa trên bản đồ sao. Bạn không chọn trong mù mờ — bạn đang ghép một hoàn cảnh đã rõ với một dịch vụ được thiết kế quanh đúng loại câu hỏi đó, và đó là một quy trình rất khác với việc lướt qua danh sách người lạ.</p>
+<h3 class="wp-block-heading">3. Kết Nối Và Hỏi Điều Bạn Đến Để Hỏi</h3>
+<p class="wp-block-paragraph">Từ đó, bạn bước vào chính phiên luận giải, theo nhịp của bạn và theo điều kiện của bạn. Không ai cần biết cả câu chuyện đời bạn trước khi bạn đặt được câu hỏi thật, và việc bắt đầu một phiên không buộc bạn phải tiếp tục quá điểm mà bạn đã nhận được điều mình cần. Bạn được tự do dừng lại, chuyển sang một loại dịch vụ khác sau này, hoặc quay lại đúng dịch vụ cũ — tùy theo cách bạn thực sự muốn dùng nơi này.</p>
+<p class="wp-block-paragraph">Không có một cách duy nhất đúng để đi qua ba bước này. Có người chạy hết cả ba trong vài phút; người khác dừng ở bước đầu một lúc lâu trước khi sẵn sàng đi tiếp — cả hai đều ổn.</p>
+<p class="wp-block-paragraph">Nếu hoàn cảnh của bạn thay đổi giữa đường, bạn không bị khóa vào lựa chọn ban đầu — chuyển sang một loại dịch vụ khác giữa quá trình là điều bình thường, không phải sai sót.</p>
+</div></div>
+<div class="wp-block-group hb-prose" id="hb-what-to-ask"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained">
+<h2 class="wp-block-heading">Các Dịch Vụ Này Phù Hợp Với Điều Gì, Và Không Phù Hợp Với Điều Gì</h2>
+<p class="wp-block-paragraph">Mọi dịch vụ trên trang này được xây dựng để mang lại một góc nhìn — một cách nhìn hoàn cảnh từ bên ngoài đầu bạn, khi bạn đang ở quá gần để thấy rõ. Điều đó thực sự hữu ích cho các câu hỏi tình cảm, những ngã ba nghề nghiệp, những khuôn mẫu bạn chưa gọi được tên, và những lúc bạn chỉ muốn thêm một điểm nhìn trước khi quyết định. Nó ít hữu ích hơn, và không được thiết kế, cho những câu hỏi có một đáp án đúng khách quan nằm trong lĩnh vực chuyên môn của người khác.</p>
+<p class="wp-block-paragraph">Điều mà không dịch vụ nào ở đây làm được là thay thế một chuyên gia mà bạn nên trao đổi với, cho bất cứ việc gì liên quan tới pháp lý, y tế hoặc tài chính. Một phiên luận giải không phải là một chẩn đoán, một ý kiến pháp lý hay một lời khuyên tài chính, và không nhà ngoại cảm nào ở đây có thể bảo đảm một hoàn cảnh cụ thể sẽ diễn ra thế nào. Nếu một quyết định liên quan tới sức khỏe, một hợp đồng hay tài chính của bạn, hãy coi phiên luận giải là một góc nhìn để cân nhắc thêm — không phải thứ thay thế cho chuyên gia thực sự phụ trách loại quyết định đó. Giữ hai việc này riêng biệt thì mỗi việc đều được làm tốt hơn.</p>
+</div></div>
+<div class="wp-block-group hb-topic" id="hb-fit-check"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained">
+<h3 class="wp-block-heading">Dịch Vụ Nào Thực Sự Khớp Với Câu Hỏi Của Bạn</h3>
+<p class="wp-block-paragraph">Có câu hỏi được sinh ra cho một phiên duy nhất, sắc gọn. Có câu hỏi cần khoảng trống để mở ra qua nhiều lần trò chuyện. Dịch vụ phù hợp thường phụ thuộc ít vào chủ đề, mà nhiều vào việc câu hỏi đó đang ổn định hay còn ngổn ngang với bạn lúc này.</p>
+<p class="hb-topic-label hb-good-label wp-block-paragraph">Nên hỏi</p>
+<ul class="wp-block-list hb-good">
+<li>Một câu hỏi bạn có thể nêu trong một câu</li>
+<li>Một quyết định có thời hạn tương đối rõ</li>
+<li>Điều bạn muốn một cái nhìn từ bên ngoài, không phải đào sâu</li>
+</ul>
+<p class="hb-topic-label hb-avoid-label wp-block-paragraph">Nên hỏi ở nơi khác</p>
+<ul class="wp-block-list hb-avoid">
+<li>Một khuôn mẫu bạn nhận ra qua nhiều năm, không phải vài tuần</li>
+<li>Một câu hỏi cứ đổi hình dạng mỗi lần bạn nghĩ về nó</li>
+</ul>
+<p class="hb-tip wp-block-paragraph">Nếu chưa chắc, hãy bắt đầu hẹp hơn — bạn luôn có thể mở rộng bằng một dịch vụ khác sau đó.</p>
+<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
+<div class="wp-block-button hb-cta"><a class="wp-block-button__link hb-cta" href="/go/" rel="nofollow sponsored">Xem dịch vụ nào phù hợp</a></div>
+</div>
+</div></div>
+<div class="wp-block-group hb-topic" id="hb-one-or-ongoing"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained">
+<h3 class="wp-block-heading">Một Phiên Luận Giải Hay Một Cuộc Trò Chuyện Dài Hơi</h3>
+<p class="wp-block-paragraph">Không phải câu hỏi nào cũng khép lại sau một phiên. Có hoàn cảnh dịch chuyển qua từng tuần, và việc quay lại cùng một loại dịch vụ nhiều lần có thể hữu ích hơn là coi một phiên duy nhất là kết luận cuối cùng.</p>
+<p class="hb-topic-label hb-good-label wp-block-paragraph">Nên hỏi</p>
+<ul class="wp-block-list hb-good">
+<li>Một hoàn cảnh đang thay đổi liên tục, tuần này qua tuần khác</li>
+<li>Điều bạn muốn theo dõi theo thời gian hơn là chốt trong một lần</li>
+</ul>
+<p class="hb-topic-label hb-avoid-label wp-block-paragraph">Nên hỏi ở nơi khác</p>
+<ul class="wp-block-list hb-avoid">
+<li>Một quyết định duy nhất bạn cần đưa ra một lần rồi bước qua</li>
+<li>Một câu hỏi mà thêm phiên chỉ làm chậm lại lựa chọn bạn vốn đã sẵn sàng</li>
+</ul>
+<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
+<div class="wp-block-button hb-cta"><a class="wp-block-button__link hb-cta" href="/go/" rel="nofollow sponsored">Bắt đầu với một phiên trước</a></div>
+</div>
+</div></div>
+<div class="wp-block-group hb-topic" id="hb-second-opinion"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained">
+<h3 class="wp-block-heading">Khi Bạn Muốn Hai Góc Nhìn Về Cùng Một Việc</h3>
+<p class="wp-block-paragraph">Có lúc một phiên luận giải làm nảy sinh nhiều câu hỏi ngang với số câu nó trả lời, và một phiên thứ hai — qua một loại dịch vụ khác — có thể làm tròn bức tranh thay vì chỉ lặp lại phiên đầu.</p>
+<p class="hb-topic-label hb-good-label wp-block-paragraph">Nên hỏi</p>
+<ul class="wp-block-list hb-good">
+<li>Hai phiên rất khác nhau nhưng cứ cùng chạm tới một chủ đề</li>
+<li>Một phiên đầu tiên hữu ích nhưng còn dở dang</li>
+</ul>
+<p class="hb-topic-label hb-avoid-label wp-block-paragraph">Nên hỏi ở nơi khác</p>
+<ul class="wp-block-list hb-avoid">
+<li>Đi tìm ý kiến thứ ba hoặc thứ tư chỉ vì hai ý kiến đầu không phải điều bạn muốn nghe</li>
+</ul>
+<p class="hb-tip wp-block-paragraph">Hai góc nhìn đồng thuận cho bạn biết nhiều hơn năm góc nhìn trái ngược nhau.</p>
+<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
+<div class="wp-block-button hb-cta"><a class="wp-block-button__link hb-cta" href="/go/" rel="nofollow sponsored">Nhận một góc nhìn thứ hai</a></div>
+</div>
+</div></div>
+<div class="wp-block-group hb-prose" id="hb-services-intro"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained">
+<h2 class="wp-block-heading">Các Loại Dịch Vụ Bạn Có Thể Chọn Tại Đây</h2>
+<p class="wp-block-paragraph">Bên dưới những hoàn cảnh khác nhau là một số loại dịch vụ riêng biệt đang làm phần việc thực sự. Mỗi loại được xây dựng quanh một cách khác nhau để tiếp cận câu trả lời, và mỗi loại thường phù hợp với một số kiểu câu hỏi nhất định hơn các kiểu khác. Biết trước sự khác biệt sẽ giúp bạn không đặt một phiên vốn chưa bao giờ được thiết kế cho điều bạn đang hỏi.</p>
+<p class="wp-block-paragraph">Không loại nào trong số này “tốt hơn” loại còn lại một cách khách quan — chúng là những công cụ khác nhau cho những việc khác nhau. Một lần trao đổi trực giác ngắn giải quyết vấn đề khác với một buổi bàn về bản đồ sao, và một giấc mơ bạn không dứt ra được cần cách tiếp cận khác với một phiên dẫn dắt mở. Năm loại dưới đây bao phủ phần lớn điều mọi người tìm đến. Hãy đọc qua và chọn loại khớp với điều đang thực sự trong đầu bạn — hoặc bắt đầu với loại nghe giống nhất điều bạn cần lúc này rồi điều chỉnh sau nếu chưa đúng. Rất nhiều người rốt cuộc thử hai hoặc ba loại theo thời gian.</p>
+</div></div>
+<div class="wp-block-group hb-method" id="hb-intuitive-readings"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained">
+<h3 class="wp-block-heading">Luận Giải Trực Giác: Một Cái Nhìn Trực Tiếp Vào Điều Trước Mắt</h3>
+<p class="wp-block-paragraph">Một phiên luận giải trực giác dành cho những câu hỏi cần một cái nhìn thẳng thắn từ bên ngoài — không bản đồ sao, không giấc mơ, chỉ là một cuộc trò chuyện tập trung về hoàn cảnh bạn mang tới. Nó phù hợp khi bạn đã biết đại khái mình muốn hỏi gì và đang tìm một góc nhìn, không phải một quá trình tháo gỡ dài.</p>
+<ul class="wp-block-list hb-explore">
+<li>Một quyết định bạn đang cân nhắc ngay lúc này</li>
+<li>Một kiểu quan hệ bạn muốn được nhìn nhận</li>
+<li>Một bước tiếp theo bạn còn do dự</li>
+<li>Một cảm giác trong lòng bạn muốn đối chiếu với cái nhìn bên ngoài</li>
+</ul>
+<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
+<div class="wp-block-button hb-cta"><a class="wp-block-button__link hb-cta" href="/go/" rel="nofollow sponsored">Bắt đầu một phiên trực giác</a></div>
+</div>
+</div></div>
+<div class="wp-block-group hb-method" id="hb-birth-chart"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained">
+<h3 class="wp-block-heading">Bản Đồ Sao: Một Cái Nhìn Dài Hạn Xoay Quanh Thời Điểm</h3>
+<p class="wp-block-paragraph">Công việc với bản đồ sao xem xét các khuôn mẫu lớn và thời điểm, thay vì một thời khắc đơn lẻ — hữu ích khi câu hỏi của bạn ít nghiêng về “tôi nên làm gì” mà nghiêng về “vì sao điều này cứ xảy ra” hoặc “đây có phải giai đoạn tốt để hành động”.</p>
+<ul class="wp-block-list hb-explore">
+<li>Những chu kỳ lặp lại trong quan hệ hoặc công việc của bạn</li>
+<li>Liệu thời điểm có phù hợp cho một quyết định lớn</li>
+<li>Những khuôn mẫu kéo dài mà bạn muốn được vẽ ra rõ ràng</li>
+<li>Cách các phần khác nhau trong đời bạn tương tác với nhau</li>
+</ul>
+<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
+<div class="wp-block-button hb-cta"><a class="wp-block-button__link hb-cta" href="/go/" rel="nofollow sponsored">Đặt một phiên bản đồ sao</a></div>
+</div>
+</div></div>
+<div class="wp-block-group hb-method" id="hb-energy-aura"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained">
+<h3 class="wp-block-heading">Năng Lượng &amp; Trường Khí: Đọc Điều Đang Đè Nặng Lên Bạn</h3>
+<p class="wp-block-paragraph">Dịch vụ này ít tập trung vào dự đoán sự kiện, mà nhiều hơn vào điều bạn đang mang theo — căng thẳng, áp lực, hoặc cảm giác có gì đó không ổn mà khó diễn tả bằng lời.</p>
+<ul class="wp-block-list hb-explore">
+<li>Một sự nặng nề bạn không giải thích được</li>
+<li>Liệu một mối quan hệ hay một môi trường có đang hút cạn sức bạn</li>
+<li>Điều gì có thể đang gây ra một giai đoạn thiếu năng lượng</li>
+<li>Một lần kiểm tra chung khi không có gì cụ thể sai nhưng có gì đó không ổn</li>
+</ul>
+<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
+<div class="wp-block-button hb-cta"><a class="wp-block-button__link hb-cta" href="/go/" rel="nofollow sponsored">Thử một phiên năng lượng &amp; trường khí</a></div>
+</div>
+</div></div>
+<div class="wp-block-group hb-method" id="hb-dream-analysis"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained">
+<h3 class="wp-block-heading">Giải Mã Giấc Mơ: Hiểu Điều Còn Đọng Lại Trong Bạn</h3>
+<p class="wp-block-paragraph">Một giấc mơ còn ở lại với bạn sau khi thức dậy thường đang chỉ về điều gì đó. Giải mã giấc mơ lấy hình ảnh và cảm xúc từ một giấc mơ cụ thể và làm việc với điều chúng có thể đang phản chiếu lại bạn.</p>
+<ul class="wp-block-list hb-explore">
+<li>Một giấc mơ bạn vẫn nghĩ về nhiều ngày sau đó</li>
+<li>Một giấc mơ lặp lại với cùng một chủ đề</li>
+<li>Một giấc mơ gắn với quyết định bạn đang đối diện</li>
+<li>Những cơn mộng dữ dường như cứ quay quanh cùng một nỗi sợ</li>
+</ul>
+<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
+<div class="wp-block-button hb-cta"><a class="wp-block-button__link hb-cta" href="/go/" rel="nofollow sponsored">Nhận một phiên giải mã giấc mơ</a></div>
+</div>
+</div></div>
+<div class="wp-block-group hb-method" id="hb-guidance-sessions"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained">
+<h3 class="wp-block-heading">Phiên Dẫn Dắt: Khoảng Trống Mở Cho Một Câu Hỏi Lớn Hơn</h3>
+<p class="wp-block-paragraph">Khi một câu hỏi không nằm gọn trong bất kỳ hạng mục nào ở trên — hoặc khi bạn còn chưa chắc mình đang hỏi gì — một phiên dẫn dắt cho bạn khoảng trống để nói ra mà không phải thu hẹp trước.</p>
+<ul class="wp-block-list hb-explore">
+<li>Một câu hỏi bạn chưa diễn đạt được thành lời</li>
+<li>Một ngã ba chạm tới nhiều phần trong đời bạn</li>
+<li>Cảm giác chung rằng bạn muốn sáng tỏ hơn, mà chưa có một câu hỏi cố định</li>
+<li>Một buổi trò chuyện tiếp nối sau một phiên thuộc loại khác</li>
+</ul>
+<p class="hb-closer wp-block-paragraph">Không loại nào trong năm loại này là chỗ “đúng” để bắt đầu — chúng chỉ là những hình dạng khác nhau mà một cuộc trò chuyện có thể mang. Nếu bạn lưỡng lự giữa hai loại, cách thử đơn giản nhất là chọn loại khớp với cách bạn tự nhiên diễn đạt câu hỏi của mình khi nói ra thành tiếng.</p>
+<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
+<div class="wp-block-button hb-cta"><a class="wp-block-button__link hb-cta" href="/go/" rel="nofollow sponsored">Đặt một phiên dẫn dắt</a></div>
+</div>
+</div></div>
+<div class="wp-block-group hb-values" id="hb-ethics-privacy"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained">
+<h2 class="wp-block-heading">Kiểm Định Và Quyền Riêng Tư, Nói Cho Rõ</h2>
+<h3 class="wp-block-heading">“Đã Xác Thực” Ở Đây Thực Sự Nghĩa Là Gì</h3>
+<p class="wp-block-paragraph">Mọi người đọc gắn với các loại dịch vụ trên trang này đều trải qua một bước sàng lọc trước khi được phép nhận phiên — một quy trình được xây dựng để kiểm tra cách họ làm việc, không chỉ việc họ đã đăng ký. Đó là một cam kết về quy trình, không phải một con số chúng tôi định phô ra; chúng tôi muốn mô tả cách nó hoạt động hơn là đưa cho bạn một con số tự thân chẳng nói lên nhiều điều.</p>
+<p class="wp-block-paragraph">Tuy vậy, sàng lọc không phải là bảo đảm cho bất kỳ phiên đơn lẻ nào. Một phiên luận giải vẫn là một cuộc trò chuyện, không phải một chẩn đoán, và nó không thay thế bác sĩ, luật sư hay chuyên gia tài chính cho bất cứ việc gì có hệ quả thật. Không dịch vụ nào trên trang này có thể hứa một kết quả cụ thể, và bất kỳ người đọc nào nói với bạn điều ngược lại đều không mô tả đúng điều loại phiên này thực sự làm được.</p>
+<p class="wp-block-paragraph">Nếu một người đọc không đạt chuẩn đó sau khi đã hoạt động, việc đó kích hoạt một lần rà soát tiếp theo, và một loại dịch vụ không còn đạt chuẩn sẽ bị rút khỏi danh mục cho tới khi vấn đề được giải quyết.</p>
+<h3 class="wp-block-heading">Quyền Riêng Tư Của Bạn Khi Dùng Trang Này</h3>
+<p class="wp-block-paragraph">Điều bạn mang tới một phiên là của bạn. Chúng tôi không cần cả câu chuyện đời bạn để chỉ cho bạn đúng loại dịch vụ, và bạn được tự do dùng nhiều hay ít thông tin nhận dạng tùy ý khi đã vào cuộc trò chuyện. Hãy đối xử với phiên đầu tiên như bạn đối xử với bất kỳ cuộc trò chuyện với một người mới — chia sẻ điều giúp bạn có câu trả lời, và giữ lại phần còn lại.</p>
+</div></div>
+<div class="wp-block-group hb-values" id="hb-why-choose-us"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained">
+<h2 class="wp-block-heading">Vì Sao Mọi Người Dùng Trang Này Để Chọn</h2>
+<h3 class="wp-block-heading">Một Danh Mục Thay Vì Một Ván Đoán</h3>
+<p class="wp-block-paragraph">Phần lớn các trang buộc bạn lướt qua danh sách người đọc và mong có ai đó trông đúng ý. Trang này bắt đầu từ hoàn cảnh bạn đang thực sự ở trong và đi ngược lại tới dịch vụ được xây cho hoàn cảnh đó, nhờ vậy bạn tránh được việc chọn trong mù mờ.</p>
+<h3 class="wp-block-heading">Năm Cách Vào Riêng Biệt, Không Phải Một Cỡ Cho Tất Cả</h3>
+<p class="wp-block-paragraph">Một lần trao đổi trực giác, một buổi bàn bản đồ sao, một lần đọc năng lượng, một phiên giấc mơ và một cuộc dẫn dắt mở là những công cụ thực sự khác nhau. Có cả năm ở một nơi nghĩa là bạn không phải nhồi câu hỏi của mình vào bất cứ hình thức nào đang có sẵn.</p>
+<h3 class="wp-block-heading">Không Bị Ép Chọn Gói “Lớn Nhất”</h3>
+<p class="wp-block-paragraph">Một phiên ngắn, tập trung là cách dùng trang này hoàn toàn chính đáng. Bạn không cần đặt loại dịch vụ phức tạp nhất để thu được điều gì hữu ích từ một lần ghé thăm — hãy bắt đầu nhỏ nếu đó là điều thực sự khớp với câu hỏi của bạn.</p>
+</div></div>
+<div class="wp-block-group hb-faq" id="hb-faq"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained">
+<h2 class="wp-block-heading">Câu Hỏi Thường Gặp</h2>
+<h3 class="wp-block-heading">Làm sao tôi biết dịch vụ nào thực sự phù hợp với mình?</h3>
+<p class="wp-block-paragraph">Hãy bắt đầu từ điều đang diễn ra với bạn thay vì từ tên các dịch vụ. Một câu hỏi sắc gọn, đơn lẻ thường dẫn tới luận giải trực giác; một khuôn mẫu cứ lặp lại dẫn tới công việc bản đồ sao hoặc một phiên dẫn dắt. Các phần chủ đề ở trên trình bày điều này chi tiết hơn.</p>
+<h3 class="wp-block-heading">Tôi có thể dùng nhiều loại dịch vụ cho cùng một câu hỏi không?</h3>
+<p class="wp-block-paragraph">Được. Rất nhiều người bắt đầu với một dịch vụ rồi tiếp nối bằng một dịch vụ khác để có góc nhìn thứ hai, đặc biệt với những câu hỏi lớn. Không có quy tắc nào buộc bạn chỉ chọn một và gắn với nó. Hai phiên cũng không cần diễn ra liền nhau — chờ vài ngày giữa hai phiên cho cuộc trò chuyện đầu có thời gian lắng lại.</p>
+<h3 class="wp-block-heading">Tôi có phải chia sẻ thông tin cá nhân trước khi đặt phiên không?</h3>
+<p class="wp-block-paragraph">Không. Bạn có thể bắt đầu với ít thông tin nhất mà bạn thấy thoải mái. Phần lớn các loại dịch vụ ở đây hoạt động tốt chỉ với một mô tả về hoàn cảnh và câu hỏi bạn muốn được giải đáp.</p>
+<h3 class="wp-block-heading">Một phiên luận giải có nói cho tôi biết chính xác điều gì sẽ xảy ra không?</h3>
+<p class="wp-block-paragraph">Không, và bạn nên thận trọng với bất kỳ người đọc nào khẳng định điều ngược lại. Các dịch vụ này được xây để mang lại góc nhìn, không phải sự chắc chắn, và không dịch vụ nào có thể bảo đảm một hoàn cảnh cụ thể sẽ diễn ra thế nào.</p>
+<h3 class="wp-block-heading">Các dịch vụ này có thể thay thế lời khuyên của bác sĩ, luật sư hay chuyên gia tài chính không?</h3>
+<p class="wp-block-paragraph">Không. Hãy coi mọi phiên ở đây là một góc nhìn để bổ sung vào suy nghĩ của chính bạn, không phải thứ thay thế cho một chuyên gia có chuyên môn khi câu hỏi của bạn liên quan tới sức khỏe, một vấn đề pháp lý hay tài chính của bạn.</p>
+</div></div>
+<div class="wp-block-group hb-final" id="hb-final-cta"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained">
+<h2 class="wp-block-heading">Sẵn Sàng Ngừng Phỏng Đoán Và Bắt Đầu Với Dịch Vụ Đúng?</h2>
+<p class="wp-block-paragraph">Bạn đã thấy hình dung về những gì có ở đây — các hoàn cảnh mọi người mang tới, cần kiểm tra gì trước khi đặt phiên, và năm loại dịch vụ riêng biệt dành cho những kiểu câu hỏi khác nhau. Bước tiếp theo rất nhỏ: gọi tên điều đang thực sự trong đầu bạn, ghép nó với loại dịch vụ được xây cho điều đó, và bắt đầu cuộc trò chuyện.</p>
+<p class="wp-block-paragraph">Bạn luôn có thể đổi hướng sau này. Bắt đầu với một loại dịch vụ không khóa bạn vào nó, và ở đây không có cửa nào sai — chỉ có một đường đi nhanh hơn so với việc lướt danh sách người lạ và cầu may.</p>
+<ol class="wp-block-list hb-final-steps">
+<li>Gọi tên hoàn cảnh bạn đang thực sự đối diện</li>
+<li>Ghép nó với một trong năm loại dịch vụ ở trên</li>
+<li>Bắt đầu phiên và hỏi câu hỏi thật của bạn</li>
+</ol>
+<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
+<div class="wp-block-button hb-cta"><a class="wp-block-button__link hb-cta" href="/go/" rel="nofollow sponsored">Tìm dịch vụ của bạn ngay</a></div>
+</div>
+</div></div>
+<div class="wp-block-group hb-disclaimer" id="hb-disclaimer"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained">
+<p class="wp-block-paragraph">Online Psychic Services chỉ nhằm mục đích giải trí và dẫn dắt chung, dành cho người dùng từ 18 tuổi trở lên. Các phiên luận giải không thay thế lời khuyên của chuyên gia y tế, pháp lý hoặc tài chính có chuyên môn, và không phiên nào có thể bảo đảm một kết quả cụ thể. Trong trường hợp khẩn cấp về sức khỏe tại Việt Nam, hãy gọi 115; nếu cần hỗ trợ của cơ quan công an, hãy gọi 113. Trang này có thể nhận hoa hồng qua các đường dẫn tới dịch vụ của bên thứ ba.</p>
+</div></div>
+</div><script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/ops-theme/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s.w.org/images/core/emoji/17.0.2/72x72/","ext":".png","svgUrl":"https://s.w.org/images/core/emoji/17.0.2/svg/","svgExt":".svg","source":{"concatemoji":"https://online-psychic-services.com/wp-includes/js/wp-emoji-release.min.js?ver=7.0.2"}}
+</script>
+<script type="module">
+/*! This file is auto-generated */
+const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(window._wpemojiSettings=a,"wpEmojiSettingsSupports"),s=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const a=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===a[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,a){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!a(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,a){let r;const o=(r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),s=(o.textBaseline="top",o.font="600 32px Arial",{});return e.forEach(e=>{s[e]=t(o,e,n,a)}),s}function r(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}a.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),c.toString(),p.toString()].join(",")+"));",a=new Blob([e],{type:"text/javascript"});const r=new Worker(URL.createObjectURL(a),{name:"wpTestEmojiSupports"});return void(r.onmessage=e=>{i(n=e.data),r.terminate(),t(n)})}catch(e){}i(n=f(s,u,c,p))}t(n)}).then(e=>{for(const n in e)a.supports[n]=e[n],a.supports.everything=a.supports.everything&&a.supports[n],"flag"!==n&&(a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&a.supports[n]);var t;a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&!a.supports.flag,a.supports.everything||((t=a.source||{}).concatemoji?r(t.concatemoji):t.wpemoji&&t.twemoji&&(r(t.twemoji),r(t.wpemoji)))});
+//# sourceURL=https://online-psychic-services.com/wp-includes/js/wp-emoji-loader.min.js
+</script>
+</body>
+</html>

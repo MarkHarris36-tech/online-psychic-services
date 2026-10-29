@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="640" height="640">
+  <defs>
+    <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#faf5f0"></stop>
+      <stop offset="70%" stop-color="#efe6dc"></stop>
+      <stop offset="100%" stop-color="#d38aab"></stop>
+    </radialGradient>
+  </defs>
+  <rect width="640" height="640" fill="#1a1340"></rect>
+  <circle cx="320" cy="320" r="180" fill="url(#moonGlow)"></circle>
+  <circle cx="380" cy="280" r="140" fill="#1a1340"></circle>
+  <g fill="#fff" opacity=".7">
+    <circle cx="120" cy="100" r="1.5"></circle><circle cx="200" cy="160" r="1"></circle><circle cx="540" cy="120" r="2"></circle>
+    <circle cx="480" cy="80" r="1"></circle><circle cx="80" cy="500" r="1.5"></circle><circle cx="560" cy="520" r="1"></circle>
+    <circle cx="110" cy="310" r="1"></circle><circle cx="520" cy="380" r="1.2"></circle>
+  </g>
+</svg>

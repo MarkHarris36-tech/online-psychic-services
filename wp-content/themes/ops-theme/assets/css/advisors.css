@@ -1,0 +1,86 @@
+/* Сторінки спеціалістів (ops-theme). Токени: style.css (--color-*, --font-*). Рожевий кварц — з головної. */
+.ad-main{--ad-rose-50:#fcf3f7;--ad-rose-100:#f8e0eb;--ad-rose-300:#e5a6c2;--ad-rose-500:#c876a0;--ad-ink:#1a1033;--ad-soft:#4a3f5c;--ad-line:#ebe3e8;display:block;overflow:visible}
+.ad-wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+.ad-crumbs{max-width:1100px;margin:0 auto;padding:18px 24px 0;font-size:.88rem;color:var(--color-text-light)}
+.ad-crumbs a{color:var(--color-text-light)}
+.ad-crumbs a:hover{color:var(--ad-rose-500)}
+.ad-crumbs span{margin:0 6px;opacity:.6}
+
+.ad-hero{background:linear-gradient(160deg,var(--ad-rose-50) 0%,#f4ecf3 60%,#fff 100%);padding:44px 0 56px}
+.ad-hero-grid{display:grid;grid-template-columns:260px 1fr;gap:48px;align-items:center;max-width:1100px;margin:0 auto;padding:0 24px}
+.ad-photo{width:240px;height:240px;border-radius:50%;object-fit:cover;display:block;margin:0 auto;border:6px solid #fff;box-shadow:0 12px 40px rgba(200,118,160,.35),0 0 0 2px var(--ad-rose-300)}
+.ad-eyebrow{font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ad-rose-500);margin:0 0 8px;font-weight:700}
+.ad-hero h1{margin:0 0 6px;font-size:clamp(2rem,5vw,2.8rem);color:var(--ad-ink)}
+.ad-role{font-family:var(--font-heading);color:var(--ad-soft);letter-spacing:.06em;font-size:1rem;margin:0 0 14px}
+.ad-tagline{font-size:1.15rem;color:var(--ad-soft);margin:0 0 22px;max-width:620px;line-height:1.6}
+.ad-actions{display:flex;gap:12px;flex-wrap:wrap}
+.ad-chips{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0;padding:0;list-style:none}
+.ad-chips li{background:#fff;border:1px solid var(--ad-rose-300);color:var(--ad-soft);font-size:.78rem;padding:4px 12px;border-radius:20px}
+
+.ad-section{padding:64px 0}
+.ad-section.alt{background:var(--ad-rose-50)}
+.ad-section h2{margin:0 0 20px;font-size:clamp(1.5rem,3vw,2rem)}
+.ad-two{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:start}
+.ad-figure{margin:0}
+.ad-figure img{width:100%;height:auto;border-radius:16px;display:block;box-shadow:0 10px 36px rgba(26,16,51,.15)}
+.ad-figure figcaption{font-size:.85rem;color:var(--color-text-light);font-style:italic;margin-top:8px;text-align:center}
+.ad-bio p{font-size:1.05rem;line-height:1.85;color:var(--color-text)}
+
+.ad-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.ad-card{background:#fff;border:1px solid var(--ad-line);border-radius:14px;padding:22px}
+.ad-card h3{font-size:1.02rem;margin:0 0 8px}
+.ad-card p{margin:0;font-size:.95rem;color:var(--color-text-light);line-height:1.6}
+.ad-steps{counter-reset:s;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;padding:0;margin:0;list-style:none}
+.ad-steps li{counter-increment:s;background:#fff;border:1px solid var(--ad-line);border-radius:14px;padding:22px}
+.ad-steps li::before{content:counter(s);display:flex;width:36px;height:36px;border-radius:50%;background:var(--ad-rose-500);color:#fff;font-weight:700;align-items:center;justify-content:center;margin-bottom:12px}
+.ad-steps h3{font-size:1rem;margin:0 0 6px}
+.ad-steps p{margin:0;font-size:.93rem;color:var(--color-text-light)}
+.ad-list{margin:0;padding:0;list-style:none}
+.ad-list li{padding:10px 0 10px 28px;position:relative;border-bottom:1px solid var(--ad-line);font-size:1.02rem;font-style:italic}
+.ad-list li::before{content:"\2726";position:absolute;left:0;color:var(--ad-rose-500);font-style:normal}
+.ad-note{font-size:.85rem;color:var(--color-text-light);font-style:italic;margin-top:16px}
+
+.ad-faq details{border:1px solid var(--ad-line);border-radius:12px;background:#fff;margin-bottom:10px}
+.ad-faq summary{cursor:pointer;padding:16px 20px;font-family:var(--font-heading);font-size:.98rem;color:var(--ad-ink);list-style:none}
+.ad-faq summary::-webkit-details-marker{display:none}
+.ad-faq summary::after{content:"+";float:right;font-size:1.3rem;line-height:1;color:var(--ad-rose-500)}
+.ad-faq details[open] summary::after{content:"\2212"}
+.ad-faq details p{padding:0 20px 18px;margin:0}
+
+.ad-ai-band{background:linear-gradient(135deg,#2a1c4d 0%,#4b3a8f 100%);padding:56px 24px;text-align:center}
+.ad-main .ad-ai-band h2{margin:0 0 10px;color:#fff}
+.ad-ai-band p{max-width:640px;margin:0 auto 22px;color:rgba(255,255,255,.85)}
+.ad-others{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.ad-other{display:flex;gap:14px;align-items:center;background:#fff;border:1px solid var(--ad-line);border-radius:14px;padding:12px 14px;color:var(--ad-ink)}
+.ad-other:hover{border-color:var(--ad-rose-300);box-shadow:0 6px 20px rgba(200,118,160,.2)}
+.ad-other img{width:64px;height:64px;border-radius:50%;object-fit:cover;flex:none}
+.ad-other strong{display:block;font-family:var(--font-heading);font-size:.98rem}
+.ad-other span{font-size:.85rem;color:var(--color-text-light)}
+.ad-cta{text-align:center;padding:64px 24px;background:var(--ad-rose-50)}
+.ad-cta h2{margin:0 0 10px}
+.ad-cta p{max-width:560px;margin:0 auto 22px;color:var(--ad-soft)}
+
+/* Індекс */
+.ad-index-hero{background:linear-gradient(160deg,var(--ad-rose-50) 0%,#f4ecf3 100%);padding:52px 24px 44px;text-align:center}
+.ad-index-hero h1{margin:0 0 12px;font-size:clamp(2rem,5vw,2.8rem);color:var(--ad-ink)}
+.ad-index-hero p{max-width:680px;margin:0 auto;color:var(--ad-soft);font-size:1.08rem}
+.ad-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.ad-pcard{background:#fff;border:1px solid var(--ad-line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:all .3s ease}
+.ad-pcard:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(200,118,160,.25)}
+.ad-pcard img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}
+.ad-pcard-body{padding:18px 20px 22px;display:flex;flex-direction:column;gap:6px;flex:1}
+.ad-pcard h3{margin:0;font-size:1.1rem}
+.ad-pcard h3 a{color:var(--ad-ink)}
+.ad-pcard .ad-prole{font-size:.85rem;color:var(--ad-rose-500);font-weight:600}
+.ad-pcard p{margin:0;font-size:.92rem;color:var(--color-text-light);line-height:1.55;flex:1}
+.ad-plink{font-weight:700;font-size:.92rem;margin-top:6px}
+
+@media (max-width:1000px){.ad-cards{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:820px){
+ .ad-hero-grid{grid-template-columns:1fr;gap:24px;text-align:center}
+ .ad-tagline{margin-left:auto;margin-right:auto}
+ .ad-actions,.ad-chips{justify-content:center}
+ .ad-two{grid-template-columns:1fr;gap:28px}
+ .ad-section{padding:44px 0}
+}
+@media (max-width:520px){.ad-cards{grid-template-columns:1fr}.ad-photo{width:200px;height:200px}}

@@ -286,6 +286,10 @@
   .stars { color: #f2994a; letter-spacing: 1px; }
   .advisor-rate { color: var(--a-violet); font-weight: 500; }
 
+  .advisor-card-link { display: block; color: inherit; text-decoration: none; }
+  .advisor-card-link .advisor-view { font-size: 14px; font-weight: 600; color: var(--a-violet); }
+  .advisor-card-link:hover .advisor-name { color: var(--a-rose-deep); }
+
   /* testimonials */
   .testimonials { background: linear-gradient(180deg, var(--a-bg-alt) 0%, var(--a-bg) 100%); position: relative; overflow: hidden; }
   .testimonials::after { content: ""; position: absolute; bottom: -100px; right: -100px; width: 600px; height: 600px; background: var(--a-glow); opacity: .5; }
@@ -811,7 +815,7 @@ body:not(.home):not(.front-page) .btn-secondary {
 </a>
 <div class="nav-links">
 <a href="https://online-psychic-services.com/#services">Services</a>
-<a href="https://online-psychic-services.com/#advisors">Advisors</a>
+<a href="https://online-psychic-services.com/advisors/">Advisors</a>
 <a href="https://online-psychic-services.com/#how">How It Works</a>
 <a href="https://online-psychic-services.com/ai-tarot-reader/">AI Tarot</a>
 <a href="https://online-psychic-services.com/tarot-card-meanings/">Card Meanings</a>
@@ -1137,53 +1141,49 @@ body:not(.home):not(.front-page) .btn-secondary {
 <div class="section-eyebrow">Featured advisors</div>
 <h2>Gifts that feel like<br/>meeting an old friend.</h2>
 </div>
-<a class="btn btn-ghost" href="https://online-psychic-services.com/contact/">See all 800+ advisors →</a>
+<a class="btn btn-ghost" href="/go/" rel="nofollow sponsored">Meet our advisors →</a>
 </div>
 <div class="advisors-grid">
-<div class="advisor-card">
+<a class="advisor-card advisor-card-link" href="https://online-psychic-services.com/advisors/luna-moreau/">
 <div class="advisor-photo" style="background:#eee;color:transparent;padding:0;">
 <img alt="Luna Moreau" src="https://online-psychic-services.com/wp-content/themes/ops-theme/assets/images/photo-advisor-luna.jpg" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
-<div class="advisor-status">Online</div>
 </img></div>
 <div class="advisor-info">
 <div class="advisor-name">Luna Moreau</div>
 <div class="advisor-tags">Tarot · Love · Career</div>
-<div class="advisor-rating"><span><span class="stars">★★★★★</span> 4.98 · 2.1k</span><span class="advisor-rate">$2.99/min</span></div>
+<div class="advisor-view">View profile →</div>
 </div>
-</div>
-<div class="advisor-card">
+</a>
+<a class="advisor-card advisor-card-link" href="https://online-psychic-services.com/advisors/arjun-shankar/">
 <div class="advisor-photo" style="background:#eee;color:transparent;padding:0;">
 <img alt="Arjun Shankar" src="https://online-psychic-services.com/wp-content/themes/ops-theme/assets/images/photo-advisor-arjun.jpg" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
-<div class="advisor-status">Online</div>
 </img></div>
 <div class="advisor-info">
 <div class="advisor-name">Arjun Shankar</div>
 <div class="advisor-tags">Mediumship · Astrology</div>
-<div class="advisor-rating"><span><span class="stars">★★★★★</span> 4.96 · 1.8k</span><span class="advisor-rate">$3.49/min</span></div>
+<div class="advisor-view">View profile →</div>
 </div>
-</div>
-<div class="advisor-card">
+</a>
+<a class="advisor-card advisor-card-link" href="https://online-psychic-services.com/advisors/rosa-calla/">
 <div class="advisor-photo" style="background:#eee;color:transparent;padding:0;">
 <img alt="Rosa Calla" src="https://online-psychic-services.com/wp-content/themes/ops-theme/assets/images/photo-advisor-rosa.jpg" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
-<div class="advisor-status">Online</div>
 </img></div>
 <div class="advisor-info">
 <div class="advisor-name">Rosa Calla</div>
 <div class="advisor-tags">Clairvoyance · Dreams</div>
-<div class="advisor-rating"><span><span class="stars">★★★★★</span> 4.99 · 3.2k</span><span class="advisor-rate">$2.49/min</span></div>
+<div class="advisor-view">View profile →</div>
 </div>
-</div>
-<div class="advisor-card">
+</a>
+<a class="advisor-card advisor-card-link" href="https://online-psychic-services.com/advisors/elena-voss/">
 <div class="advisor-photo" style="background:#eee;color:transparent;padding:0;">
 <img alt="Elena Voss" src="https://online-psychic-services.com/wp-content/themes/ops-theme/assets/images/photo-advisor-elena.jpg" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
-<div class="advisor-status" style="color:#8b7f9a">Back in 12m</div>
 </img></div>
 <div class="advisor-info">
 <div class="advisor-name">Elena Voss</div>
 <div class="advisor-tags">Reiki · Spiritual coaching</div>
-<div class="advisor-rating"><span><span class="stars">★★★★★</span> 4.97 · 1.4k</span><span class="advisor-rate">$1.99/min</span></div>
+<div class="advisor-view">View profile →</div>
 </div>
-</div>
+</a>
 </div>
 </section>
 <!-- TESTIMONIALS -->
@@ -1316,7 +1316,7 @@ body:not(.home):not(.front-page) .btn-secondary {
 <h5>Platform</h5>
 <a href="https://online-psychic-services.com/">Home</a>
 <a href="https://online-psychic-services.com/#how">How It Works</a>
-<a href="https://online-psychic-services.com/#advisors">Advisors</a>
+<a href="https://online-psychic-services.com/advisors/">Advisors</a>
 <a href="https://online-psychic-services.com/pricing/">Pricing</a>
 <a href="https://online-psychic-services.com/ai-tarot-reader/">AI Tarot Reading</a>
 <a href="https://online-psychic-services.com/tarot-card-meanings/">Tarot Card Meanings</a>

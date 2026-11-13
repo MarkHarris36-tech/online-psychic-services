@@ -1,0 +1,277 @@
+<?php
+/**
+ * SEO meta module (no SEO plugin installed).
+ * Emits: <title> control, meta description, canonical, robots,
+ * Open Graph, Twitter Cards, and JSON-LD (Organization, WebSite,
+ * WebPage/Article, FAQPage, BreadcrumbList).
+ *
+ * All output is UTF-8 clean and escaped. Never fatals.
+ * @package ops-theme
+ */
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+/** Human title for the current view (no site suffix). */
+function ops_seo_view_title() {
+    // NOTE: is_home() is true both for the real front page (when "Posts page"
+    // display is used) AND for a static custom "Posts page" set separately
+    // from a static front page (e.g. a Blog page). Only the true front page
+    // should get the marketing title/canonical/description below — a
+    // dedicated Blog posts-page must get its OWN identity, or it ends up
+    // reporting itself as a duplicate of the homepage (canonical + title +
+    // description all pointed at "/" instead of "/blog/").
+    if ( is_front_page() ) {
+        return 'Online Psychic Services | Trusted Readings, Chat & Advice';
+    }
+    if ( is_home() ) {
+        return 'Blog | Online Psychic Services';
+    }
+    if ( is_singular() ) return get_the_title();
+    if ( is_archive() )  return wp_strip_all_tags( get_the_archive_title() );
+    if ( is_search() )   return 'Search results';
+    if ( is_404() )      return 'Page not found';
+    return get_bloginfo( 'name' );
+}
+
+/** Clean, length-capped meta description for the current view. */
+function ops_seo_description() {
+    $desc = '';
+    if ( is_singular() ) {
+        $post = get_queried_object();
+        $custom = get_post_meta( $post->ID, '_ops_meta_desc', true );
+        if ( $custom ) {
+            $desc = $custom;
+        } elseif ( has_excerpt( $post ) ) {
+            $desc = get_the_excerpt( $post );
+        } else {
+            $desc = wp_strip_all_tags( strip_shortcodes( $post->post_content ) );
+        }
+    } elseif ( is_home() && ! is_front_page() ) {
+        $desc = 'Guides, insights, and advice from the Online Psychic Services blog — tarot, astrology, mediumship, and more.';
+    } elseif ( is_author() ) {
+        $desc = 'Articles and psychic insights by ' . wp_strip_all_tags( get_the_archive_title() ) . ' on Online Psychic Services.';
+    } elseif ( is_category() || is_tag() || is_tax() ) {
+        $desc = wp_strip_all_tags( get_the_archive_title() ) . ' — psychic insights and guides from Online Psychic Services.';
+    } else {
+        $desc = get_bloginfo( 'description' );
+    }
+    $desc = trim( preg_replace( '/\s+/u', ' ', html_entity_decode( $desc, ENT_QUOTES, 'UTF-8' ) ) );
+    if ( mb_strlen( $desc ) > 158 ) {
+        $desc = rtrim( mb_substr( $desc, 0, 155 ) ) . '…';
+    }
+    return $desc;
+}
+
+/** Canonical URL for the current view. */
+function ops_seo_canonical() {
+    if ( is_singular() ) return get_permalink();
+    if ( is_front_page() ) return home_url( '/' );
+    if ( is_home() ) {
+        // Static "Posts page" (Blog) — canonicalize to itself, not "/".
+        $page_id = get_option( 'page_for_posts' );
+        if ( $page_id ) return get_permalink( $page_id );
+    }
+    if ( is_category() || is_tag() || is_tax() ) {
+        $l = get_term_link( get_queried_object() );
+        return is_wp_error( $l ) ? home_url( '/' ) : $l;
+    }
+    if ( is_author() ) return get_author_posts_url( get_queried_object_id() );
+    global $wp;
+    return home_url( add_query_arg( array(), $wp->request ) . '/' );
+}
+
+/** Best representative image for the current view (absolute URL or ''). */
+function ops_seo_image() {
+    $override = apply_filters( 'ops_seo_image_override', '' );
+    if ( $override ) return $override;
+    if ( is_singular() && has_post_thumbnail() ) {
+        $src = wp_get_attachment_image_src( get_post_thumbnail_id(), 'large' );
+        if ( $src ) return $src[0];
+    }
+    if ( has_custom_logo() ) {
+        $src = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'full' );
+        if ( $src ) return $src[0];
+    }
+    return '';
+}
+
+/* --- <title> control ------------------------------------------------------ */
+add_filter( 'pre_get_document_title', 'ops_seo_document_title', 99 );
+function ops_seo_document_title( $title ) {
+    $name = get_bloginfo( 'name' );
+    if ( is_front_page() || is_home() ) {
+        return ops_seo_view_title();
+    }
+    // Власний SEO-заголовок (_ops_meta_title) використовується як є, без суфікса сайту.
+    if ( is_singular() ) {
+        $custom_title = get_post_meta( get_queried_object_id(), '_ops_meta_title', true );
+        if ( $custom_title ) return $custom_title;
+    }
+    return ops_seo_view_title() . ' | ' . $name;
+}
+add_filter( 'document_title_separator', function () { return '|'; } );
+
+/* Drop WP core's own canonical — this module emits a complete one (avoids a
+   duplicate <link rel="canonical"> in the head). */
+remove_action( 'wp_head', 'rel_canonical' );
+
+/* --- head meta ------------------------------------------------------------ */
+add_action( 'wp_head', 'ops_seo_head', 1 );
+function ops_seo_head() {
+    $desc = ops_seo_description();
+    $canon = ops_seo_canonical();
+    $img   = ops_seo_image();
+    $name  = get_bloginfo( 'name' );
+    $title = ops_seo_document_title( '' );
+    $type  = ( is_singular( 'post' ) ) ? 'article' : 'website';
+
+    // robots: keep noindex out of index for utility / thin views
+    $noindex = is_search() || is_404() || is_paged() && ( is_archive() );
+
+    echo "\n<!-- ops-theme SEO -->\n";
+    if ( $desc ) {
+        printf( '<meta name="description" content="%s" />' . "\n", esc_attr( $desc ) );
+    }
+    printf( '<link rel="canonical" href="%s" />' . "\n", esc_url( $canon ) );
+    if ( $noindex ) {
+        echo '<meta name="robots" content="noindex,follow" />' . "\n";
+    } else {
+        echo '<meta name="robots" content="index,follow,max-image-preview:large" />' . "\n";
+    }
+
+    // Open Graph
+    printf( '<meta property="og:type" content="%s" />' . "\n", esc_attr( $type ) );
+    printf( '<meta property="og:site_name" content="%s" />' . "\n", esc_attr( $name ) );
+    printf( '<meta property="og:title" content="%s" />' . "\n", esc_attr( $title ) );
+    if ( $desc ) printf( '<meta property="og:description" content="%s" />' . "\n", esc_attr( $desc ) );
+    printf( '<meta property="og:url" content="%s" />' . "\n", esc_url( $canon ) );
+    printf( '<meta property="og:locale" content="%s" />' . "\n", esc_attr( get_locale() ) );
+    if ( $img ) printf( '<meta property="og:image" content="%s" />' . "\n", esc_url( $img ) );
+
+    // Twitter
+    echo '<meta name="twitter:card" content="' . ( $img ? 'summary_large_image' : 'summary' ) . '" />' . "\n";
+    printf( '<meta name="twitter:title" content="%s" />' . "\n", esc_attr( $title ) );
+    if ( $desc ) printf( '<meta name="twitter:description" content="%s" />' . "\n", esc_attr( $desc ) );
+    if ( $img ) printf( '<meta name="twitter:image" content="%s" />' . "\n", esc_url( $img ) );
+
+    ops_seo_jsonld();
+    echo "<!-- /ops-theme SEO -->\n";
+}
+
+/** Emit JSON-LD graph. */
+function ops_seo_jsonld() {
+    $home = home_url( '/' );
+    $name = get_bloginfo( 'name' );
+    $logo = '';
+    if ( has_custom_logo() ) {
+        $src = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'full' );
+        if ( $src ) $logo = $src[0];
+    }
+
+    $graph = array();
+
+    // Organization + WebSite (sitewide identity)
+    $org = array(
+        '@type' => 'Organization',
+        '@id'   => $home . '#organization',
+        'name'  => $name,
+        'url'   => $home,
+    );
+    if ( $logo ) $org['logo'] = $logo;
+    $graph[] = $org;
+
+    $graph[] = array(
+        '@type'     => 'WebSite',
+        '@id'       => $home . '#website',
+        'url'       => $home,
+        'name'      => $name,
+        'publisher' => array( '@id' => $home . '#organization' ),
+    );
+
+    if ( is_singular() ) {
+        $post  = get_queried_object();
+        $url   = get_permalink( $post );
+        $desc  = ops_seo_description();
+        $img   = ops_seo_image();
+
+        if ( is_singular( 'post' ) ) {
+            $article = array(
+                '@type'         => 'Article',
+                '@id'           => $url . '#article',
+                'headline'      => get_the_title( $post ),
+                'description'   => $desc,
+                'datePublished' => get_the_date( 'c', $post ),
+                'dateModified'  => get_the_modified_date( 'c', $post ),
+                'author'        => array( '@type' => 'Person', 'name' => get_the_author_meta( 'display_name', $post->post_author ) ),
+                'publisher'     => array( '@id' => $home . '#organization' ),
+                'mainEntityOfPage' => $url,
+                'url'           => $url,
+            );
+            if ( $img ) $article['image'] = $img;
+            $graph[] = $article;
+        } elseif ( 'page-tarot-card.php' !== get_page_template_slug( $post ) ) {
+            $graph[] = array(
+                '@type'       => 'WebPage',
+                '@id'         => $url . '#webpage',
+                'url'         => $url,
+                'name'        => get_the_title( $post ),
+                'description' => $desc,
+                'isPartOf'    => array( '@id' => $home . '#website' ),
+            );
+        }
+
+        // FAQPage on the FAQ page (parse question/answer pairs from content)
+        if ( is_page( 'faq' ) ) {
+            $faqs = ops_seo_extract_faqs( $post->post_content );
+            if ( $faqs ) {
+                $items = array();
+                foreach ( $faqs as $q => $a ) {
+                    $items[] = array(
+                        '@type'          => 'Question',
+                        'name'           => $q,
+                        'acceptedAnswer' => array( '@type' => 'Answer', 'text' => $a ),
+                    );
+                }
+                $graph[] = array(
+                    '@type'      => 'FAQPage',
+                    '@id'        => $url . '#faqpage',
+                    'mainEntity' => $items,
+                );
+            }
+        }
+
+        // BreadcrumbList (картки Таро друкують власний у шаблоні)
+        if ( 'page-tarot-card.php' === get_page_template_slug( $post ) ) {
+            $crumbs = array();
+        } else {
+        $crumbs = array(
+            array( '@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => $home ),
+            array( '@type' => 'ListItem', 'position' => 2, 'name' => get_the_title( $post ), 'item' => $url ),
+        );
+        $graph[] = array(
+            '@type'           => 'BreadcrumbList',
+            'itemListElement' => $crumbs,
+        );
+        }
+    }
+
+    $payload = array( '@context' => 'https://schema.org', '@graph' => $graph );
+    echo '<script type="application/ld+json">'
+        . wp_json_encode( $payload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE )
+        . '</script>' . "\n";
+}
+
+/** Extract {question => answer} pairs from FAQ block content (h3 + following text). */
+function ops_seo_extract_faqs( $content ) {
+    $html = do_blocks( $content );
+    $faqs = array();
+    if ( ! preg_match_all( '#<h3[^>]*>(.*?)</h3>\s*<p[^>]*>(.*?)</p>#is', $html, $m, PREG_SET_ORDER ) ) {
+        return $faqs;
+    }
+    foreach ( $m as $pair ) {
+        $q = trim( html_entity_decode( wp_strip_all_tags( $pair[1] ), ENT_QUOTES, 'UTF-8' ) );
+        $a = trim( html_entity_decode( wp_strip_all_tags( $pair[2] ), ENT_QUOTES, 'UTF-8' ) );
+        if ( $q && $a ) $faqs[ $q ] = $a;
+    }
+    return $faqs;
+}
